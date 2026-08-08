@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <meta name="description"
-content="TaşıBunu ile yükünüz için uygun nakliyeciyi bulun, aracınızla taşıyacak yeni işler keşfedin.">
+content="TaşıBunu ile evden eve taşımadan küçük yüklere ve büyük nakliyeye kadar uygun taşıyıcıyı bulun.">
 
-<meta name="theme-color" content="#087a45">
+<meta name="theme-color" content="#0b1f3a">
 
-<title>TaşıBunu | Nakliye & Taşımacılık</title>
+<title>TaşıBunu | Evden Eve & Nakliye</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -25,14 +25,11 @@ html{
 body{
   margin:0;
   font-family:Arial,Helvetica,sans-serif;
-  background:#f5f7f6;
-  color:#17231b;
+  background:#f4f7fb;
+  color:#172033;
 }
 
-button,
-input,
-select,
-textarea{
+button,input,select,textarea{
   font:inherit;
 }
 
@@ -44,15 +41,34 @@ button{
   display:none!important;
 }
 
-/* HEADER */
+/* =========================================================
+   RENKLER
+   ========================================================= */
+
+:root{
+  --navy:#0b1f3a;
+  --navy2:#12345d;
+  --blue:#1d5fa7;
+  --lightblue:#eaf2fb;
+  --border:#d9e2ec;
+  --text:#172033;
+  --muted:#68778a;
+  --white:#fff;
+  --danger:#b42318;
+  --success:#18794e;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 header{
   position:sticky;
   top:0;
   z-index:100;
-  background:#087a45;
+  background:var(--navy);
   color:white;
-  box-shadow:0 2px 12px #0002;
+  box-shadow:0 2px 14px #0003;
 }
 
 .header-inner{
@@ -69,7 +85,11 @@ header{
 .logo{
   font-size:27px;
   font-weight:900;
-  letter-spacing:-.5px;
+  letter-spacing:-.6px;
+}
+
+.logo span{
+  color:#8fc7ff;
 }
 
 nav{
@@ -79,20 +99,24 @@ nav{
 }
 
 nav button{
-  border:0;
-  background:white;
-  color:#087a45;
+  border:1px solid #ffffff30;
+  background:#ffffff;
+  color:var(--navy);
   padding:9px 13px;
   border-radius:9px;
   font-weight:800;
 }
 
-/* HERO */
+/* =========================================================
+   HERO
+   ========================================================= */
 
 .hero{
-  background:linear-gradient(135deg,#087a45,#0cae62);
+  background:
+    radial-gradient(circle at 90% 10%,#2d6da855,transparent 35%),
+    linear-gradient(135deg,var(--navy),#164779);
   color:white;
-  padding:42px 18px;
+  padding:48px 18px;
 }
 
 .hero-inner{
@@ -101,15 +125,15 @@ nav button{
 }
 
 .hero h1{
-  font-size:clamp(30px,5vw,50px);
+  font-size:clamp(32px,5vw,52px);
   margin:0 0 12px;
 }
 
 .hero p{
   font-size:clamp(18px,3vw,24px);
-  max-width:780px;
+  max-width:800px;
   line-height:1.45;
-  margin:0 0 22px;
+  margin:0 0 24px;
   font-weight:700;
 }
 
@@ -118,8 +142,6 @@ nav button{
   gap:10px;
   flex-wrap:wrap;
 }
-
-/* GENEL */
 
 .btn{
   border:0;
@@ -130,11 +152,16 @@ nav button{
 
 .btn-primary{
   background:white;
-  color:#087a45;
+  color:var(--navy);
 }
 
 .btn-dark{
-  background:#073d26;
+  background:var(--navy);
+  color:white;
+}
+
+.btn-blue{
+  background:var(--blue);
   color:white;
 }
 
@@ -149,6 +176,44 @@ nav button{
   margin:8px 0 15px;
 }
 
+/* =========================================================
+   KATEGORİLER
+   ========================================================= */
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-2px);
+  border-color:#8fb5dc;
+  box-shadow:0 6px 18px #0b1f3a12;
+}
+
+.category strong{
+  display:block;
+  margin-top:7px;
+}
+
+.category small{
+  color:var(--muted);
+}
+
+/* =========================================================
+   GRID / CARD
+   ========================================================= */
+
 .grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -157,10 +222,10 @@ nav button{
 
 .card{
   background:white;
-  border:1px solid #e0e7e3;
+  border:1px solid var(--border);
   border-radius:14px;
   padding:17px;
-  box-shadow:0 3px 12px #0000000a;
+  box-shadow:0 3px 12px #0b1f3a0b;
 }
 
 .card h3{
@@ -168,13 +233,13 @@ nav button{
 }
 
 .muted{
-  color:#68756e;
+  color:var(--muted);
 }
 
 .badge{
   display:inline-block;
-  background:#e9f7ef;
-  color:#087a45;
+  background:var(--lightblue);
+  color:var(--navy2);
   padding:5px 9px;
   border-radius:999px;
   font-size:12px;
@@ -182,7 +247,9 @@ nav button{
   margin:3px 3px 3px 0;
 }
 
-/* FORM */
+/* =========================================================
+   FORM
+   ========================================================= */
 
 .form-grid{
   display:grid;
@@ -202,7 +269,7 @@ select,
 textarea{
   width:100%;
   padding:11px;
-  border:1px solid #cfd8d3;
+  border:1px solid #cbd6e2;
   border-radius:9px;
   background:white;
   outline:none;
@@ -211,8 +278,8 @@ textarea{
 input:focus,
 select:focus,
 textarea:focus{
-  border-color:#0b8b50;
-  box-shadow:0 0 0 3px #0b8b5020;
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #1d5fa720;
 }
 
 textarea{
@@ -232,7 +299,9 @@ textarea{
   flex-wrap:wrap;
 }
 
-/* ARAMA */
+/* =========================================================
+   ARAMA
+   ========================================================= */
 
 .searchbar{
   display:grid;
@@ -241,19 +310,21 @@ textarea{
   margin-bottom:15px;
 }
 
-/* MESAJ */
+/* =========================================================
+   MESAJ
+   ========================================================= */
 
 .notice{
   padding:12px 14px;
   border-radius:10px;
   background:#fff8df;
-  border:1px solid #f0d88a;
+  border:1px solid #efd98d;
   margin:12px 0;
 }
 
 .success{
-  background:#e9f8ef;
-  border-color:#9dd9b5;
+  background:#eaf8f0;
+  border-color:#9bd6b5;
 }
 
 .danger{
@@ -261,13 +332,25 @@ textarea{
   border-color:#efb1b1;
 }
 
-/* İLAN */
+/* =========================================================
+   İLAN
+   ========================================================= */
 
 .item-head{
   display:flex;
   justify-content:space-between;
   gap:10px;
   align-items:flex-start;
+}
+
+.route{
+  font-size:17px;
+  margin:13px 0;
+  line-height:1.5;
+}
+
+.route strong{
+  color:var(--navy);
 }
 
 .item-actions{
@@ -292,7 +375,7 @@ textarea{
 }
 
 .edit{
-  background:#edf2ff;
+  background:#edf3ff;
   color:#3158b8;
 }
 
@@ -306,10 +389,12 @@ textarea{
   text-align:center;
   background:white;
   border-radius:14px;
-  border:1px dashed #cbd5cf;
+  border:1px dashed #cbd5df;
 }
 
-/* İSTATİSTİK */
+/* =========================================================
+   İSTATİSTİK
+   ========================================================= */
 
 .stats{
   display:grid;
@@ -323,20 +408,43 @@ textarea{
   border-radius:12px;
   padding:17px;
   text-align:center;
-  border:1px solid #e1e8e4;
+  border:1px solid var(--border);
 }
 
 .stat strong{
   display:block;
   font-size:28px;
-  color:#087a45;
+  color:var(--navy);
 }
 
-/* FOOTER */
+/* =========================================================
+   ÖZELLİKLER
+   ========================================================= */
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.feature{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+}
+
+.feature-icon{
+  font-size:30px;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 footer{
-  background:#0d2118;
-  color:#dbe9e1;
+  background:#071629;
+  color:#dbe8f5;
   margin-top:30px;
   padding:28px 18px;
 }
@@ -346,7 +454,9 @@ footer .container{
   padding-bottom:0;
 }
 
-/* MODAL */
+/* =========================================================
+   MODAL
+   ========================================================= */
 
 .modal{
   position:fixed;
@@ -361,9 +471,9 @@ footer .container{
 
 .modal-box{
   background:white;
-  max-width:650px;
+  max-width:720px;
   width:100%;
-  max-height:90vh;
+  max-height:92vh;
   overflow:auto;
   border-radius:16px;
   padding:20px;
@@ -384,11 +494,18 @@ footer .container{
   font-size:20px;
 }
 
-/* MOBİL */
+/* =========================================================
+   MOBİL
+   ========================================================= */
 
 @media(max-width:800px){
 
-  .grid{
+  .grid,
+  .feature-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .category-grid{
     grid-template-columns:1fr 1fr;
   }
 
@@ -413,6 +530,8 @@ footer .container{
   }
 
   .grid,
+  .feature-grid,
+  .category-grid,
   .form-grid,
   .stats,
   .searchbar{
@@ -420,13 +539,12 @@ footer .container{
   }
 
   .hero{
-    padding:30px 18px;
+    padding:32px 18px;
   }
 
   .card{
     padding:14px;
   }
-
 }
 </style>
 </head>
@@ -438,7 +556,7 @@ footer .container{
 <div class="header-inner">
 
 <div class="logo">
-🚚 TaşıBunu
+🚚 Taşı<span>Bunu</span>
 </div>
 
 <nav>
@@ -471,12 +589,13 @@ Nakliyeciler
 <div class="hero-inner">
 
 <h1>
-TaşıBunu
+Evden eve taşımadan küçük yüke kadar.
 </h1>
 
 <p>
-Yükün ne kadar küçük veya büyük olursa olsun,
-sana uygun taşıyıcıyı bul.
+TaşıBunu ile yükünüz için uygun taşıyıcıyı bulun.
+Ev eşyası, mobilya, küçük yükler veya büyük yükler için
+şehir içi ve şehirler arası taşıma seçeneklerini keşfedin.
 </p>
 
 <div class="hero-actions">
@@ -484,13 +603,13 @@ sana uygun taşıyıcıyı bul.
 <button
 class="btn btn-primary"
 onclick="openModal('ilanModal')">
-📦 Yükünü İlan Et
+📦 Yükünü / Eşyalarını İlan Et
 </button>
 
 <button
 class="btn btn-dark"
 onclick="openModal('nakliyeciModal')">
-🚛 Nakliyeci Olarak İlan Ver
+🚛 Taşıyıcı Olarak İş Bul
 </button>
 
 </div>
@@ -535,7 +654,7 @@ Nakliyeci
 7/24
 </strong>
 
-Yeni iş keşfi
+İş keşfi
 
 </div>
 
@@ -544,13 +663,88 @@ Yeni iş keşfi
 </section>
 
 
+<!-- KATEGORİLER -->
+
+<section class="container">
+
+<h2 class="section-title">
+🚚 Taşıma İhtiyacın Nedir?
+</h2>
+
+<div class="category-grid">
+
+<div
+class="category"
+onclick="selectCategory('Evden Eve Taşıma')">
+
+<div class="feature-icon">🏠</div>
+
+<strong>Evden Eve Taşıma</strong>
+
+<small>
+Ev, daire ve ev eşyaları
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Parça Eşya')">
+
+<div class="feature-icon">🛋️</div>
+
+<strong>Parça Eşya</strong>
+
+<small>
+Mobilya, beyaz eşya, koli
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Küçük Yük')">
+
+<div class="feature-icon">📦</div>
+
+<strong>Küçük Yük</strong>
+
+<small>
+Panelvan ve kamyonet işleri
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Büyük Yük')">
+
+<div class="feature-icon">🚛</div>
+
+<strong>Büyük Yük</strong>
+
+<small>
+Kamyon ve TIR taşımaları
+</small>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- YÜKLER -->
 
 <section
 id="ilanlar"
 class="container">
 
 <h2 class="section-title">
-📦 Yük İlanları
+📦 Yük & Taşıma İlanları
 </h2>
 
 
@@ -558,7 +752,7 @@ class="container">
 
 <input
 id="ilanSearch"
-placeholder="Şehir, yük türü, araç tipi ara..."
+placeholder="Şehir, ilçe, mahalle, yük veya araç ara..."
 oninput="renderIlanlar()">
 
 
@@ -570,21 +764,10 @@ onchange="renderIlanlar()">
 Tüm araçlar
 </option>
 
-<option>
-Panelvan
-</option>
-
-<option>
-Kamyonet
-</option>
-
-<option>
-Kamyon
-</option>
-
-<option>
-Tır
-</option>
+<option>Panelvan</option>
+<option>Kamyonet</option>
+<option>Kamyon</option>
+<option>Tır</option>
 
 </select>
 
@@ -597,13 +780,8 @@ onchange="renderIlanlar()">
 Tüm güzergâhlar
 </option>
 
-<option>
-Şehir içi
-</option>
-
-<option>
-Şehirler arası
-</option>
+<option>Şehir içi</option>
+<option>Şehirler arası</option>
 
 </select>
 
@@ -627,13 +805,14 @@ class="grid">
 </section>
 
 
+<!-- NAKLİYECİLER -->
 
 <section
 id="nakliyeciler"
 class="container">
 
 <h2 class="section-title">
-🚛 Nakliyeciler
+🚛 Taşıyıcılar & Nakliyeciler
 </h2>
 
 
@@ -641,7 +820,7 @@ class="container">
 
 <input
 id="nakSearch"
-placeholder="İsim, şehir, araç, güzergâh ara..."
+placeholder="İsim, şehir, ilçe, araç, güzergâh ara..."
 oninput="renderNakliyeciler()">
 
 
@@ -653,21 +832,10 @@ onchange="renderNakliyeciler()">
 Tüm araçlar
 </option>
 
-<option>
-Panelvan
-</option>
-
-<option>
-Kamyonet
-</option>
-
-<option>
-Kamyon
-</option>
-
-<option>
-Tır
-</option>
+<option>Panelvan</option>
+<option>Kamyonet</option>
+<option>Kamyon</option>
+<option>Tır</option>
 
 </select>
 
@@ -682,6 +850,7 @@ class="grid">
 </section>
 
 
+<!-- NASIL ÇALIŞIR -->
 
 <section class="container">
 
@@ -691,55 +860,51 @@ class="grid">
 TaşıBunu nasıl çalışır?
 </h2>
 
+<div class="feature-grid">
 
-<div class="grid">
+<div class="feature">
 
-<div>
-
-<span class="badge">
-1
-</span>
+<div class="feature-icon">📦</div>
 
 <h3>
-Yükünü yayınla
+1. İhtiyacını yayınla
 </h3>
 
 <p class="muted">
-Nereden nereye gideceğini ve ihtiyacın olan aracı belirt.
+Taşınacak yükü veya ev eşyalarını,
+nereden nereye gideceğini ve tarihini belirt.
 </p>
 
 </div>
 
 
-<div>
+<div class="feature">
 
-<span class="badge">
-2
-</span>
+<div class="feature-icon">🚛</div>
 
 <h3>
-Uygun taşıyıcıyı bul
+2. Uygun taşıyıcıyı bul
 </h3>
 
 <p class="muted">
-İlanları şehir, araç ve taşıma tipine göre filtrele.
+Panelvandan kamyona ve TIR'a kadar
+uygun taşıyıcıları keşfet.
 </p>
 
 </div>
 
 
-<div>
+<div class="feature">
 
-<span class="badge">
-3
-</span>
+<div class="feature-icon">💬</div>
 
 <h3>
-İletişime geç
+3. Doğrudan iletişim kur
 </h3>
 
 <p class="muted">
-Uygun nakliyeciyle WhatsApp üzerinden doğrudan iletişim kur.
+Uygun taşıyıcıyla WhatsApp üzerinden
+doğrudan iletişime geç.
 </p>
 
 </div>
@@ -754,18 +919,17 @@ Uygun nakliyeciyle WhatsApp üzerinden doğrudan iletişim kur.
 </main>
 
 
-
 <footer>
 
 <div class="container">
 
 <strong>
-TaşıBunu
+🚚 TaşıBunu
 </strong>
 
 <p>
-Yükün ne kadar küçük veya büyük olursa olsun,
-sana uygun taşıyıcıyı bul.
+Evden eve taşımadan küçük ve büyük yüklere kadar
+taşıma ihtiyacınız için uygun taşıyıcıyı bulun.
 </p>
 
 </div>
@@ -773,8 +937,9 @@ sana uygun taşıyıcıyı bul.
 </footer>
 
 
-
-<!-- YÜK İLANI MODALI -->
+<!-- =========================================================
+     YÜK İLANI MODALI
+     ========================================================= -->
 
 <div
 id="ilanModal"
@@ -785,7 +950,7 @@ class="modal hidden">
 <div class="modal-head">
 
 <h2>
-📦 Yeni Yük İlanı
+📦 Yeni Taşıma İlanı
 </h2>
 
 <button
@@ -796,9 +961,7 @@ onclick="closeModal('ilanModal')">
 
 </div>
 
-
-<div id="ilanMsg">
-</div>
+<div id="ilanMsg"></div>
 
 
 <form id="ilanForm">
@@ -809,16 +972,37 @@ onclick="closeModal('ilanModal')">
 <div>
 
 <label>
-Yük türü
+Taşıma kategorisi
+</label>
+
+<select id="kategori">
+
+<option>Evden Eve Taşıma</option>
+<option>Parça Eşya</option>
+<option>Küçük Yük</option>
+<option>Büyük Yük</option>
+<option>Mobilya</option>
+<option>Beyaz Eşya</option>
+<option>Koli / Paket</option>
+<option>Diğer</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Yük / eşya türü
 </label>
 
 <input
 id="yuk_tipi"
 required
-placeholder="Örn. Mobilya, koli, makine">
+placeholder="Örn. Ev eşyası, mobilya, koli">
 
 </div>
-
 
 
 <div>
@@ -827,94 +1011,16 @@ placeholder="Örn. Mobilya, koli, makine">
 Taşıma tipi
 </label>
 
-<select id="tasima_tipi">
+<select
+id="tasima_tipi"
+onchange="updateLocationMode()">
 
-<option>
-Şehir içi
-</option>
-
-<option>
-Şehirler arası
-</option>
+<option>Şehir içi</option>
+<option>Şehirler arası</option>
 
 </select>
 
 </div>
-
-
-
-<div>
-
-<label>
-Nereden
-</label>
-
-<input
-id="nereden"
-required
-placeholder="İl / ilçe">
-
-</div>
-
-
-
-<div>
-
-<label>
-Nereye
-</label>
-
-<input
-id="nereye"
-required
-placeholder="İl / ilçe">
-
-</div>
-
-
-
-<div>
-
-<label>
-Araç tipi
-</label>
-
-<select id="arac_tipi">
-
-<option>
-Panelvan
-</option>
-
-<option>
-Kamyonet
-</option>
-
-<option>
-Kamyon
-</option>
-
-<option>
-Tır
-</option>
-
-</select>
-
-</div>
-
-
-
-<div>
-
-<label>
-Tonaj
-</label>
-
-<input
-id="tonaj"
-placeholder="Örn. 2 ton">
-
-</div>
-
 
 
 <div>
@@ -929,6 +1035,156 @@ type="date">
 
 </div>
 
+
+<!-- NEREDEN -->
+
+<div>
+
+<label>
+Nereden - İl
+</label>
+
+<select
+id="nereden_il"
+onchange="updateDistricts('nereden')"
+required>
+
+<option value="">
+İl seçin
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Nereden - İlçe
+</label>
+
+<select
+id="nereden_ilce"
+onchange="updateNeighborhoods('nereden')">
+
+<option value="">
+Önce il seçin
+</option>
+
+</select>
+
+</div>
+
+
+<div
+id="neredenMahalleBox">
+
+<label>
+Nereden - Mahalle
+</label>
+
+<select
+id="nereden_mahalle">
+
+<option value="">
+Önce ilçe seçin
+</option>
+
+</select>
+
+</div>
+
+
+<!-- NEREYE -->
+
+<div>
+
+<label>
+Nereye - İl
+</label>
+
+<select
+id="nereye_il"
+onchange="updateDistricts('nereye')"
+required>
+
+<option value="">
+İl seçin
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Nereye - İlçe
+</label>
+
+<select
+id="nereye_ilce"
+onchange="updateNeighborhoods('nereye')">
+
+<option value="">
+Önce il seçin
+</option>
+
+</select>
+
+</div>
+
+
+<div
+id="nereyeMahalleBox">
+
+<label>
+Nereye - Mahalle
+</label>
+
+<select
+id="nereye_mahalle">
+
+<option value="">
+Önce ilçe seçin
+</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Araç tipi
+</label>
+
+<select id="arac_tipi">
+
+<option>Panelvan</option>
+<option>Kamyonet</option>
+<option>Kamyon</option>
+<option>Tır</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Tonaj / yaklaşık ağırlık
+</label>
+
+<input
+id="tonaj"
+placeholder="Örn. 2 ton">
+
+</div>
 
 
 <div>
@@ -945,7 +1201,6 @@ placeholder="05xx xxx xx xx">
 </div>
 
 
-
 <div class="full">
 
 <label>
@@ -954,7 +1209,7 @@ Açıklama
 
 <textarea
 id="aciklama"
-placeholder="Yük hakkında ek bilgi...">
+placeholder="Eşyalar, kat bilgisi, asansör, araç giriş durumu, yük miktarı vb. bilgileri yazabilirsiniz.">
 </textarea>
 
 </div>
@@ -972,7 +1227,6 @@ type="submit">
 İlanı Yayınla
 
 </button>
-
 
 <button
 class="btn"
@@ -992,8 +1246,9 @@ Vazgeç
 </div>
 
 
-
-<!-- NAKLİYECİ MODALI -->
+<!-- =========================================================
+     NAKLİYECİ MODALI
+     ========================================================= -->
 
 <div
 id="nakliyeciModal"
@@ -1004,22 +1259,18 @@ class="modal hidden">
 <div class="modal-head">
 
 <h2>
-🚛 Nakliyeci İlanı
+🚛 Taşıyıcı / Nakliyeci İlanı
 </h2>
 
 <button
 class="close"
 onclick="closeModal('nakliyeciModal')">
-
 ×
-
 </button>
 
 </div>
 
-
-<div id="nakMsg">
-</div>
+<div id="nakMsg"></div>
 
 
 <form id="nakForm">
@@ -1030,15 +1281,15 @@ onclick="closeModal('nakliyeciModal')">
 <div>
 
 <label>
-Ad / firma
+Ad / Firma
 </label>
 
 <input
 id="nak_ad"
-required>
+required
+placeholder="Adınız veya firma adı">
 
 </div>
-
 
 
 <div>
@@ -1050,25 +1301,29 @@ Telefon / WhatsApp
 <input
 id="nak_telefon"
 required
-type="tel">
+type="tel"
+placeholder="05xx xxx xx xx">
 
 </div>
-
 
 
 <div>
 
 <label>
-Şehir
+Çalıştığınız il
 </label>
 
-<input
+<select
 id="nak_sehir"
-required
-placeholder="Örn. İstanbul">
+required>
+
+<option value="">
+İl seçin
+</option>
+
+</select>
 
 </div>
-
 
 
 <div>
@@ -1079,26 +1334,47 @@ Araç tipi
 
 <select id="nak_arac">
 
-<option>
-Panelvan
-</option>
-
-<option>
-Kamyonet
-</option>
-
-<option>
-Kamyon
-</option>
-
-<option>
-Tır
-</option>
+<option>Panelvan</option>
+<option>Kamyonet</option>
+<option>Kamyon</option>
+<option>Tır</option>
 
 </select>
 
 </div>
 
+
+<div>
+
+<label>
+Taşıma alanı
+</label>
+
+<select id="nak_tasima">
+
+<option>Şehir içi</option>
+<option>Şehirler arası</option>
+<option>Şehir içi ve şehirler arası</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
+Ev taşıma yapıyor musunuz?
+</label>
+
+<select id="nak_ev">
+
+<option>Evet</option>
+<option>Hayır</option>
+
+</select>
+
+</div>
 
 
 <div class="full">
@@ -1109,10 +1385,9 @@ Güzergâh
 
 <input
 id="nak_guzergah"
-placeholder="Örn. İstanbul → Ankara">
+placeholder="Örn. İstanbul → Ankara veya İstanbul içi">
 
 </div>
-
 
 
 <div class="full">
@@ -1123,7 +1398,7 @@ Açıklama
 
 <textarea
 id="nak_aciklama"
-placeholder="Hangi yükleri ve bölgeleri taşıyorsunuz?">
+placeholder="Hangi yükleri taşıyorsunuz? Ev taşıma, parça eşya, küçük yük, büyük yük vb.">
 </textarea>
 
 </div>
@@ -1161,8 +1436,9 @@ Vazgeç
 </div>
 
 
-
-<!-- DÜZENLEME MODALI -->
+<!-- =========================================================
+     DÜZENLEME MODALI
+     ========================================================= -->
 
 <div
 id="editModal"
@@ -1179,16 +1455,12 @@ class="modal hidden">
 <button
 class="close"
 onclick="closeModal('editModal')">
-
 ×
-
 </button>
 
 </div>
 
-
-<div id="editMsg">
-</div>
+<div id="editMsg"></div>
 
 
 <form id="editForm">
@@ -1204,6 +1476,28 @@ id="editId">
 <div>
 
 <label>
+Kategori
+</label>
+
+<select id="editKategori">
+
+<option>Evden Eve Taşıma</option>
+<option>Parça Eşya</option>
+<option>Küçük Yük</option>
+<option>Büyük Yük</option>
+<option>Mobilya</option>
+<option>Beyaz Eşya</option>
+<option>Koli / Paket</option>
+<option>Diğer</option>
+
+</select>
+
+</div>
+
+
+<div>
+
+<label>
 Yük türü
 </label>
 
@@ -1214,7 +1508,6 @@ required>
 </div>
 
 
-
 <div>
 
 <label>
@@ -1223,26 +1516,30 @@ Araç tipi
 
 <select id="editArac">
 
-<option>
-Panelvan
-</option>
-
-<option>
-Kamyonet
-</option>
-
-<option>
-Kamyon
-</option>
-
-<option>
-Tır
-</option>
+<option>Panelvan</option>
+<option>Kamyonet</option>
+<option>Kamyon</option>
+<option>Tır</option>
 
 </select>
 
 </div>
 
+
+<div>
+
+<label>
+Taşıma tipi
+</label>
+
+<select id="editTasima">
+
+<option>Şehir içi</option>
+<option>Şehirler arası</option>
+
+</select>
+
+</div>
 
 
 <div>
@@ -1258,7 +1555,6 @@ required>
 </div>
 
 
-
 <div>
 
 <label>
@@ -1272,18 +1568,15 @@ required>
 </div>
 
 
-
 <div class="full">
 
 <label>
 Açıklama
 </label>
 
-<textarea id="editDesc">
-</textarea>
+<textarea id="editDesc"></textarea>
 
 </div>
-
 
 </div>
 
@@ -1307,11 +1600,10 @@ Kaydet
 </div>
 
 
-
 <script>
 
 /* =========================================================
-   TAŞIBUNU - SUPABASE
+   SUPABASE
    ========================================================= */
 
 const SUPABASE_URL =
@@ -1319,7 +1611,6 @@ const SUPABASE_URL =
 
 const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_Q3R-e7e3MoOFc06_28Wr7A_WVOYzImC";
-
 
 const supabaseClient =
 supabase.createClient(
@@ -1329,13 +1620,101 @@ supabase.createClient(
 
 
 let ilanlar = [];
-
 let nakliyeciler = [];
 
 
+/* =========================================================
+   TÜRKİYE İLLERİ
+   ========================================================= */
+
+const cities = [
+"Adana","Adıyaman","Afyonkarahisar","Ağrı","Aksaray",
+"Amasya","Ankara","Antalya","Ardahan","Artvin",
+"Aydın","Balıkesir","Bartın","Batman","Bayburt",
+"Bilecik","Bingöl","Bitlis","Bolu","Burdur",
+"Bursa","Çanakkale","Çankırı","Çorum","Denizli",
+"Diyarbakır","Düzce","Edirne","Elazığ","Erzincan",
+"Erzurum","Eskişehir","Gaziantep","Giresun","Gümüşhane",
+"Hakkari","Hatay","Iğdır","Isparta","İstanbul",
+"İzmir","Kahramanmaraş","Karabük","Karaman","Kars",
+"Kastamonu","Kayseri","Kilis","Kırıkkale","Kırklareli",
+"Kırşehir","Kocaeli","Konya","Kütahya","Malatya",
+"Manisa","Mardin","Mersin","Muğla","Muş",
+"Nevşehir","Niğde","Ordu","Osmaniye","Rize",
+"Sakarya","Samsun","Siirt","Sinop","Sivas",
+"Şanlıurfa","Şırnak","Tekirdağ","Tokat","Trabzon",
+"Tunceli","Uşak","Van","Yalova","Yozgat","Zonguldak"
+];
+
 
 /* =========================================================
-   YARDIMCI FONKSİYONLAR
+   BASİT İLÇE VERİSİ
+   ========================================================= */
+
+const districts = {
+
+"İstanbul":[
+"Adalar","Arnavutköy","Ataşehir","Avcılar","Bağcılar",
+"Bahçelievler","Bakırköy","Başakşehir","Bayrampaşa",
+"Beşiktaş","Beykoz","Beylikdüzü","Beyoğlu","Büyükçekmece",
+"Çatalca","Çekmeköy","Esenler","Esenyurt","Eyüpsultan",
+"Fatih","Gaziosmanpaşa","Güngören","Kadıköy","Kağıthane",
+"Kartal","Küçükçekmece","Maltepe","Pendik","Sancaktepe",
+"Sarıyer","Silivri","Sultanbeyli","Sultangazi","Şile",
+"Şişli","Tuzla","Ümraniye","Üsküdar","Zeytinburnu"
+],
+
+"Ankara":[
+"Akyurt","Altındağ","Ayaş","Bala","Beypazarı",
+"Çankaya","Çamlıdere","Çubuk","Elmadağ","Etimesgut",
+"Evren","Gölbaşı","Güdül","Haymana","Kahramankazan",
+"Kalecik","Keçiören","Kızılcahamam","Mamak","Nallıhan",
+"Polatlı","Pursaklar","Sincan","Şereflikoçhisar","Yenimahalle"
+],
+
+"İzmir":[
+"Aliağa","Balçova","Bayındır","Bayraklı","Bergama",
+"Beydağ","Bornova","Buca","Çeşme","Çiğli",
+"Dikili","Foça","Gaziemir","Güzelbahçe","Karabağlar",
+"Karaburun","Karşıyaka","Kemalpaşa","Kınık","Kiraz",
+"Konak","Menderes","Menemen","Narlıdere","Ödemiş",
+"Seferihisar","Selçuk","Tire","Torbalı","Urla"
+],
+
+"Bursa":[
+"Büyükorhan","Gemlik","Gürsu","Harmancık","İnegöl",
+"İznik","Karacabey","Keles","Kestel","Mudanya",
+"Mustafakemalpaşa","Nilüfer","Orhaneli","Orhangazi",
+"Osmangazi","Yenişehir","Yıldırım"
+],
+
+"Antalya":[
+"Akseki","Aksu","Alanya","Demre","Döşemealtı",
+"Elmalı","Finike","Gazipaşa","Gündoğmuş","İbradı",
+"Kaş","Kemer","Kepez","Konyaaltı","Korkuteli",
+"Kumluca","Manavgat","Muratpaşa","Serik"
+],
+
+"Adana":[
+"Aladağ","Ceyhan","Çukurova","Feke","İmamoğlu",
+"Karaisalı","Karataş","Kozan","Pozantı","Saimbeyli",
+"Sarıçam","Seyhan","Tufanbeyli","Yumurtalık","Yüreğir"
+],
+
+"Konya":[
+"Ahırlı","Akören","Akşehir","Altınekin","Beyşehir",
+"Bozkır","Cihanbeyli","Çeltik","Cihanbeyli","Çumra",
+"Derbent","Derebucak","Doğanhisar","Ereğli","Hadim",
+"Halkapınar","Hüyük","Ilgın","Kadınhanı","Karapınar",
+"Karatay","Kulu","Meram","Sarayönü","Selçuklu",
+"Seydişehir","Taşkent","Tuzlukçu","Yalıhüyük","Yunak"
+]
+
+};
+
+
+/* =========================================================
+   YARDIMCI
    ========================================================= */
 
 function esc(value){
@@ -1356,14 +1735,12 @@ function esc(value){
 }
 
 
-
 function norm(value){
 
   return String(value ?? "")
     .toLocaleLowerCase("tr-TR");
 
 }
-
 
 
 function go(id){
@@ -1382,7 +1759,6 @@ function go(id){
 }
 
 
-
 function openModal(id){
 
   const element =
@@ -1397,7 +1773,6 @@ function openModal(id){
 }
 
 
-
 function closeModal(id){
 
   const element =
@@ -1410,7 +1785,6 @@ function closeModal(id){
   }
 
 }
-
 
 
 function message(id,text,type=""){
@@ -1435,7 +1809,6 @@ function message(id,text,type=""){
 }
 
 
-
 function whatsapp(phone){
 
   const digits =
@@ -1458,9 +1831,232 @@ function whatsapp(phone){
 }
 
 
+/* =========================================================
+   İLLERİ DOLDUR
+   ========================================================= */
+
+function fillCities(){
+
+  const ids = [
+    "nereden_il",
+    "nereye_il",
+    "nak_sehir"
+  ];
+
+  ids.forEach(function(id){
+
+    const el =
+      document.getElementById(id);
+
+    if(!el) return;
+
+    cities.forEach(function(city){
+
+      const option =
+        document.createElement("option");
+
+      option.value = city;
+      option.textContent = city;
+
+      el.appendChild(option);
+
+    });
+
+  });
+
+}
+
 
 /* =========================================================
-   VERİLERİ ÇEK
+   İLÇELER
+   ========================================================= */
+
+function updateDistricts(prefix){
+
+  const city =
+    document.getElementById(
+      prefix + "_il"
+    ).value;
+
+  const district =
+    document.getElementById(
+      prefix + "_ilce"
+    );
+
+  const neighborhood =
+    document.getElementById(
+      prefix + "_mahalle"
+    );
+
+  district.innerHTML =
+    `<option value="">İlçe seçin</option>`;
+
+  neighborhood.innerHTML =
+    `<option value="">Önce ilçe seçin</option>`;
+
+  const list =
+    districts[city] || [];
+
+  if(list.length){
+
+    list.forEach(function(item){
+
+      const option =
+        document.createElement("option");
+
+      option.value = item;
+      option.textContent = item;
+
+      district.appendChild(option);
+
+    });
+
+  }
+
+}
+
+
+function updateNeighborhoods(prefix){
+
+  const district =
+    document.getElementById(
+      prefix + "_ilce"
+    ).value;
+
+  const neighborhood =
+    document.getElementById(
+      prefix + "_mahalle"
+    );
+
+  neighborhood.innerHTML =
+    `<option value="">Mahalle seçin</option>`;
+
+  /*
+    Mahalleler ilçe bazlı gerçek veri servisi
+    eklenmeden burada örnek olarak boş bırakılır.
+    Kullanıcı isterse mahalle adı manuel yazabilecektir.
+  */
+
+  if(district){
+
+    const option =
+      document.createElement("option");
+
+    option.value =
+      "Mahalle seçilmedi";
+
+    option.textContent =
+      "Mahalle seçilmedi";
+
+    neighborhood.appendChild(option);
+
+  }
+
+}
+
+
+/* =========================================================
+   ŞEHİR İÇİ / ŞEHİRLER ARASI
+   ========================================================= */
+
+function updateLocationMode(){
+
+  const mode =
+    document.getElementById(
+      "tasima_tipi"
+    ).value;
+
+  const boxes = [
+    document.getElementById(
+      "neredenMahalleBox"
+    ),
+    document.getElementById(
+      "nereyeMahalleBox"
+    )
+  ];
+
+  boxes.forEach(function(box){
+
+    if(!box) return;
+
+    if(mode === "Şehir içi"){
+
+      box.style.display="block";
+
+    }else{
+
+      box.style.display="none";
+
+    }
+
+  });
+
+}
+
+
+/* =========================================================
+   TARİH
+   ========================================================= */
+
+function setMinDate(){
+
+  const today =
+    new Date();
+
+  const year =
+    today.getFullYear();
+
+  const month =
+    String(today.getMonth()+1)
+      .padStart(2,"0");
+
+  const day =
+    String(today.getDate())
+      .padStart(2,"0");
+
+  const min =
+    year + "-" + month + "-" + day;
+
+  const dateInput =
+    document.getElementById("tarih");
+
+  if(dateInput){
+
+    dateInput.min = min;
+
+  }
+
+}
+
+
+/* =========================================================
+   KATEGORİ SEÇ
+   ========================================================= */
+
+function selectCategory(category){
+
+  openModal("ilanModal");
+
+  setTimeout(function(){
+
+    const select =
+      document.getElementById(
+        "kategori"
+      );
+
+    if(select){
+
+      select.value = category;
+
+    }
+
+  },100);
+
+}
+
+
+/* =========================================================
+   VERİLER
    ========================================================= */
 
 async function loadAll(){
@@ -1534,9 +2130,8 @@ async function loadAll(){
 }
 
 
-
 /* =========================================================
-   YÜK İLANLARI
+   İLANLARI RENDER
    ========================================================= */
 
 function renderIlanlar(){
@@ -1568,6 +2163,7 @@ function renderIlanlar(){
         norm([
           x.yuk_tipi,
           x.yuk_turu,
+          x.kategori,
           x.nereden,
           x.nereye,
           x.arac_tipi,
@@ -1596,7 +2192,6 @@ function renderIlanlar(){
     });
 
 
-
   const container =
     document.getElementById(
       "ilanList"
@@ -1610,8 +2205,7 @@ function renderIlanlar(){
         class="empty"
         style="grid-column:1/-1">
 
-        Henüz yük ilanı yok.
-        İlk ilanı sen yayınla.
+        Henüz bu kriterlere uygun ilan yok.
 
       </div>
     `;
@@ -1621,9 +2215,17 @@ function renderIlanlar(){
   }
 
 
-
   container.innerHTML =
     list.map(function(x){
+
+      const from =
+        x.nereden ||
+        "—";
+
+      const to =
+        x.nereye ||
+        "—";
+
 
       return `
 
@@ -1638,9 +2240,23 @@ function renderIlanlar(){
               ${esc(
                 x.yuk_tipi ||
                 x.yuk_turu ||
-                "Yük ilanı"
+                "Taşıma ilanı"
               )}
             </h3>
+
+
+            ${
+              x.kategori
+              ?
+              `
+              <span class="badge">
+                ${esc(x.kategori)}
+              </span>
+              `
+              :
+              ""
+            }
+
 
             <span class="badge">
               ${esc(
@@ -1648,6 +2264,7 @@ function renderIlanlar(){
                 "Taşıma"
               )}
             </span>
+
 
             <span class="badge">
               ${esc(
@@ -1671,27 +2288,21 @@ function renderIlanlar(){
         </div>
 
 
-
-        <p>
+        <div class="route">
 
           📍
 
-          <b>
-            ${esc(
-              x.nereden || "—"
-            )}
-          </b>
+          <strong>
+            ${esc(from)}
+          </strong>
 
           →
 
-          <b>
-            ${esc(
-              x.nereye || "—"
-            )}
-          </b>
+          <strong>
+            ${esc(to)}
+          </strong>
 
-        </p>
-
+        </div>
 
 
         ${
@@ -1709,21 +2320,19 @@ function renderIlanlar(){
         }
 
 
-
         ${
           x.tarih
           ?
           `
           <p>
             📅
-            <b>Tarih:</b>
+            <b>Taşıma tarihi:</b>
             ${esc(x.tarih)}
           </p>
           `
           :
           ""
         }
-
 
 
         ${
@@ -1739,7 +2348,6 @@ function renderIlanlar(){
         }
 
 
-
         <div class="item-actions">
 
           ${
@@ -1749,6 +2357,7 @@ function renderIlanlar(){
             <a
               class="small wa"
               target="_blank"
+              rel="noopener"
               href="${whatsapp(x.telefon)}">
 
               WhatsApp
@@ -1788,7 +2397,6 @@ function renderIlanlar(){
 }
 
 
-
 /* =========================================================
    NAKLİYECİLER
    ========================================================= */
@@ -1820,7 +2428,8 @@ function renderNakliyeciler(){
           x.sehir,
           x.arac_tipi,
           x.guzergah,
-          x.aciklama
+          x.aciklama,
+          x.tasima_tipi
         ].join(" "));
 
 
@@ -1839,7 +2448,6 @@ function renderNakliyeciler(){
     });
 
 
-
   const container =
     document.getElementById(
       "nakList"
@@ -1854,7 +2462,6 @@ function renderNakliyeciler(){
         style="grid-column:1/-1">
 
         Henüz nakliyeci ilanı yok.
-        İlk nakliyeci ilanını sen yayınla.
 
       </div>
     `;
@@ -1862,7 +2469,6 @@ function renderNakliyeciler(){
     return;
 
   }
-
 
 
   container.innerHTML =
@@ -1912,6 +2518,18 @@ function renderNakliyeciler(){
         }
 
 
+        ${
+          x.tasima_tipi
+          ?
+          `
+          <span class="badge">
+            ${esc(x.tasima_tipi)}
+          </span>
+          `
+          :
+          ""
+        }
+
 
         ${
           x.guzergah
@@ -1932,7 +2550,6 @@ function renderNakliyeciler(){
         }
 
 
-
         ${
           x.aciklama
           ?
@@ -1948,7 +2565,6 @@ function renderNakliyeciler(){
         }
 
 
-
         <div class="item-actions">
 
           ${
@@ -1958,6 +2574,7 @@ function renderNakliyeciler(){
             <a
               class="small wa"
               target="_blank"
+              rel="noopener"
               href="${whatsapp(x.telefon)}">
 
               WhatsApp
@@ -1977,7 +2594,6 @@ function renderNakliyeciler(){
     }).join("");
 
 }
-
 
 
 /* =========================================================
@@ -2009,6 +2625,61 @@ document
         .getUser();
 
 
+    const neredenIl =
+      document.getElementById(
+        "nereden_il"
+      ).value;
+
+
+    const neredenIlce =
+      document.getElementById(
+        "nereden_ilce"
+      ).value;
+
+
+    const neredenMahalle =
+      document.getElementById(
+        "nereden_mahalle"
+      ).value;
+
+
+    const nereyeIl =
+      document.getElementById(
+        "nereye_il"
+      ).value;
+
+
+    const nereyeIlce =
+      document.getElementById(
+        "nereye_ilce"
+      ).value;
+
+
+    const nereyeMahalle =
+      document.getElementById(
+        "nereye_mahalle"
+      ).value;
+
+
+    const nereden =
+      [
+        neredenIl,
+        neredenIlce,
+        neredenMahalle
+      ]
+      .filter(Boolean)
+      .join(" / ");
+
+
+    const nereye =
+      [
+        nereyeIl,
+        nereyeIlce,
+        nereyeMahalle
+      ]
+      .filter(Boolean)
+      .join(" / ");
+
 
     const row = {
 
@@ -2027,16 +2698,10 @@ document
           .value,
 
       nereden:
-        document
-          .getElementById("nereden")
-          .value
-          .trim(),
+        nereden,
 
       nereye:
-        document
-          .getElementById("nereye")
-          .value
-          .trim(),
+        nereye,
 
       arac_tipi:
         document
@@ -2061,13 +2726,19 @@ document
           .trim(),
 
       aciklama:
-        document
-          .getElementById("aciklama")
-          .value
-          .trim()
+        (
+          "[" +
+          document
+            .getElementById("kategori")
+            .value +
+          "] " +
+          document
+            .getElementById("aciklama")
+            .value
+            .trim()
+        )
 
     };
-
 
 
     const {
@@ -2076,7 +2747,6 @@ document
       await supabaseClient
         .from("ilanlar")
         .insert(row);
-
 
 
     if(error){
@@ -2095,7 +2765,6 @@ document
     }
 
 
-
     message(
       "ilanMsg",
       "İlan başarıyla yayınlandı.",
@@ -2105,13 +2774,21 @@ document
 
     e.target.reset();
 
+    setMinDate();
 
     await loadAll();
 
 
     setTimeout(
       function(){
+
         closeModal("ilanModal");
+
+        message(
+          "ilanMsg",
+          ""
+        );
+
       },
       700
     );
@@ -2120,9 +2797,8 @@ document
 );
 
 
-
 /* =========================================================
-   YENİ NAKLİYECİ
+   NAKLİYECİ
    ========================================================= */
 
 document
@@ -2148,7 +2824,6 @@ document
       await supabaseClient
         .auth
         .getUser();
-
 
 
     const row = {
@@ -2189,10 +2864,14 @@ document
         document
           .getElementById("nak_aciklama")
           .value
-          .trim()
+          .trim(),
+
+      tasima_tipi:
+        document
+          .getElementById("nak_tasima")
+          .value
 
     };
-
 
 
     const {
@@ -2201,7 +2880,6 @@ document
       await supabaseClient
         .from("nakliyeciler")
         .insert(row);
-
 
 
     if(error){
@@ -2220,7 +2898,6 @@ document
     }
 
 
-
     message(
       "nakMsg",
       "Nakliyeci ilanı başarıyla yayınlandı.",
@@ -2236,14 +2913,20 @@ document
 
     setTimeout(
       function(){
+
         closeModal("nakliyeciModal");
+
+        message(
+          "nakMsg",
+          ""
+        );
+
       },
       700
     );
 
   }
 );
-
 
 
 /* =========================================================
@@ -2255,7 +2938,10 @@ function editIlan(id){
   const x =
     ilanlar.find(
       function(i){
-        return String(i.id) === String(id);
+
+        return String(i.id) ===
+          String(id);
+
       }
     );
 
@@ -2285,6 +2971,13 @@ function editIlan(id){
 
 
   document.getElementById(
+    "editTasima"
+  ).value =
+    x.tasima_tipi ||
+    "Şehir içi";
+
+
+  document.getElementById(
     "editFrom"
   ).value =
     x.nereden || "";
@@ -2307,9 +3000,8 @@ function editIlan(id){
 }
 
 
-
 /* =========================================================
-   İLAN GÜNCELLE
+   GÜNCELLE
    ========================================================= */
 
 document
@@ -2345,6 +3037,11 @@ document
               .getElementById("editArac")
               .value,
 
+          tasima_tipi:
+            document
+              .getElementById("editTasima")
+              .value,
+
           nereden:
             document
               .getElementById("editFrom")
@@ -2365,7 +3062,6 @@ document
 
         })
         .eq("id",id);
-
 
 
     if(error){
@@ -2390,9 +3086,8 @@ document
 );
 
 
-
 /* =========================================================
-   İLAN SİL
+   SİL
    ========================================================= */
 
 async function deleteIlan(id){
@@ -2417,7 +3112,6 @@ async function deleteIlan(id){
       .eq("id",id);
 
 
-
   if(error){
 
     alert(
@@ -2433,7 +3127,6 @@ async function deleteIlan(id){
   await loadAll();
 
 }
-
 
 
 /* =========================================================
@@ -2471,7 +3164,6 @@ supabaseClient
 .subscribe();
 
 
-
 /* =========================================================
    BAŞLANGIÇ
    ========================================================= */
@@ -2479,6 +3171,12 @@ supabaseClient
 document.addEventListener(
   "DOMContentLoaded",
   function(){
+
+    fillCities();
+
+    setMinDate();
+
+    updateLocationMode();
 
     loadAll();
 
