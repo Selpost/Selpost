@@ -3,240 +3,430 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Selport - Yük ve Nakliyeci Platformu</title>
+
+<meta name="description"
+content="TaşıBunu ile yükünüz için uygun nakliyeciyi bulun, aracınızla taşıyacak yeni işler keşfedin.">
+
+<meta name="theme-color" content="#087a45">
+
+<title>TaşıBunu | Nakliye & Taşımacılık</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  font-family:Arial,sans-serif;
-  background:#f4f7f5;
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#f5f7f6;
   color:#17231b;
 }
-button,input,select,textarea{font-family:inherit}
-button{cursor:pointer}
-.hidden{display:none!important}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none!important;
+}
+
+/* HEADER */
 
 header{
-  background:#087f3e;
-  color:white;
-  padding:15px;
   position:sticky;
   top:0;
   z-index:100;
-  box-shadow:0 3px 15px #0002;
+  background:#087a45;
+  color:white;
+  box-shadow:0 2px 12px #0002;
 }
-.header{
-  max-width:1100px;
+
+.header-inner{
+  max-width:1150px;
   margin:auto;
+  padding:14px 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:15px;
   flex-wrap:wrap;
 }
-.logo{font-size:28px;font-weight:900}
-nav{display:flex;gap:7px;flex-wrap:wrap}
-nav button{
-  border:0;
-  background:white;
-  color:#087f3e;
-  padding:9px 12px;
-  border-radius:9px;
-  font-weight:bold;
-}
-.user{
-  display:flex;
-  gap:8px;
-  align-items:center;
-}
-.badge{
-  background:#ffffff22;
-  padding:8px 10px;
-  border-radius:8px;
-  font-size:13px;
-}
-.logout{
-  border:0;
-  background:white;
-  color:#a00000;
-  padding:8px 11px;
-  border-radius:8px;
-  font-weight:bold;
+
+.logo{
+  font-size:27px;
+  font-weight:900;
+  letter-spacing:-.5px;
 }
 
-.hero{
-  background:linear-gradient(135deg,#087f3e,#12a955);
-  color:white;
-  text-align:center;
-  padding:55px 20px;
-}
-.hero h1{font-size:40px;margin-bottom:10px}
-.hero p{font-size:18px}
-.hero button{
-  margin:20px 5px 0;
-  padding:14px 20px;
-  border:0;
-  border-radius:10px;
-  font-weight:bold;
-}
-.white{color:#087f3e;background:white}
-.dark{background:#075f30;color:white}
-
-.container{
-  max-width:1100px;
-  margin:auto;
-  padding:25px 15px 50px;
-}
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:15px;
-  margin-bottom:25px;
-}
-.stat{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  text-align:center;
-  box-shadow:0 4px 15px #0001;
-}
-.stat strong{
-  display:block;
-  color:#087f3e;
-  font-size:30px;
-}
-
-.card{
-  background:white;
-  padding:25px;
-  border-radius:18px;
-  margin-bottom:20px;
-  box-shadow:0 4px 18px #0001;
-}
-
-.form{
-  max-width:700px;
-  margin:25px auto;
-}
-.group{margin-bottom:16px}
-label{
-  display:block;
-  font-weight:bold;
-  margin-bottom:6px;
-}
-input,select,textarea{
-  width:100%;
-  padding:13px;
-  border:1px solid #ccc;
-  border-radius:10px;
-  font-size:16px;
-}
-textarea{min-height:110px}
-.primary{
-  width:100%;
-  padding:15px;
-  border:0;
-  border-radius:10px;
-  background:#087f3e;
-  color:white;
-  font-size:17px;
-  font-weight:bold;
-}
-.secondary{
-  width:100%;
-  padding:13px;
-  margin-top:10px;
-  border:0;
-  border-radius:10px;
-  background:#e9f7ef;
-  color:#087f3e;
-  font-weight:bold;
-}
-.back{
-  border:0;
-  background:#eee;
-  padding:10px 15px;
-  border-radius:9px;
-  margin-bottom:15px;
-  font-weight:bold;
-}
-
-.message{
-  padding:12px;
-  border-radius:9px;
-  margin-bottom:15px;
-}
-.success{background:#e5f8eb;color:#087f3e}
-.error{background:#ffe5e5;color:#a00000}
-
-.listing{
-  background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-bottom:15px;
-  border-left:5px solid #087f3e;
-  box-shadow:0 4px 15px #0001;
-}
-.listing h3{color:#087f3e}
-.info{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-  margin:15px 0;
-}
-.info div{
-  background:#f5f7f6;
-  padding:10px;
-  border-radius:8px;
-}
-.actions{
+nav{
   display:flex;
   gap:8px;
   flex-wrap:wrap;
 }
-.whatsapp{
+
+nav button{
+  border:0;
+  background:white;
+  color:#087a45;
+  padding:9px 13px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#087a45,#0cae62);
+  color:white;
+  padding:42px 18px;
+}
+
+.hero-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,50px);
+  margin:0 0 12px;
+}
+
+.hero p{
+  font-size:clamp(18px,3vw,24px);
+  max-width:780px;
+  line-height:1.45;
+  margin:0 0 22px;
+  font-weight:700;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+/* GENEL */
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:800;
+}
+
+.btn-primary{
+  background:white;
+  color:#087a45;
+}
+
+.btn-dark{
+  background:#073d26;
+  color:white;
+}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:22px 18px;
+}
+
+.section-title{
+  font-size:25px;
+  margin:8px 0 15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  background:white;
+  border:1px solid #e0e7e3;
+  border-radius:14px;
+  padding:17px;
+  box-shadow:0 3px 12px #0000000a;
+}
+
+.card h3{
+  margin:0 0 8px;
+}
+
+.muted{
+  color:#68756e;
+}
+
+.badge{
+  display:inline-block;
+  background:#e9f7ef;
+  color:#087a45;
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin:3px 3px 3px 0;
+}
+
+/* FORM */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #cfd8d3;
+  border-radius:9px;
+  background:white;
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#0b8b50;
+  box-shadow:0 0 0 3px #0b8b5020;
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+/* ARAMA */
+
+.searchbar{
+  display:grid;
+  grid-template-columns:1fr 170px 170px auto;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+/* MESAJ */
+
+.notice{
+  padding:12px 14px;
+  border-radius:10px;
+  background:#fff8df;
+  border:1px solid #f0d88a;
+  margin:12px 0;
+}
+
+.success{
+  background:#e9f8ef;
+  border-color:#9dd9b5;
+}
+
+.danger{
+  background:#fff0f0;
+  border-color:#efb1b1;
+}
+
+/* İLAN */
+
+.item-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.item-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.small{
+  padding:8px 10px;
+  border-radius:8px;
+  border:0;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.wa{
   background:#25d366;
   color:white;
-  padding:10px 14px;
-  border-radius:9px;
-  text-decoration:none;
-  font-weight:bold;
 }
+
+.edit{
+  background:#edf2ff;
+  color:#3158b8;
+}
+
 .delete{
-  background:#ffe5e5;
-  color:#a00000;
-  border:0;
-  padding:10px 14px;
-  border-radius:9px;
-  font-weight:bold;
+  background:#ffecec;
+  color:#b52020;
 }
 
-.notification{
+.empty{
+  padding:30px;
+  text-align:center;
   background:white;
-  padding:20px;
-  border-radius:16px;
-  margin-bottom:25px;
-  box-shadow:0 4px 15px #0001;
-}
-.notification button{
-  background:#087f3e;
-  color:white;
-  border:0;
-  padding:11px 15px;
-  border-radius:9px;
-  font-weight:bold;
-  margin-top:10px;
+  border-radius:14px;
+  border:1px dashed #cbd5cf;
 }
 
-@media(max-width:700px){
-  .header{flex-direction:column}
-  nav{justify-content:center}
-  .stats{grid-template-columns:1fr}
-  .hero h1{font-size:30px}
-  .info{grid-template-columns:1fr}
+/* İSTATİSTİK */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.stat{
+  background:white;
+  border-radius:12px;
+  padding:17px;
+  text-align:center;
+  border:1px solid #e1e8e4;
+}
+
+.stat strong{
+  display:block;
+  font-size:28px;
+  color:#087a45;
+}
+
+/* FOOTER */
+
+footer{
+  background:#0d2118;
+  color:#dbe9e1;
+  margin-top:30px;
+  padding:28px 18px;
+}
+
+footer .container{
+  padding-top:0;
+  padding-bottom:0;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal-box{
+  background:white;
+  max-width:650px;
+  width:100%;
+  max-height:90vh;
+  overflow:auto;
+  border-radius:16px;
+  padding:20px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.close{
+  border:0;
+  background:#eee;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  font-size:20px;
+}
+
+/* MOBİL */
+
+@media(max-width:800px){
+
+  .grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .searchbar{
+    grid-template-columns:1fr 1fr;
+  }
+
+}
+
+@media(max-width:560px){
+
+  .header-inner{
+    align-items:flex-start;
+  }
+
+  nav{
+    width:100%;
+  }
+
+  nav button{
+    flex:1;
+  }
+
+  .grid,
+  .form-grid,
+  .stats,
+  .searchbar{
+    grid-template-columns:1fr;
+  }
+
+  .hero{
+    padding:30px 18px;
+  }
+
+  .card{
+    padding:14px;
+  }
+
 }
 </style>
 </head>
@@ -244,1355 +434,2014 @@ textarea{min-height:110px}
 <body>
 
 <header>
-<div class="header">
-  <div class="logo">🚚 SELPORT</div>
 
-  <nav>
-    <button onclick="showPage('home')">Ana Sayfa</button>
-    <button onclick="showPage('loadForm')">📦 Yüküm Var</button>
-    <button onclick="showPage('carrierForm')">🚚 Nakliyeciyim</button>
-    <button onclick="showPage('loads')">Yük İlanları</button>
-    <button onclick="showPage('carriers')">Nakliyeciler</button>
-  </nav>
+<div class="header-inner">
 
-  <div class="user">
-    <span id="userBadge" class="badge">Misafir</span>
-    <button id="authButton" class="logout" onclick="showPage('auth')">
-      Giriş / Kayıt
-    </button>
-  </div>
+<div class="logo">
+🚚 TaşıBunu
 </div>
+
+<nav>
+
+<button onclick="go('ilanlar')">
+Yük İlanları
+</button>
+
+<button onclick="go('nakliyeciler')">
+Nakliyeciler
+</button>
+
+<button onclick="openModal('ilanModal')">
++ Yük İlanı
+</button>
+
+<button onclick="openModal('nakliyeciModal')">
++ Nakliyeci
+</button>
+
+</nav>
+
+</div>
+
 </header>
 
-<section id="homePage">
 
-<div class="hero">
-  <h1>Yükünüz İçin Doğru Taşıyıcı</h1>
-  <p>Yük sahipleri ile nakliyecileri tek platformda buluşturuyoruz.</p>
+<section class="hero">
 
-  <button class="white" onclick="showPage('loadForm')">
-    📦 Yük İlanı Ver
-  </button>
+<div class="hero-inner">
 
-  <button class="dark" onclick="showPage('carrierForm')">
-    🚚 Nakliyeciyim
-  </button>
+<h1>
+TaşıBunu
+</h1>
+
+<p>
+Yükün ne kadar küçük veya büyük olursa olsun,
+sana uygun taşıyıcıyı bul.
+</p>
+
+<div class="hero-actions">
+
+<button
+class="btn btn-primary"
+onclick="openModal('ilanModal')">
+📦 Yükünü İlan Et
+</button>
+
+<button
+class="btn btn-dark"
+onclick="openModal('nakliyeciModal')">
+🚛 Nakliyeci Olarak İlan Ver
+</button>
+
 </div>
 
-<div class="container">
+</div>
+
+</section>
+
+
+<main>
+
+
+<section class="container">
 
 <div class="stats">
-  <div class="stat">
-    <strong id="loadCount">0</strong>
-    Yük İlanı
-  </div>
 
-  <div class="stat">
-    <strong id="carrierCount">0</strong>
-    Nakliyeci
-  </div>
+<div class="stat">
 
-  <div class="stat">
-    <strong>7/24</strong>
-    Platform
-  </div>
+<strong id="ilanCount">
+0
+</strong>
+
+Aktif yük ilanı
+
 </div>
 
-<div class="notification">
-  <h3>🔔 Bölgenizdeki Yeni Yüklerden Haberdar Olun</h3>
-  <p style="margin-top:8px">
-    Uygun bölgenizde yeni yük ilanı geldiğinde tarayıcı bildirimi alabilirsiniz.
-  </p>
 
-  <div id="notificationStatus" style="margin-top:10px;color:#666">
-    Bildirim durumu kontrol ediliyor...
-  </div>
+<div class="stat">
 
-  <button onclick="requestNotifications()">
-    🔔 Bildirimleri Aç
-  </button>
+<strong id="nakliyeciCount">
+0
+</strong>
+
+Nakliyeci
+
 </div>
 
-<div class="card">
-<h2>📦 Yükünüz mü var?</h2>
-<p style="margin:10px 0 15px">
-Yükünüzü yayınlayın, uygun nakliyeciler size ulaşabilsin.
-</p>
-<button class="primary" onclick="showPage('loadForm')">
-Yük İlanı Oluştur
-</button>
-</div>
 
-<div class="card">
-<h2>🚚 Nakliyeci misiniz?</h2>
-<p style="margin:10px 0 15px">
-Aracınızı ve hizmet verdiğiniz bölgeleri yayınlayın.
-</p>
-<button class="primary" onclick="showPage('carrierForm')">
-Nakliyeci Kaydı Oluştur
-</button>
+<div class="stat">
+
+<strong>
+7/24
+</strong>
+
+Yeni iş keşfi
+
 </div>
 
 </div>
+
 </section>
 
 
-<section id="authPage" class="hidden">
-<div class="container">
-<div class="card form">
 
-<button class="back" onclick="showPage('home')">← Geri</button>
+<section
+id="ilanlar"
+class="container">
 
-<h2>🔐 Giriş / Kayıt</h2>
-
-<div id="authMessage" style="margin-top:15px"></div>
-
-<div class="group" style="margin-top:20px">
-<label>E-posta</label>
-<input id="authEmail" type="email" placeholder="ornek@email.com">
-</div>
-
-<div class="group">
-<label>Şifre</label>
-<input id="authPassword" type="password" placeholder="En az 6 karakter">
-</div>
-
-<button class="primary" onclick="loginUser()">Giriş Yap</button>
-<button class="secondary" onclick="registerUser()">Yeni Hesap Oluştur</button>
-
-</div>
-</div>
-</section>
+<h2 class="section-title">
+📦 Yük İlanları
+</h2>
 
 
-<section id="loadFormPage" class="hidden">
-<div class="container">
-<div class="card form">
+<div class="searchbar">
 
-<button class="back" onclick="showPage('home')">← Geri</button>
+<input
+id="ilanSearch"
+placeholder="Şehir, yük türü, araç tipi ara..."
+oninput="renderIlanlar()">
 
-<h2>📦 Yük Taşıma İlanı</h2>
 
-<div id="loadMessage" style="margin-top:15px"></div>
+<select
+id="ilanAracFilter"
+onchange="renderIlanlar()">
 
-<div class="group">
-<label>Ad Soyad</label>
-<input id="loadName" required>
-</div>
+<option value="">
+Tüm araçlar
+</option>
 
-<div class="group">
-<label>Telefon</label>
-<input id="loadPhone" type="tel" placeholder="05XX XXX XX XX" required>
-</div>
+<option>
+Panelvan
+</option>
 
-<div class="group">
-<label>Nereden?</label>
-<input id="loadFrom" required>
-</div>
+<option>
+Kamyonet
+</option>
 
-<div class="group">
-<label>Nereye?</label>
-<input id="loadTo" required>
-</div>
+<option>
+Kamyon
+</option>
 
-<div class="group">
-<label>Yük Türü</label>
-<select id="loadType" required>
-<option value="">Seçiniz</option>
-<option>Ev Eşyası</option>
-<option>Küçük Yük</option>
-<option>Makine</option>
-<option>İnşaat Malzemesi</option>
-<option>Mobilya</option>
-<option>Paletli Ürün</option>
-<option>Gıda</option>
-<option>Diğer</option>
+<option>
+Tır
+</option>
+
 </select>
+
+
+<select
+id="ilanYolFilter"
+onchange="renderIlanlar()">
+
+<option value="">
+Tüm güzergâhlar
+</option>
+
+<option>
+Şehir içi
+</option>
+
+<option>
+Şehirler arası
+</option>
+
+</select>
+
+
+<button
+class="btn btn-dark"
+onclick="loadAll()">
+
+Yenile
+
+</button>
+
 </div>
 
-<div class="group">
-<label>Yük Miktarı</label>
-<input id="loadWeight" placeholder="Örn: 2 ton / 5 palet">
+
+<div
+id="ilanList"
+class="grid">
 </div>
 
-<div class="group">
-<label>Taşıma Tarihi</label>
-<input id="loadDate" type="date">
+</section>
+
+
+
+<section
+id="nakliyeciler"
+class="container">
+
+<h2 class="section-title">
+🚛 Nakliyeciler
+</h2>
+
+
+<div class="searchbar">
+
+<input
+id="nakSearch"
+placeholder="İsim, şehir, araç, güzergâh ara..."
+oninput="renderNakliyeciler()">
+
+
+<select
+id="nakAracFilter"
+onchange="renderNakliyeciler()">
+
+<option value="">
+Tüm araçlar
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+Tır
+</option>
+
+</select>
+
 </div>
 
-<div class="group">
-<label>Ek Bilgi</label>
-<textarea id="loadDetails"></textarea>
+
+<div
+id="nakList"
+class="grid">
 </div>
 
-<button class="primary" onclick="createLoad()">
+</section>
+
+
+
+<section class="container">
+
+<div class="card">
+
+<h2>
+TaşıBunu nasıl çalışır?
+</h2>
+
+
+<div class="grid">
+
+<div>
+
+<span class="badge">
+1
+</span>
+
+<h3>
+Yükünü yayınla
+</h3>
+
+<p class="muted">
+Nereden nereye gideceğini ve ihtiyacın olan aracı belirt.
+</p>
+
+</div>
+
+
+<div>
+
+<span class="badge">
+2
+</span>
+
+<h3>
+Uygun taşıyıcıyı bul
+</h3>
+
+<p class="muted">
+İlanları şehir, araç ve taşıma tipine göre filtrele.
+</p>
+
+</div>
+
+
+<div>
+
+<span class="badge">
+3
+</span>
+
+<h3>
+İletişime geç
+</h3>
+
+<p class="muted">
+Uygun nakliyeciyle WhatsApp üzerinden doğrudan iletişim kur.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<footer>
+
+<div class="container">
+
+<strong>
+TaşıBunu
+</strong>
+
+<p>
+Yükün ne kadar küçük veya büyük olursa olsun,
+sana uygun taşıyıcıyı bul.
+</p>
+
+</div>
+
+</footer>
+
+
+
+<!-- YÜK İLANI MODALI -->
+
+<div
+id="ilanModal"
+class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>
+📦 Yeni Yük İlanı
+</h2>
+
+<button
+class="close"
+onclick="closeModal('ilanModal')">
+×
+</button>
+
+</div>
+
+
+<div id="ilanMsg">
+</div>
+
+
+<form id="ilanForm">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>
+Yük türü
+</label>
+
+<input
+id="yuk_tipi"
+required
+placeholder="Örn. Mobilya, koli, makine">
+
+</div>
+
+
+
+<div>
+
+<label>
+Taşıma tipi
+</label>
+
+<select id="tasima_tipi">
+
+<option>
+Şehir içi
+</option>
+
+<option>
+Şehirler arası
+</option>
+
+</select>
+
+</div>
+
+
+
+<div>
+
+<label>
+Nereden
+</label>
+
+<input
+id="nereden"
+required
+placeholder="İl / ilçe">
+
+</div>
+
+
+
+<div>
+
+<label>
+Nereye
+</label>
+
+<input
+id="nereye"
+required
+placeholder="İl / ilçe">
+
+</div>
+
+
+
+<div>
+
+<label>
+Araç tipi
+</label>
+
+<select id="arac_tipi">
+
+<option>
+Panelvan
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+Tır
+</option>
+
+</select>
+
+</div>
+
+
+
+<div>
+
+<label>
+Tonaj
+</label>
+
+<input
+id="tonaj"
+placeholder="Örn. 2 ton">
+
+</div>
+
+
+
+<div>
+
+<label>
+Tarih
+</label>
+
+<input
+id="tarih"
+type="date">
+
+</div>
+
+
+
+<div>
+
+<label>
+Telefon / WhatsApp
+</label>
+
+<input
+id="telefon"
+type="tel"
+placeholder="05xx xxx xx xx">
+
+</div>
+
+
+
+<div class="full">
+
+<label>
+Açıklama
+</label>
+
+<textarea
+id="aciklama"
+placeholder="Yük hakkında ek bilgi...">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+class="btn btn-dark"
+type="submit">
+
 İlanı Yayınla
+
+</button>
+
+
+<button
+class="btn"
+type="button"
+onclick="closeModal('ilanModal')">
+
+Vazgeç
+
 </button>
 
 </div>
-</div>
-</section>
 
+</form>
 
-<section id="carrierFormPage" class="hidden">
-<div class="container">
-<div class="card form">
-
-<button class="back" onclick="showPage('home')">← Geri</button>
-
-<h2>🚚 Nakliyeci Kaydı</h2>
-
-<div id="carrierMessage" style="margin-top:15px"></div>
-
-<div class="group">
-<label>Ad Soyad</label>
-<input id="carrierName" required>
 </div>
 
-<div class="group">
-<label>Telefon</label>
-<input id="carrierPhone" type="tel" required>
 </div>
 
-<div class="group">
-<label>Araç Tipi</label>
-<select id="vehicleType" required>
-<option value="">Seçiniz</option>
-<option>Panelvan</option>
-<option>Kamyonet</option>
-<option>Kamyon</option>
-<option>Tır</option>
-<option>Frigorifik Araç</option>
-<option>Tenteli Araç</option>
-<option>Evden Eve Servis</option>
-<option>Diğer</option>
+
+
+<!-- NAKLİYECİ MODALI -->
+
+<div
+id="nakliyeciModal"
+class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>
+🚛 Nakliyeci İlanı
+</h2>
+
+<button
+class="close"
+onclick="closeModal('nakliyeciModal')">
+
+×
+
+</button>
+
+</div>
+
+
+<div id="nakMsg">
+</div>
+
+
+<form id="nakForm">
+
+<div class="form-grid">
+
+
+<div>
+
+<label>
+Ad / firma
+</label>
+
+<input
+id="nak_ad"
+required>
+
+</div>
+
+
+
+<div>
+
+<label>
+Telefon / WhatsApp
+</label>
+
+<input
+id="nak_telefon"
+required
+type="tel">
+
+</div>
+
+
+
+<div>
+
+<label>
+Şehir
+</label>
+
+<input
+id="nak_sehir"
+required
+placeholder="Örn. İstanbul">
+
+</div>
+
+
+
+<div>
+
+<label>
+Araç tipi
+</label>
+
+<select id="nak_arac">
+
+<option>
+Panelvan
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+Tır
+</option>
+
 </select>
+
 </div>
 
-<div class="group">
-<label>Araç Kapasitesi</label>
-<input id="vehicleCapacity" placeholder="Örn: 10 ton" required>
+
+
+<div class="full">
+
+<label>
+Güzergâh
+</label>
+
+<input
+id="nak_guzergah"
+placeholder="Örn. İstanbul → Ankara">
+
 </div>
 
-<div class="group">
-<label>Bulunduğunuz Şehir</label>
-<input id="carrierCity" required>
+
+
+<div class="full">
+
+<label>
+Açıklama
+</label>
+
+<textarea
+id="nak_aciklama"
+placeholder="Hangi yükleri ve bölgeleri taşıyorsunuz?">
+</textarea>
+
 </div>
 
-<div class="group">
-<label>Gidebileceğiniz Bölgeler</label>
-<input id="carrierRegions" placeholder="Örn: Ankara, Konya, İstanbul">
+
 </div>
 
-<div class="group">
-<label>Ek Bilgi</label>
-<textarea id="carrierDetails"></textarea>
-</div>
 
-<button class="primary" onclick="createCarrier()">
-Nakliyeci Kaydımı Oluştur
+<div class="form-actions">
+
+<button
+class="btn btn-dark"
+type="submit">
+
+Nakliyeci İlanını Yayınla
+
+</button>
+
+
+<button
+class="btn"
+type="button"
+onclick="closeModal('nakliyeciModal')">
+
+Vazgeç
+
 </button>
 
 </div>
+
+</form>
+
 </div>
-</section>
+
+</div>
 
 
-<section id="loadsPage" class="hidden">
-<div class="container">
 
-<button class="back" onclick="showPage('home')">← Geri</button>
+<!-- DÜZENLEME MODALI -->
 
-<h2 style="margin-bottom:20px">📦 Yük İlanları</h2>
+<div
+id="editModal"
+class="modal hidden">
+
+<div class="modal-box">
+
+<div class="modal-head">
+
+<h2>
+İlanı Düzenle
+</h2>
+
+<button
+class="close"
+onclick="closeModal('editModal')">
+
+×
+
+</button>
+
+</div>
+
+
+<div id="editMsg">
+</div>
+
+
+<form id="editForm">
 
 <input
-id="loadSearch"
-oninput="renderLoads()"
-placeholder="Şehir, yük türü veya isim ara..."
-style="margin-bottom:15px">
-
-<div id="loadsList"></div>
-
-</div>
-</section>
+type="hidden"
+id="editId">
 
 
-<section id="carriersPage" class="hidden">
-<div class="container">
+<div class="form-grid">
 
-<button class="back" onclick="showPage('home')">← Geri</button>
 
-<h2 style="margin-bottom:20px">🚚 Nakliyeciler</h2>
+<div>
+
+<label>
+Yük türü
+</label>
 
 <input
-id="carrierSearch"
-oninput="renderCarriers()"
-placeholder="Şehir, araç veya isim ara..."
-style="margin-bottom:15px">
-
-<div id="carriersList"></div>
+id="editYuk"
+required>
 
 </div>
-</section>
+
+
+
+<div>
+
+<label>
+Araç tipi
+</label>
+
+<select id="editArac">
+
+<option>
+Panelvan
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+Tır
+</option>
+
+</select>
+
+</div>
+
+
+
+<div>
+
+<label>
+Nereden
+</label>
+
+<input
+id="editFrom"
+required>
+
+</div>
+
+
+
+<div>
+
+<label>
+Nereye
+</label>
+
+<input
+id="editTo"
+required>
+
+</div>
+
+
+
+<div class="full">
+
+<label>
+Açıklama
+</label>
+
+<textarea id="editDesc">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+<div class="form-actions">
+
+<button
+class="btn btn-dark"
+type="submit">
+
+Kaydet
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+</div>
+
 
 
 <script>
 
+/* =========================================================
+   TAŞIBUNU - SUPABASE
+   ========================================================= */
+
 const SUPABASE_URL =
 "https://wacmbcmgpemcwdlwwjrh.supabase.co";
 
-const SUPABASE_KEY =
+const SUPABASE_PUBLISHABLE_KEY =
 "sb_publishable_Q3R-e7e3MoOFc06_28Wr7A_WVOYzImC";
 
-const db = window.supabase.createClient(
+
+const supabaseClient =
+supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_KEY
+  SUPABASE_PUBLISHABLE_KEY
 );
 
-let currentUser = null;
-let loads = [];
-let carriers = [];
+
+let ilanlar = [];
+
+let nakliyeciler = [];
 
 
-/* ---------------- AUTH ---------------- */
 
-async function checkUser(){
+/* =========================================================
+   YARDIMCI FONKSİYONLAR
+   ========================================================= */
 
-  const {data} = await db.auth.getUser();
+function esc(value){
 
-  currentUser = data?.user || null;
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(m){
 
-  updateUserUI();
-}
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m];
 
-
-function updateUserUI(){
-
-  const badge = document.getElementById("userBadge");
-  const button = document.getElementById("authButton");
-
-  if(currentUser){
-
-    badge.textContent =
-      "👤 " + (currentUser.email || "Kullanıcı");
-
-    button.textContent = "Çıkış Yap";
-    button.onclick = logoutUser;
-
-  }else{
-
-    badge.textContent = "Misafir";
-
-    button.textContent = "Giriş / Kayıt";
-    button.onclick = () => showPage("auth");
-
-  }
-}
-
-
-async function registerUser(){
-
-  const email =
-    document.getElementById("authEmail").value.trim();
-
-  const password =
-    document.getElementById("authPassword").value;
-
-  if(!email || !password){
-
-    showAuthMessage("E-posta ve şifre girin.","error");
-    return;
-  }
-
-  if(password.length < 6){
-
-    showAuthMessage(
-      "Şifre en az 6 karakter olmalıdır.",
-      "error"
-    );
-
-    return;
-  }
-
-  const {data,error} =
-    await db.auth.signUp({
-      email,
-      password
     });
 
-  if(error){
+}
 
-    showAuthMessage(error.message,"error");
-    return;
+
+
+function norm(value){
+
+  return String(value ?? "")
+    .toLocaleLowerCase("tr-TR");
+
+}
+
+
+
+function go(id){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+
+    element.scrollIntoView({
+      behavior:"smooth"
+    });
+
   }
 
-  if(data.session){
+}
 
-    currentUser = data.user;
-    updateUserUI();
 
-    showAuthMessage(
-      "✅ Kayıt başarılı.",
+
+function openModal(id){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+
+    element.classList.remove("hidden");
+
+  }
+
+}
+
+
+
+function closeModal(id){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+
+    element.classList.add("hidden");
+
+  }
+
+}
+
+
+
+function message(id,text,type=""){
+
+  const element =
+    document.getElementById(id);
+
+  if(!element) return;
+
+  if(!text){
+
+    element.innerHTML="";
+    return;
+
+  }
+
+  element.innerHTML =
+    `<div class="notice ${type}">
+      ${esc(text)}
+    </div>`;
+
+}
+
+
+
+function whatsapp(phone){
+
+  const digits =
+    String(phone || "")
+      .replace(/\D/g,"");
+
+  if(!digits){
+
+    return "#";
+
+  }
+
+  const tr =
+    digits.startsWith("0")
+      ? "90" + digits.slice(1)
+      : digits;
+
+  return "https://wa.me/" + tr;
+
+}
+
+
+
+/* =========================================================
+   VERİLERİ ÇEK
+   ========================================================= */
+
+async function loadAll(){
+
+  const [
+    ilanResult,
+    nakliyeciResult
+  ] = await Promise.all([
+
+    supabaseClient
+      .from("ilanlar")
+      .select("*")
+      .order("created_at",{
+        ascending:false
+      }),
+
+    supabaseClient
+      .from("nakliyeciler")
+      .select("*")
+      .order("created_at",{
+        ascending:false
+      })
+
+  ]);
+
+
+  if(ilanResult.error){
+
+    console.error(
+      "ilanlar:",
+      ilanResult.error
+    );
+
+  }
+
+
+  if(nakliyeciResult.error){
+
+    console.error(
+      "nakliyeciler:",
+      nakliyeciResult.error
+    );
+
+  }
+
+
+  ilanlar =
+    ilanResult.data || [];
+
+
+  nakliyeciler =
+    nakliyeciResult.data || [];
+
+
+  document.getElementById(
+    "ilanCount"
+  ).textContent =
+    ilanlar.length;
+
+
+  document.getElementById(
+    "nakliyeciCount"
+  ).textContent =
+    nakliyeciler.length;
+
+
+  renderIlanlar();
+
+  renderNakliyeciler();
+
+}
+
+
+
+/* =========================================================
+   YÜK İLANLARI
+   ========================================================= */
+
+function renderIlanlar(){
+
+  const search =
+    norm(
+      document.getElementById(
+        "ilanSearch"
+      ).value
+    );
+
+
+  const arac =
+    document.getElementById(
+      "ilanAracFilter"
+    ).value;
+
+
+  const yol =
+    document.getElementById(
+      "ilanYolFilter"
+    ).value;
+
+
+  const list =
+    ilanlar.filter(function(x){
+
+      const haystack =
+        norm([
+          x.yuk_tipi,
+          x.yuk_turu,
+          x.nereden,
+          x.nereye,
+          x.arac_tipi,
+          x.aciklama,
+          x.tasima_tipi
+        ].join(" "));
+
+
+      return (
+
+        (!search ||
+          haystack.includes(search))
+
+        &&
+
+        (!arac ||
+          x.arac_tipi === arac)
+
+        &&
+
+        (!yol ||
+          x.tasima_tipi === yol)
+
+      );
+
+    });
+
+
+
+  const container =
+    document.getElementById(
+      "ilanList"
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+      <div
+        class="empty"
+        style="grid-column:1/-1">
+
+        Henüz yük ilanı yok.
+        İlk ilanı sen yayınla.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+
+  container.innerHTML =
+    list.map(function(x){
+
+      return `
+
+      <article class="card">
+
+        <div class="item-head">
+
+          <div>
+
+            <h3>
+              📦
+              ${esc(
+                x.yuk_tipi ||
+                x.yuk_turu ||
+                "Yük ilanı"
+              )}
+            </h3>
+
+            <span class="badge">
+              ${esc(
+                x.tasima_tipi ||
+                "Taşıma"
+              )}
+            </span>
+
+            <span class="badge">
+              ${esc(
+                x.arac_tipi ||
+                "Araç belirtilmemiş"
+              )}
+            </span>
+
+          </div>
+
+
+          <span class="muted">
+
+            ${esc(
+              (x.created_at || "")
+              .slice(0,10)
+            )}
+
+          </span>
+
+        </div>
+
+
+
+        <p>
+
+          📍
+
+          <b>
+            ${esc(
+              x.nereden || "—"
+            )}
+          </b>
+
+          →
+
+          <b>
+            ${esc(
+              x.nereye || "—"
+            )}
+          </b>
+
+        </p>
+
+
+
+        ${
+          x.tonaj
+          ?
+          `
+          <p>
+            ⚖️
+            <b>Tonaj:</b>
+            ${esc(x.tonaj)}
+          </p>
+          `
+          :
+          ""
+        }
+
+
+
+        ${
+          x.tarih
+          ?
+          `
+          <p>
+            📅
+            <b>Tarih:</b>
+            ${esc(x.tarih)}
+          </p>
+          `
+          :
+          ""
+        }
+
+
+
+        ${
+          x.aciklama
+          ?
+          `
+          <p class="muted">
+            ${esc(x.aciklama)}
+          </p>
+          `
+          :
+          ""
+        }
+
+
+
+        <div class="item-actions">
+
+          ${
+            x.telefon
+            ?
+            `
+            <a
+              class="small wa"
+              target="_blank"
+              href="${whatsapp(x.telefon)}">
+
+              WhatsApp
+
+            </a>
+            `
+            :
+            ""
+          }
+
+
+          <button
+            class="small edit"
+            onclick="editIlan('${esc(x.id)}')">
+
+            Düzenle
+
+          </button>
+
+
+          <button
+            class="small delete"
+            onclick="deleteIlan('${esc(x.id)}')">
+
+            Sil
+
+          </button>
+
+        </div>
+
+      </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+
+/* =========================================================
+   NAKLİYECİLER
+   ========================================================= */
+
+function renderNakliyeciler(){
+
+  const search =
+    norm(
+      document.getElementById(
+        "nakSearch"
+      ).value
+    );
+
+
+  const arac =
+    document.getElementById(
+      "nakAracFilter"
+    ).value;
+
+
+  const list =
+    nakliyeciler.filter(function(x){
+
+      const haystack =
+        norm([
+          x.ad_soyad,
+          x.ad,
+          x.firma,
+          x.sehir,
+          x.arac_tipi,
+          x.guzergah,
+          x.aciklama
+        ].join(" "));
+
+
+      return (
+
+        (!search ||
+          haystack.includes(search))
+
+        &&
+
+        (!arac ||
+          x.arac_tipi === arac)
+
+      );
+
+    });
+
+
+
+  const container =
+    document.getElementById(
+      "nakList"
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML = `
+      <div
+        class="empty"
+        style="grid-column:1/-1">
+
+        Henüz nakliyeci ilanı yok.
+        İlk nakliyeci ilanını sen yayınla.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+
+  container.innerHTML =
+    list.map(function(x){
+
+      return `
+
+      <article class="card">
+
+        <h3>
+
+          🚛
+
+          ${esc(
+            x.ad_soyad ||
+            x.ad ||
+            x.firma ||
+            "Nakliyeci"
+          )}
+
+        </h3>
+
+
+        <span class="badge">
+
+          ${esc(
+            x.arac_tipi ||
+            "Araç belirtilmemiş"
+          )}
+
+        </span>
+
+
+        ${
+          x.sehir
+          ?
+          `
+          <span class="badge">
+
+            📍
+            ${esc(x.sehir)}
+
+          </span>
+          `
+          :
+          ""
+        }
+
+
+
+        ${
+          x.guzergah
+          ?
+          `
+          <p>
+
+            <b>
+              Güzergâh:
+            </b>
+
+            ${esc(x.guzergah)}
+
+          </p>
+          `
+          :
+          ""
+        }
+
+
+
+        ${
+          x.aciklama
+          ?
+          `
+          <p class="muted">
+
+            ${esc(x.aciklama)}
+
+          </p>
+          `
+          :
+          ""
+        }
+
+
+
+        <div class="item-actions">
+
+          ${
+            x.telefon
+            ?
+            `
+            <a
+              class="small wa"
+              target="_blank"
+              href="${whatsapp(x.telefon)}">
+
+              WhatsApp
+
+            </a>
+            `
+            :
+            ""
+          }
+
+        </div>
+
+      </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+
+/* =========================================================
+   YENİ YÜK İLANI
+   ========================================================= */
+
+document
+.getElementById("ilanForm")
+.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    message(
+      "ilanMsg",
+      "İlan yayınlanıyor..."
+    );
+
+
+    const {
+      data:{
+        user
+      }
+    } =
+      await supabaseClient
+        .auth
+        .getUser();
+
+
+
+    const row = {
+
+      owner_id:
+        user?.id || null,
+
+      yuk_tipi:
+        document
+          .getElementById("yuk_tipi")
+          .value
+          .trim(),
+
+      tasima_tipi:
+        document
+          .getElementById("tasima_tipi")
+          .value,
+
+      nereden:
+        document
+          .getElementById("nereden")
+          .value
+          .trim(),
+
+      nereye:
+        document
+          .getElementById("nereye")
+          .value
+          .trim(),
+
+      arac_tipi:
+        document
+          .getElementById("arac_tipi")
+          .value,
+
+      tonaj:
+        document
+          .getElementById("tonaj")
+          .value
+          .trim(),
+
+      tarih:
+        document
+          .getElementById("tarih")
+          .value || null,
+
+      telefon:
+        document
+          .getElementById("telefon")
+          .value
+          .trim(),
+
+      aciklama:
+        document
+          .getElementById("aciklama")
+          .value
+          .trim()
+
+    };
+
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("ilanlar")
+        .insert(row);
+
+
+
+    if(error){
+
+      console.error(error);
+
+      message(
+        "ilanMsg",
+        "İlan kaydedilemedi: " +
+        error.message,
+        "danger"
+      );
+
+      return;
+
+    }
+
+
+
+    message(
+      "ilanMsg",
+      "İlan başarıyla yayınlandı.",
       "success"
     );
 
+
+    e.target.reset();
+
+
+    await loadAll();
+
+
     setTimeout(
-      () => showPage("home"),
+      function(){
+        closeModal("ilanModal");
+      },
       700
     );
 
-  }else{
+  }
+);
 
-    showAuthMessage(
-      "✅ Hesap oluşturuldu. E-posta doğrulaması gerekiyorsa e-postanızı kontrol edin.",
+
+
+/* =========================================================
+   YENİ NAKLİYECİ
+   ========================================================= */
+
+document
+.getElementById("nakForm")
+.addEventListener(
+  "submit",
+  async function(e){
+
+    e.preventDefault();
+
+
+    message(
+      "nakMsg",
+      "Nakliyeci ilanı yayınlanıyor..."
+    );
+
+
+    const {
+      data:{
+        user
+      }
+    } =
+      await supabaseClient
+        .auth
+        .getUser();
+
+
+
+    const row = {
+
+      owner_id:
+        user?.id || null,
+
+      ad_soyad:
+        document
+          .getElementById("nak_ad")
+          .value
+          .trim(),
+
+      telefon:
+        document
+          .getElementById("nak_telefon")
+          .value
+          .trim(),
+
+      sehir:
+        document
+          .getElementById("nak_sehir")
+          .value
+          .trim(),
+
+      arac_tipi:
+        document
+          .getElementById("nak_arac")
+          .value,
+
+      guzergah:
+        document
+          .getElementById("nak_guzergah")
+          .value
+          .trim(),
+
+      aciklama:
+        document
+          .getElementById("nak_aciklama")
+          .value
+          .trim()
+
+    };
+
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("nakliyeciler")
+        .insert(row);
+
+
+
+    if(error){
+
+      console.error(error);
+
+      message(
+        "nakMsg",
+        "Nakliyeci kaydedilemedi: " +
+        error.message,
+        "danger"
+      );
+
+      return;
+
+    }
+
+
+
+    message(
+      "nakMsg",
+      "Nakliyeci ilanı başarıyla yayınlandı.",
       "success"
     );
-  }
-}
 
 
-async function loginUser(){
+    e.target.reset();
 
-  const email =
-    document.getElementById("authEmail").value.trim();
 
-  const password =
-    document.getElementById("authPassword").value;
+    await loadAll();
 
-  if(!email || !password){
 
-    showAuthMessage(
-      "E-posta ve şifre girin.",
-      "error"
+    setTimeout(
+      function(){
+        closeModal("nakliyeciModal");
+      },
+      700
     );
 
-    return;
   }
+);
 
-  const {data,error} =
-    await db.auth.signInWithPassword({
-      email,
-      password
-    });
 
-  if(error){
 
-    showAuthMessage(error.message,"error");
-    return;
-  }
+/* =========================================================
+   İLAN DÜZENLE
+   ========================================================= */
 
-  currentUser = data.user;
+function editIlan(id){
 
-  updateUserUI();
-
-  showAuthMessage(
-    "✅ Giriş başarılı.",
-    "success"
-  );
-
-  setTimeout(
-    () => showPage("home"),
-    500
-  );
-}
-
-
-async function logoutUser(){
-
-  await db.auth.signOut();
-
-  currentUser = null;
-
-  updateUserUI();
-
-  showPage("home");
-}
-
-
-function showAuthMessage(text,type){
-
-  document.getElementById("authMessage").innerHTML =
-    `<div class="message ${type}">${escapeHtml(text)}</div>`;
-}
-
-
-/* ---------------- SAYFA ---------------- */
-
-function showPage(page){
-
-  document
-    .querySelectorAll("section[id$='Page']")
-    .forEach(x => x.classList.add("hidden"));
-
-  const element =
-    document.getElementById(page + "Page");
-
-  if(element)
-    element.classList.remove("hidden");
-
-  if(page === "loads")
-    renderLoads();
-
-  if(page === "carriers")
-    renderCarriers();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-}
-
-
-/* ---------------- YÜK OLUŞTUR ---------------- */
-
-async function createLoad(){
-
-  if(!currentUser){
-
-    alert("İlan vermek için önce giriş yapmalısınız.");
-
-    showPage("auth");
-
-    return;
-  }
-
-  const data = {
-
-    user_id: currentUser.id,
-
-    ad_soyad:
-      document.getElementById("loadName").value.trim(),
-
-    telefon:
-      document.getElementById("loadPhone").value.trim(),
-
-    nereden:
-      document.getElementById("loadFrom").value.trim(),
-
-    nereye:
-      document.getElementById("loadTo").value.trim(),
-
-    yuk_tipi:
-      document.getElementById("loadType").value,
-
-    agirlik:
-      document.getElementById("loadWeight").value.trim(),
-
-    tarih:
-      document.getElementById("loadDate").value,
-
-    aciklama:
-      document.getElementById("loadDetails").value.trim(),
-
-    durum:"aktif"
-  };
-
-
-  if(
-    !data.ad_soyad ||
-    !data.telefon ||
-    !data.nereden ||
-    !data.nereye ||
-    !data.yuk_tipi
-  ){
-
-    showLoadMessage(
-      "Lütfen zorunlu alanları doldurun.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("ilanlar")
-      .insert(data);
-
-
-  if(error){
-
-    console.error(error);
-
-    showLoadMessage(
-      "❌ İlan oluşturulamadı: " + error.message,
-      "error"
-    );
-
-    return;
-  }
-
-
-  showLoadMessage(
-    "✅ İlanınız başarıyla yayınlandı!",
-    "success"
-  );
-
-  document
-    .querySelector("#loadFormPage .form")
-    .querySelectorAll("input,select,textarea")
-    .forEach(x => x.value = "");
-
-  await loadData();
-
-  setTimeout(
-    () => showPage("loads"),
-    700
-  );
-}
-
-
-function showLoadMessage(text,type){
-
-  document.getElementById("loadMessage").innerHTML =
-    `<div class="message ${type}">${escapeHtml(text)}</div>`;
-}
-
-
-/* ---------------- NAKLİYECİ ---------------- */
-
-async function createCarrier(){
-
-  if(!currentUser){
-
-    alert("Nakliyeci kaydı için önce giriş yapmalısınız.");
-
-    showPage("auth");
-
-    return;
-  }
-
-
-  const capacity =
-    document.getElementById("vehicleCapacity").value.trim();
-
-  const details =
-    document.getElementById("carrierDetails").value.trim();
-
-
-  const data = {
-
-    user_id: currentUser.id,
-
-    ad_soyad:
-      document.getElementById("carrierName").value.trim(),
-
-    telefon:
-      document.getElementById("carrierPhone").value.trim(),
-
-    arac_tipi:
-      document.getElementById("vehicleType").value,
-
-    plaka:null,
-
-    nereden:
-      document.getElementById("carrierCity").value.trim(),
-
-    nereye:
-      document.getElementById("carrierRegions").value.trim(),
-
-    aciklama:
-      `[KAPASITE:${capacity}] ${details}`,
-
-    durum:"aktif"
-  };
-
-
-  if(
-    !data.ad_soyad ||
-    !data.telefon ||
-    !data.arac_tipi ||
-    !data.nereden
-  ){
-
-    showCarrierMessage(
-      "Lütfen zorunlu alanları doldurun.",
-      "error"
-    );
-
-    return;
-  }
-
-
-  const {error} =
-    await db
-      .from("nakliyeciler")
-      .insert(data);
-
-
-  if(error){
-
-    console.error(error);
-
-    showCarrierMessage(
-      "❌ Nakliyeci kaydı oluşturulamadı: " + error.message,
-      "error"
-    );
-
-    return;
-  }
-
-
-  showCarrierMessage(
-    "✅ Nakliyeci kaydınız oluşturuldu.",
-    "success"
-  );
-
-  document
-    .querySelector("#carrierFormPage .form")
-    .querySelectorAll("input,select,textarea")
-    .forEach(x => x.value = "");
-
-  await loadData();
-
-  setTimeout(
-    () => showPage("carriers"),
-    700
-  );
-}
-
-
-function showCarrierMessage(text,type){
-
-  document.getElementById("carrierMessage").innerHTML =
-    `<div class="message ${type}">${escapeHtml(text)}</div>`;
-}
-
-
-/* ---------------- VERİLER ---------------- */
-
-async function loadData(){
-
-  const [loadResult,carrierResult] =
-    await Promise.all([
-
-      db
-        .from("ilanlar")
-        .select("*")
-        .order("created_at",{ascending:false}),
-
-      db
-        .from("nakliyeciler")
-        .select("*")
-        .order("created_at",{ascending:false})
-    ]);
-
-
-  if(loadResult.error)
-    console.error(loadResult.error);
-
-  if(carrierResult.error)
-    console.error(carrierResult.error);
-
-
-  loads =
-    (loadResult.data || []).map(x => ({
-      id:x.id,
-      user_id:x.user_id,
-      name:x.ad_soyad || "",
-      phone:x.telefon || "",
-      from:x.nereden || "",
-      to:x.nereye || "",
-      type:x.yuk_tipi || "",
-      weight:x.agirlik || "",
-      date:x.tarih || "",
-      details:x.aciklama || "",
-      created:x.created_at
-        ? new Date(x.created_at).toLocaleDateString("tr-TR")
-        : ""
-    }));
-
-
-  carriers =
-    (carrierResult.data || []).map(x => {
-
-      let capacity="";
-      let details=x.aciklama || "";
-
-      const match =
-        details.match(/^\[KAPASITE:(.*?)\]\s*/);
-
-      if(match){
-
-        capacity=match[1];
-
-        details=
-          details.replace(match[0],"");
+  const x =
+    ilanlar.find(
+      function(i){
+        return String(i.id) === String(id);
       }
-
-      return {
-
-        id:x.id,
-        user_id:x.user_id,
-        name:x.ad_soyad || "",
-        phone:x.telefon || "",
-        vehicle:x.arac_tipi || "",
-        capacity,
-        city:x.nereden || "",
-        regions:x.nereye || "",
-        details,
-        created:x.created_at
-          ? new Date(x.created_at).toLocaleDateString("tr-TR")
-          : ""
-      };
-    });
+    );
 
 
-  updateStats();
+  if(!x) return;
 
-  renderLoads();
 
-  renderCarriers();
+  document.getElementById(
+    "editId"
+  ).value =
+    x.id;
+
+
+  document.getElementById(
+    "editYuk"
+  ).value =
+    x.yuk_tipi ||
+    x.yuk_turu ||
+    "";
+
+
+  document.getElementById(
+    "editArac"
+  ).value =
+    x.arac_tipi ||
+    "Panelvan";
+
+
+  document.getElementById(
+    "editFrom"
+  ).value =
+    x.nereden || "";
+
+
+  document.getElementById(
+    "editTo"
+  ).value =
+    x.nereye || "";
+
+
+  document.getElementById(
+    "editDesc"
+  ).value =
+    x.aciklama || "";
+
+
+  openModal("editModal");
+
 }
 
 
-function updateStats(){
 
-  document.getElementById("loadCount").textContent =
-    loads.length;
+/* =========================================================
+   İLAN GÜNCELLE
+   ========================================================= */
 
-  document.getElementById("carrierCount").textContent =
-    carriers.length;
-}
+document
+.getElementById("editForm")
+.addEventListener(
+  "submit",
+  async function(e){
 
-
-/* ---------------- YÜK LİSTESİ ---------------- */
-
-function renderLoads(){
-
-  const container =
-    document.getElementById("loadsList");
-
-  if(!container)return;
-
-  const search =
-    (document.getElementById("loadSearch")?.value || "")
-      .toLowerCase();
-
-  const filtered =
-    loads.filter(load => {
-
-      const text =
-        `${load.name} ${load.from} ${load.to} ${load.type} ${load.weight}`
-          .toLowerCase();
-
-      return text.includes(search);
-    });
+    e.preventDefault();
 
 
-  if(!filtered.length){
+    const id =
+      document.getElementById(
+        "editId"
+      ).value;
 
-    container.innerHTML =
-      `<div class="card">
-        Henüz yük ilanı bulunmuyor.
-      </div>`;
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from("ilanlar")
+        .update({
+
+          yuk_tipi:
+            document
+              .getElementById("editYuk")
+              .value
+              .trim(),
+
+          arac_tipi:
+            document
+              .getElementById("editArac")
+              .value,
+
+          nereden:
+            document
+              .getElementById("editFrom")
+              .value
+              .trim(),
+
+          nereye:
+            document
+              .getElementById("editTo")
+              .value
+              .trim(),
+
+          aciklama:
+            document
+              .getElementById("editDesc")
+              .value
+              .trim()
+
+        })
+        .eq("id",id);
+
+
+
+    if(error){
+
+      message(
+        "editMsg",
+        "Güncelleme başarısız: " +
+        error.message,
+        "danger"
+      );
+
+      return;
+
+    }
+
+
+    closeModal("editModal");
+
+    await loadAll();
+
+  }
+);
+
+
+
+/* =========================================================
+   İLAN SİL
+   ========================================================= */
+
+async function deleteIlan(id){
+
+  if(
+    !confirm(
+      "Bu ilanı silmek istediğine emin misin?"
+    )
+  ){
 
     return;
+
   }
 
 
-  container.innerHTML =
-    filtered.map(load => {
-
-      const owner =
-        currentUser &&
-        currentUser.id === load.user_id;
-
-
-      const whatsapp =
-        "https://wa.me/" +
-        cleanPhone(load.phone) +
-        "?text=" +
-        encodeURIComponent(
-          `Merhaba, Selport'taki ${load.from} → ${load.to} yük ilanınız hakkında iletişime geçiyorum.`
-        );
-
-
-      return `
-      <div class="listing">
-
-        <h3>📦
-          ${escapeHtml(load.from)}
-          →
-          ${escapeHtml(load.to)}
-        </h3>
-
-        <small>${escapeHtml(load.created)}</small>
-
-        <div class="info">
-
-          <div>
-            <strong>İlan Sahibi</strong><br>
-            ${escapeHtml(load.name)}
-          </div>
-
-          <div>
-            <strong>Yük Türü</strong><br>
-            ${escapeHtml(load.type)}
-          </div>
-
-          <div>
-            <strong>Miktar</strong><br>
-            ${escapeHtml(load.weight || "Belirtilmedi")}
-          </div>
-
-          <div>
-            <strong>Tarih</strong><br>
-            ${escapeHtml(load.date || "Belirtilmedi")}
-          </div>
-
-        </div>
-
-        ${
-          load.details
-          ? `<p><strong>Ek Bilgi:</strong>
-             ${escapeHtml(load.details)}</p>`
-          : ""
-        }
-
-        <div class="actions">
-
-          <a
-            class="whatsapp"
-            href="${whatsapp}"
-            target="_blank"
-            rel="noopener">
-            WhatsApp
-          </a>
-
-          ${
-            owner
-            ? `<button
-                class="delete"
-                onclick="deleteLoad('${load.id}')">
-                🗑️ İlanımı Sil
-              </button>`
-            : ""
-          }
-
-        </div>
-
-      </div>
-      `;
-    }).join("");
-}
-
-
-/* ---------------- NAKLİYECİ LİSTESİ ---------------- */
-
-function renderCarriers(){
-
-  const container =
-    document.getElementById("carriersList");
-
-  if(!container)return;
-
-  const search =
-    (document.getElementById("carrierSearch")?.value || "")
-      .toLowerCase();
-
-
-  const filtered =
-    carriers.filter(carrier => {
-
-      const text =
-        `${carrier.name} ${carrier.city} ${carrier.vehicle} ${carrier.regions}`
-          .toLowerCase();
-
-      return text.includes(search);
-    });
-
-
-  if(!filtered.length){
-
-    container.innerHTML =
-      `<div class="card">
-        Henüz nakliyeci bulunmuyor.
-      </div>`;
-
-    return;
-  }
-
-
-  container.innerHTML =
-    filtered.map(carrier => {
-
-      const owner =
-        currentUser &&
-        currentUser.id === carrier.user_id;
-
-
-      const whatsapp =
-        "https://wa.me/" +
-        cleanPhone(carrier.phone) +
-        "?text=" +
-        encodeURIComponent(
-          "Merhaba, Selport üzerinden taşıma hizmetiniz hakkında iletişime geçiyorum."
-        );
-
-
-      return `
-      <div class="listing">
-
-        <h3>🚚 ${escapeHtml(carrier.name)}</h3>
-
-        <small>
-          ${escapeHtml(carrier.city)}
-        </small>
-
-        <div class="info">
-
-          <div>
-            <strong>Araç</strong><br>
-            ${escapeHtml(carrier.vehicle)}
-          </div>
-
-          <div>
-            <strong>Kapasite</strong><br>
-            ${escapeHtml(carrier.capacity || "Belirtilmedi")}
-          </div>
-
-          <div>
-            <strong>Şehir</strong><br>
-            ${escapeHtml(carrier.city)}
-          </div>
-
-          <div>
-            <strong>Bölgeler</strong><br>
-            ${escapeHtml(carrier.regions || "Belirtilmedi")}
-          </div>
-
-        </div>
-
-        ${
-          carrier.details
-          ? `<p>${escapeHtml(carrier.details)}</p>`
-          : ""
-        }
-
-        <div class="actions">
-
-          <a
-            class="whatsapp"
-            href="${whatsapp}"
-            target="_blank"
-            rel="noopener">
-            WhatsApp
-          </a>
-
-          ${
-            owner
-            ? `<button
-                class="delete"
-                onclick="deleteCarrier('${carrier.id}')">
-                🗑️ Kaydımı Sil
-              </button>`
-            : ""
-          }
-
-        </div>
-
-      </div>
-      `;
-    }).join("");
-}
-
-
-/* ---------------- GÜVENLİ SİLME ---------------- */
-
-async function deleteLoad(id){
-
-  if(!currentUser){
-
-    alert("Giriş yapmanız gerekiyor.");
-    return;
-  }
-
-
-  const load =
-    loads.find(x => String(x.id) === String(id));
-
-
-  if(!load){
-
-    alert("İlan bulunamadı.");
-    return;
-  }
-
-
-  if(load.user_id !== currentUser.id){
-
-    alert("❌ Bu ilan size ait değil.");
-    return;
-  }
-
-
-  if(!confirm("Kendi ilanınızı silmek istediğinizden emin misiniz?"))
-    return;
-
-
-  const {error} =
-    await db
+  const {
+    error
+  } =
+    await supabaseClient
       .from("ilanlar")
       .delete()
-      .eq("id",id)
-      .eq("user_id",currentUser.id);
+      .eq("id",id);
 
-
-  if(error){
-
-    console.error(error);
-
-    alert("❌ İlan silinemedi.");
-
-    return;
-  }
-
-
-  await loadData();
-}
-
-
-async function deleteCarrier(id){
-
-  if(!currentUser){
-
-    alert("Giriş yapmanız gerekiyor.");
-    return;
-  }
-
-
-  const carrier =
-    carriers.find(x => String(x.id) === String(id));
-
-
-  if(!carrier){
-
-    alert("Kayıt bulunamadı.");
-    return;
-  }
-
-
-  if(carrier.user_id !== currentUser.id){
-
-    alert("❌ Bu kayıt size ait değil.");
-    return;
-  }
-
-
-  if(!confirm("Kendi nakliyeci kaydınızı silmek istediğinizden emin misiniz?"))
-    return;
-
-
-  const {error} =
-    await db
-      .from("nakliyeciler")
-      .delete()
-      .eq("id",id)
-      .eq("user_id",currentUser.id);
 
 
   if(error){
 
-    console.error(error);
-
-    alert("❌ Kayıt silinemedi.");
-
-    return;
-  }
-
-
-  await loadData();
-}
-
-
-/* ---------------- TELEFON ---------------- */
-
-function cleanPhone(phone){
-
-  let number =
-    String(phone || "").replace(/\D/g,"");
-
-  if(number.startsWith("0"))
-    number=number.substring(1);
-
-  if(number.startsWith("90"))
-    return number;
-
-  return "90" + number;
-}
-
-
-/* ---------------- HTML GÜVENLİĞİ ---------------- */
-
-function escapeHtml(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-
-/* ---------------- BİLDİRİM ---------------- */
-
-async function requestNotifications(){
-
-  if(!("Notification" in window)){
-
-    updateNotificationStatus(
-      "Bu tarayıcı bildirimleri desteklemiyor."
+    alert(
+      "Silinemedi: " +
+      error.message
     );
 
     return;
+
   }
 
 
-  try{
+  await loadAll();
 
-    const permission =
-      await Notification.requestPermission();
-
-    updateNotificationStatus();
-
-    if(permission === "granted"){
-
-      new Notification(
-        "Selport 🔔",
-        {
-          body:"Bildirimler başarıyla açıldı."
-        }
-      );
-    }
-
-  }catch(error){
-
-    console.error(error);
-  }
 }
 
 
-function updateNotificationStatus(){
 
-  const element =
-    document.getElementById("notificationStatus");
+/* =========================================================
+   REALTIME
+   ========================================================= */
 
-  if(!element)return;
-
-
-  if(!("Notification" in window)){
-
-    element.textContent =
-      "Bu tarayıcı bildirimleri desteklemiyor.";
-
-    return;
-  }
-
-
-  if(Notification.permission === "granted"){
-
-    element.textContent =
-      "🟢 Bildirimler açık.";
-
-  }else if(Notification.permission === "denied"){
-
-    element.textContent =
-      "🔴 Bildirimler engellenmiş.";
-
-  }else{
-
-    element.textContent =
-      "🟡 Bildirimler henüz açılmadı.";
-  }
-}
-
-
-/* ---------------- BÖLGE BİLDİRİMİ ---------------- */
-
-function regionMatches(load){
-
-  if(!currentUser)
-    return false;
-
-
-  const myCarriers =
-    carriers.filter(
-      x => x.user_id === currentUser.id
-    );
-
-
-  if(!myCarriers.length)
-    return false;
-
-
-  const loadText =
-    `${load.from || load.nereden || ""} ${load.to || load.nereye || ""}`
-      .toLowerCase();
-
-
-  return myCarriers.some(carrier => {
-
-    const regions =
-      `${carrier.city} ${carrier.regions}`
-        .toLowerCase()
-        .split(/[,;\/]+/)
-        .map(x => x.trim())
-        .filter(Boolean);
-
-
-    return regions.some(region =>
-      region.length > 2 &&
-      loadText.includes(region)
-    );
-  });
-}
-
-
-function notifyNewLoad(load){
-
-  if(!("Notification" in window))
-    return;
-
-  if(Notification.permission !== "granted")
-    return;
-
-  if(!regionMatches(load))
-    return;
-
-
-  new Notification(
-    "Selport - Bölgenizde Yeni Yük 📦",
-    {
-      body:
-        `${load.nereden} → ${load.nereye} güzergâhında yeni ${load.yuk_tipi || "yük"} ilanı var.`,
-      tag:"selport-" + load.id
-    }
-  );
-}
-
-
-/* ---------------- REALTIME ---------------- */
-
-db.channel("selport-live")
-
-.on(
-  "postgres_changes",
-  {
-    event:"INSERT",
-    schema:"public",
-    table:"ilanlar"
-  },
-  payload => {
-
-    notifyNewLoad(payload.new);
-
-    loadData();
-  }
-)
-
+supabaseClient
+.channel("tasibunu-realtime")
 .on(
   "postgres_changes",
   {
@@ -1600,9 +2449,12 @@ db.channel("selport-live")
     schema:"public",
     table:"ilanlar"
   },
-  () => loadData()
-)
+  function(){
 
+    loadAll();
+
+  }
+)
 .on(
   "postgres_changes",
   {
@@ -1610,39 +2462,28 @@ db.channel("selport-live")
     schema:"public",
     table:"nakliyeciler"
   },
-  () => loadData()
-)
+  function(){
 
+    loadAll();
+
+  }
+)
 .subscribe();
 
 
-/* ---------------- AUTH STATE ---------------- */
 
-db.auth.onAuthStateChange(
-  (event,session) => {
+/* =========================================================
+   BAŞLANGIÇ
+   ========================================================= */
 
-    currentUser =
-      session?.user || null;
+document.addEventListener(
+  "DOMContentLoaded",
+  function(){
 
-    updateUserUI();
+    loadAll();
+
   }
 );
-
-
-/* ---------------- BAŞLAT ---------------- */
-
-async function startApp(){
-
-  await checkUser();
-
-  await loadData();
-
-  updateNotificationStatus();
-
-  showPage("home");
-}
-
-startApp();
 
 </script>
 
