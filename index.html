@@ -14,13 +14,9 @@ content="TaşıBunu ile evden eve taşımadan küçük yüklere ve büyük nakli
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -29,21 +25,9 @@ body{
   color:#172033;
 }
 
-button,input,select,textarea{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* =========================================================
-   RENKLER
-   ========================================================= */
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
 
 :root{
   --navy:#0b1f3a;
@@ -57,10 +41,6 @@ button{
   --danger:#b42318;
   --success:#18794e;
 }
-
-/* =========================================================
-   HEADER
-   ========================================================= */
 
 header{
   position:sticky;
@@ -88,9 +68,7 @@ header{
   letter-spacing:-.6px;
 }
 
-.logo span{
-  color:#8fc7ff;
-}
+.logo span{color:#8fc7ff}
 
 nav{
   display:flex;
@@ -100,16 +78,12 @@ nav{
 
 nav button{
   border:1px solid #ffffff30;
-  background:#ffffff;
+  background:#fff;
   color:var(--navy);
   padding:9px 13px;
   border-radius:9px;
   font-weight:800;
 }
-
-/* =========================================================
-   HERO
-   ========================================================= */
 
 .hero{
   background:
@@ -151,18 +125,18 @@ nav button{
 }
 
 .btn-primary{
-  background:white;
+  background:#fff;
   color:var(--navy);
 }
 
 .btn-dark{
   background:var(--navy);
-  color:white;
+  color:#fff;
 }
 
 .btn-blue{
   background:var(--blue);
-  color:white;
+  color:#fff;
 }
 
 .container{
@@ -176,10 +150,6 @@ nav button{
   margin:8px 0 15px;
 }
 
-/* =========================================================
-   KATEGORİLER
-   ========================================================= */
-
 .category-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
@@ -187,7 +157,7 @@ nav button{
 }
 
 .category{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
   border-radius:14px;
   padding:18px;
@@ -206,13 +176,7 @@ nav button{
   margin-top:7px;
 }
 
-.category small{
-  color:var(--muted);
-}
-
-/* =========================================================
-   GRID / CARD
-   ========================================================= */
+.category small{color:var(--muted)}
 
 .grid{
   display:grid;
@@ -221,20 +185,16 @@ nav button{
 }
 
 .card{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
   border-radius:14px;
   padding:17px;
   box-shadow:0 3px 12px #0b1f3a0b;
 }
 
-.card h3{
-  margin:0 0 8px;
-}
+.card h3{margin:0 0 8px}
 
-.muted{
-  color:var(--muted);
-}
+.muted{color:var(--muted)}
 
 .badge{
   display:inline-block;
@@ -246,10 +206,6 @@ nav button{
   font-weight:800;
   margin:3px 3px 3px 0;
 }
-
-/* =========================================================
-   FORM
-   ========================================================= */
 
 .form-grid{
   display:grid;
@@ -264,20 +220,16 @@ label{
   margin-bottom:5px;
 }
 
-input,
-select,
-textarea{
+input,select,textarea{
   width:100%;
   padding:11px;
   border:1px solid #cbd6e2;
   border-radius:9px;
-  background:white;
+  background:#fff;
   outline:none;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
+input:focus,select:focus,textarea:focus{
   border-color:var(--blue);
   box-shadow:0 0 0 3px #1d5fa720;
 }
@@ -287,9 +239,7 @@ textarea{
   resize:vertical;
 }
 
-.full{
-  grid-column:1/-1;
-}
+.full{grid-column:1/-1}
 
 .form-actions{
   display:flex;
@@ -299,20 +249,12 @@ textarea{
   flex-wrap:wrap;
 }
 
-/* =========================================================
-   ARAMA
-   ========================================================= */
-
 .searchbar{
   display:grid;
   grid-template-columns:1fr 170px 170px auto;
   gap:10px;
   margin-bottom:15px;
 }
-
-/* =========================================================
-   MESAJ
-   ========================================================= */
 
 .notice{
   padding:12px 14px;
@@ -332,10 +274,6 @@ textarea{
   border-color:#efb1b1;
 }
 
-/* =========================================================
-   İLAN
-   ========================================================= */
-
 .item-head{
   display:flex;
   justify-content:space-between;
@@ -349,9 +287,7 @@ textarea{
   line-height:1.5;
 }
 
-.route strong{
-  color:var(--navy);
-}
+.route strong{color:var(--navy)}
 
 .item-actions{
   display:flex;
@@ -371,7 +307,7 @@ textarea{
 
 .wa{
   background:#25d366;
-  color:white;
+  color:#fff;
 }
 
 .edit{
@@ -387,14 +323,10 @@ textarea{
 .empty{
   padding:30px;
   text-align:center;
-  background:white;
+  background:#fff;
   border-radius:14px;
   border:1px dashed #cbd5df;
 }
-
-/* =========================================================
-   İSTATİSTİK
-   ========================================================= */
 
 .stats{
   display:grid;
@@ -404,7 +336,7 @@ textarea{
 }
 
 .stat{
-  background:white;
+  background:#fff;
   border-radius:12px;
   padding:17px;
   text-align:center;
@@ -417,10 +349,6 @@ textarea{
   color:var(--navy);
 }
 
-/* =========================================================
-   ÖZELLİKLER
-   ========================================================= */
-
 .feature-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
@@ -428,19 +356,13 @@ textarea{
 }
 
 .feature{
-  background:white;
+  background:#fff;
   border:1px solid var(--border);
   border-radius:14px;
   padding:18px;
 }
 
-.feature-icon{
-  font-size:30px;
-}
-
-/* =========================================================
-   FOOTER
-   ========================================================= */
+.feature-icon{font-size:30px}
 
 footer{
   background:#071629;
@@ -454,10 +376,6 @@ footer .container{
   padding-bottom:0;
 }
 
-/* =========================================================
-   MODAL
-   ========================================================= */
-
 .modal{
   position:fixed;
   inset:0;
@@ -470,7 +388,7 @@ footer .container{
 }
 
 .modal-box{
-  background:white;
+  background:#fff;
   max-width:720px;
   width:100%;
   max-height:92vh;
@@ -494,9 +412,11 @@ footer .container{
   font-size:20px;
 }
 
-/* =========================================================
-   MOBİL
-   ========================================================= */
+.loading{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+}
 
 @media(max-width:800px){
 
@@ -512,22 +432,15 @@ footer .container{
   .searchbar{
     grid-template-columns:1fr 1fr;
   }
-
 }
 
 @media(max-width:560px){
 
-  .header-inner{
-    align-items:flex-start;
-  }
+  .header-inner{align-items:flex-start}
 
-  nav{
-    width:100%;
-  }
+  nav{width:100%}
 
-  nav button{
-    flex:1;
-  }
+  nav button{flex:1}
 
   .grid,
   .feature-grid,
@@ -538,13 +451,9 @@ footer .container{
     grid-template-columns:1fr;
   }
 
-  .hero{
-    padding:32px 18px;
-  }
+  .hero{padding:32px 18px}
 
-  .card{
-    padding:14px;
-  }
+  .card{padding:14px}
 }
 </style>
 </head>
@@ -552,7 +461,6 @@ footer .container{
 <body>
 
 <header>
-
 <div class="header-inner">
 
 <div class="logo">
@@ -560,32 +468,17 @@ footer .container{
 </div>
 
 <nav>
-
-<button onclick="go('ilanlar')">
-Yük İlanları
-</button>
-
-<button onclick="go('nakliyeciler')">
-Nakliyeciler
-</button>
-
-<button onclick="openModal('ilanModal')">
-+ Yük İlanı
-</button>
-
-<button onclick="openModal('nakliyeciModal')">
-+ Nakliyeci
-</button>
-
+<button onclick="go('ilanlar')">Yük İlanları</button>
+<button onclick="go('nakliyeciler')">Nakliyeciler</button>
+<button onclick="openModal('ilanModal')">+ Yük İlanı</button>
+<button onclick="openModal('nakliyeciModal')">+ Nakliyeci</button>
 </nav>
 
 </div>
-
 </header>
 
 
 <section class="hero">
-
 <div class="hero-inner">
 
 <h1>
@@ -613,57 +506,34 @@ onclick="openModal('nakliyeciModal')">
 </button>
 
 </div>
-
 </div>
-
 </section>
 
 
 <main>
-
 
 <section class="container">
 
 <div class="stats">
 
 <div class="stat">
-
-<strong id="ilanCount">
-0
-</strong>
-
+<strong id="ilanCount">0</strong>
 Aktif yük ilanı
-
 </div>
 
-
 <div class="stat">
-
-<strong id="nakliyeciCount">
-0
-</strong>
-
+<strong id="nakliyeciCount">0</strong>
 Nakliyeci
-
 </div>
-
 
 <div class="stat">
-
-<strong>
-7/24
-</strong>
-
+<strong>7/24</strong>
 İş keşfi
-
 </div>
 
 </div>
-
 </section>
 
-
-<!-- KATEGORİLER -->
 
 <section class="container">
 
@@ -673,80 +543,43 @@ Nakliyeci
 
 <div class="category-grid">
 
-<div
-class="category"
+<div class="category"
 onclick="selectCategory('Evden Eve Taşıma')">
-
 <div class="feature-icon">🏠</div>
-
 <strong>Evden Eve Taşıma</strong>
-
-<small>
-Ev, daire ve ev eşyaları
-</small>
-
+<small>Ev, daire ve ev eşyaları</small>
 </div>
 
-
-<div
-class="category"
+<div class="category"
 onclick="selectCategory('Parça Eşya')">
-
 <div class="feature-icon">🛋️</div>
-
 <strong>Parça Eşya</strong>
-
-<small>
-Mobilya, beyaz eşya, koli
-</small>
-
+<small>Mobilya, beyaz eşya, koli</small>
 </div>
 
-
-<div
-class="category"
+<div class="category"
 onclick="selectCategory('Küçük Yük')">
-
 <div class="feature-icon">📦</div>
-
 <strong>Küçük Yük</strong>
-
-<small>
-Panelvan ve kamyonet işleri
-</small>
-
+<small>Panelvan ve kamyonet işleri</small>
 </div>
 
-
-<div
-class="category"
+<div class="category"
 onclick="selectCategory('Büyük Yük')">
-
 <div class="feature-icon">🚛</div>
-
 <strong>Büyük Yük</strong>
-
-<small>
-Kamyon ve TIR taşımaları
-</small>
-
+<small>Kamyon ve TIR taşımaları</small>
 </div>
 
 </div>
-
 </section>
 
 
-<!-- YÜKLER -->
-
-<section
-id="ilanlar"
-class="container">
+<section id="ilanlar" class="container">
 
 <h2 class="section-title">
 📦 Yük & Taşıma İlanları
 </h2>
-
 
 <div class="searchbar">
 
@@ -755,66 +588,42 @@ id="ilanSearch"
 placeholder="Şehir, ilçe, mahalle, yük veya araç ara..."
 oninput="renderIlanlar()">
 
-
-<select
-id="ilanAracFilter"
+<select id="ilanAracFilter"
 onchange="renderIlanlar()">
-
-<option value="">
-Tüm araçlar
-</option>
-
+<option value="">Tüm araçlar</option>
 <option>Panelvan</option>
 <option>Kamyonet</option>
 <option>Kamyon</option>
 <option>Tır</option>
-
 </select>
 
-
-<select
-id="ilanYolFilter"
+<select id="ilanYolFilter"
 onchange="renderIlanlar()">
-
-<option value="">
-Tüm güzergâhlar
-</option>
-
+<option value="">Tüm güzergâhlar</option>
 <option>Şehir içi</option>
 <option>Şehirler arası</option>
-
 </select>
-
 
 <button
 class="btn btn-dark"
 onclick="loadAll()">
-
 Yenile
-
 </button>
 
 </div>
 
-
-<div
-id="ilanList"
-class="grid">
+<div id="ilanList" class="grid">
+<div class="loading">İlanlar yükleniyor...</div>
 </div>
 
 </section>
 
 
-<!-- NAKLİYECİLER -->
-
-<section
-id="nakliyeciler"
-class="container">
+<section id="nakliyeciler" class="container">
 
 <h2 class="section-title">
 🚛 Taşıyıcılar & Nakliyeciler
 </h2>
-
 
 <div class="searchbar">
 
@@ -823,15 +632,11 @@ id="nakSearch"
 placeholder="İsim, şehir, ilçe, araç, güzergâh ara..."
 oninput="renderNakliyeciler()">
 
-
 <select
 id="nakAracFilter"
 onchange="renderNakliyeciler()">
 
-<option value="">
-Tüm araçlar
-</option>
-
+<option value="">Tüm araçlar</option>
 <option>Panelvan</option>
 <option>Kamyonet</option>
 <option>Kamyon</option>
@@ -841,91 +646,59 @@ Tüm araçlar
 
 </div>
 
-
-<div
-id="nakList"
-class="grid">
+<div id="nakList" class="grid">
+<div class="loading">Nakliyeciler yükleniyor...</div>
 </div>
 
 </section>
 
-
-<!-- NASIL ÇALIŞIR -->
 
 <section class="container">
 
 <div class="card">
 
-<h2>
-TaşıBunu nasıl çalışır?
-</h2>
+<h2>TaşıBunu nasıl çalışır?</h2>
 
 <div class="feature-grid">
 
 <div class="feature">
-
 <div class="feature-icon">📦</div>
-
-<h3>
-1. İhtiyacını yayınla
-</h3>
-
+<h3>1. İhtiyacını yayınla</h3>
 <p class="muted">
 Taşınacak yükü veya ev eşyalarını,
 nereden nereye gideceğini ve tarihini belirt.
 </p>
-
 </div>
 
-
 <div class="feature">
-
 <div class="feature-icon">🚛</div>
-
-<h3>
-2. Uygun taşıyıcıyı bul
-</h3>
-
+<h3>2. Uygun taşıyıcıyı bul</h3>
 <p class="muted">
 Panelvandan kamyona ve TIR'a kadar
 uygun taşıyıcıları keşfet.
 </p>
-
 </div>
 
-
 <div class="feature">
-
 <div class="feature-icon">💬</div>
-
-<h3>
-3. Doğrudan iletişim kur
-</h3>
-
+<h3>3. Doğrudan iletişim kur</h3>
 <p class="muted">
 Uygun taşıyıcıyla WhatsApp üzerinden
 doğrudan iletişime geç.
 </p>
-
 </div>
 
 </div>
-
 </div>
-
 </section>
-
 
 </main>
 
 
 <footer>
-
 <div class="container">
 
-<strong>
-🚚 TaşıBunu
-</strong>
+<strong>🚚 TaşıBunu</strong>
 
 <p>
 Evden eve taşımadan küçük ve büyük yüklere kadar
@@ -933,25 +706,20 @@ taşıma ihtiyacınız için uygun taşıyıcıyı bulun.
 </p>
 
 </div>
-
 </footer>
 
 
-<!-- =========================================================
-     YÜK İLANI MODALI
-     ========================================================= -->
+<!-- =========================
+     İLAN MODALI
+========================= -->
 
-<div
-id="ilanModal"
-class="modal hidden">
+<div id="ilanModal" class="modal hidden">
 
 <div class="modal-box">
 
 <div class="modal-head">
 
-<h2>
-📦 Yeni Taşıma İlanı
-</h2>
+<h2>📦 Yeni Taşıma İlanı</h2>
 
 <button
 class="close"
@@ -963,20 +731,14 @@ onclick="closeModal('ilanModal')">
 
 <div id="ilanMsg"></div>
 
-
 <form id="ilanForm">
 
 <div class="form-grid">
 
-
 <div>
-
-<label>
-Taşıma kategorisi
-</label>
+<label>Taşıma kategorisi</label>
 
 <select id="kategori">
-
 <option>Evden Eve Taşıma</option>
 <option>Parça Eşya</option>
 <option>Küçük Yük</option>
@@ -985,31 +747,22 @@ Taşıma kategorisi
 <option>Beyaz Eşya</option>
 <option>Koli / Paket</option>
 <option>Diğer</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Yük / eşya türü
-</label>
+<label>Yük / eşya türü</label>
 
 <input
 id="yuk_tipi"
 required
 placeholder="Örn. Ev eşyası, mobilya, koli">
-
 </div>
 
 
 <div>
-
-<label>
-Taşıma tipi
-</label>
+<label>Taşıma tipi</label>
 
 <select
 id="tasima_tipi"
@@ -1019,201 +772,131 @@ onchange="updateLocationMode()">
 <option>Şehirler arası</option>
 
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Tarih
-</label>
-
-<input
-id="tarih"
-type="date">
-
+<label>Tarih</label>
+<input id="tarih" type="date">
 </div>
 
 
-<!-- NEREDEN -->
-
 <div>
-
-<label>
-Nereden - İl
-</label>
+<label>Nereden - İl</label>
 
 <select
 id="nereden_il"
 onchange="updateDistricts('nereden')"
 required>
 
-<option value="">
-İl seçin
-</option>
+<option value="">İl seçin</option>
 
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Nereden - İlçe
-</label>
+<label>Nereden - İlçe</label>
 
 <select
 id="nereden_ilce"
 onchange="updateNeighborhoods('nereden')">
 
-<option value="">
-Önce il seçin
-</option>
+<option value="">Önce il seçin</option>
 
 </select>
-
 </div>
 
 
-<div
-id="neredenMahalleBox">
+<div id="neredenMahalleBox">
 
-<label>
-Nereden - Mahalle
-</label>
+<label>Nereden - Mahalle</label>
 
-<select
-id="nereden_mahalle">
-
-<option value="">
-Önce ilçe seçin
-</option>
-
-</select>
-
+<input
+id="nereden_mahalle"
+placeholder="Mahalle adı">
 </div>
 
-
-<!-- NEREYE -->
 
 <div>
-
-<label>
-Nereye - İl
-</label>
+<label>Nereye - İl</label>
 
 <select
 id="nereye_il"
 onchange="updateDistricts('nereye')"
 required>
 
-<option value="">
-İl seçin
-</option>
+<option value="">İl seçin</option>
 
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Nereye - İlçe
-</label>
+<label>Nereye - İlçe</label>
 
 <select
 id="nereye_ilce"
 onchange="updateNeighborhoods('nereye')">
 
-<option value="">
-Önce il seçin
-</option>
+<option value="">Önce il seçin</option>
 
 </select>
-
 </div>
 
 
-<div
-id="nereyeMahalleBox">
+<div id="nereyeMahalleBox">
 
-<label>
-Nereye - Mahalle
-</label>
+<label>Nereye - Mahalle</label>
 
-<select
-id="nereye_mahalle">
-
-<option value="">
-Önce ilçe seçin
-</option>
-
-</select>
-
+<input
+id="nereye_mahalle"
+placeholder="Mahalle adı">
 </div>
 
 
 <div>
-
-<label>
-Araç tipi
-</label>
+<label>Araç tipi</label>
 
 <select id="arac_tipi">
-
 <option>Panelvan</option>
 <option>Kamyonet</option>
 <option>Kamyon</option>
 <option>Tır</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Tonaj / yaklaşık ağırlık
-</label>
+<label>Tonaj / yaklaşık ağırlık</label>
 
 <input
 id="tonaj"
 placeholder="Örn. 2 ton">
-
 </div>
 
 
 <div>
-
-<label>
-Telefon / WhatsApp
-</label>
+<label>Telefon / WhatsApp</label>
 
 <input
 id="telefon"
 type="tel"
+required
 placeholder="05xx xxx xx xx">
-
 </div>
 
 
 <div class="full">
 
-<label>
-Açıklama
-</label>
+<label>Açıklama</label>
 
 <textarea
 id="aciklama"
-placeholder="Eşyalar, kat bilgisi, asansör, araç giriş durumu, yük miktarı vb. bilgileri yazabilirsiniz.">
+placeholder="Eşyalar, kat bilgisi, asansör, araç giriş durumu, yük miktarı vb.">
 </textarea>
 
 </div>
-
 
 </div>
 
@@ -1223,44 +906,34 @@ placeholder="Eşyalar, kat bilgisi, asansör, araç giriş durumu, yük miktarı
 <button
 class="btn btn-dark"
 type="submit">
-
 İlanı Yayınla
-
 </button>
 
 <button
 class="btn"
 type="button"
 onclick="closeModal('ilanModal')">
-
 Vazgeç
-
 </button>
 
 </div>
 
 </form>
-
+</div>
 </div>
 
-</div>
 
-
-<!-- =========================================================
+<!-- =========================
      NAKLİYECİ MODALI
-     ========================================================= -->
+========================= -->
 
-<div
-id="nakliyeciModal"
-class="modal hidden">
+<div id="nakliyeciModal" class="modal hidden">
 
 <div class="modal-box">
 
 <div class="modal-head">
 
-<h2>
-🚛 Taşıyıcı / Nakliyeci İlanı
-</h2>
+<h2>🚛 Taşıyıcı / Nakliyeci İlanı</h2>
 
 <button
 class="close"
@@ -1272,137 +945,96 @@ onclick="closeModal('nakliyeciModal')">
 
 <div id="nakMsg"></div>
 
-
 <form id="nakForm">
 
 <div class="form-grid">
 
-
 <div>
-
-<label>
-Ad / Firma
-</label>
+<label>Ad / Firma</label>
 
 <input
 id="nak_ad"
 required
 placeholder="Adınız veya firma adı">
-
 </div>
 
 
 <div>
-
-<label>
-Telefon / WhatsApp
-</label>
+<label>Telefon / WhatsApp</label>
 
 <input
 id="nak_telefon"
 required
 type="tel"
 placeholder="05xx xxx xx xx">
-
 </div>
 
 
 <div>
-
-<label>
-Çalıştığınız il
-</label>
+<label>Çalıştığınız il</label>
 
 <select
 id="nak_sehir"
 required>
 
-<option value="">
-İl seçin
-</option>
+<option value="">İl seçin</option>
 
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Araç tipi
-</label>
+<label>Araç tipi</label>
 
 <select id="nak_arac">
-
 <option>Panelvan</option>
 <option>Kamyonet</option>
 <option>Kamyon</option>
 <option>Tır</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Taşıma alanı
-</label>
+<label>Taşıma alanı</label>
 
 <select id="nak_tasima">
-
 <option>Şehir içi</option>
 <option>Şehirler arası</option>
 <option>Şehir içi ve şehirler arası</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Ev taşıma yapıyor musunuz?
-</label>
+<label>Ev taşıma yapıyor musunuz?</label>
 
 <select id="nak_ev">
-
 <option>Evet</option>
 <option>Hayır</option>
-
 </select>
-
 </div>
 
 
 <div class="full">
 
-<label>
-Güzergâh
-</label>
+<label>Güzergâh</label>
 
 <input
 id="nak_guzergah"
 placeholder="Örn. İstanbul → Ankara veya İstanbul içi">
-
 </div>
 
 
 <div class="full">
 
-<label>
-Açıklama
-</label>
+<label>Açıklama</label>
 
 <textarea
 id="nak_aciklama"
 placeholder="Hangi yükleri taşıyorsunuz? Ev taşıma, parça eşya, küçük yük, büyük yük vb.">
 </textarea>
-
 </div>
-
 
 </div>
 
@@ -1412,45 +1044,34 @@ placeholder="Hangi yükleri taşıyorsunuz? Ev taşıma, parça eşya, küçük 
 <button
 class="btn btn-dark"
 type="submit">
-
 Nakliyeci İlanını Yayınla
-
 </button>
-
 
 <button
 class="btn"
 type="button"
 onclick="closeModal('nakliyeciModal')">
-
 Vazgeç
-
 </button>
 
 </div>
 
 </form>
-
+</div>
 </div>
 
-</div>
 
-
-<!-- =========================================================
+<!-- =========================
      DÜZENLEME MODALI
-     ========================================================= -->
+========================= -->
 
-<div
-id="editModal"
-class="modal hidden">
+<div id="editModal" class="modal hidden">
 
 <div class="modal-box">
 
 <div class="modal-head">
 
-<h2>
-İlanı Düzenle
-</h2>
+<h2>İlanı Düzenle</h2>
 
 <button
 class="close"
@@ -1462,25 +1083,16 @@ onclick="closeModal('editModal')">
 
 <div id="editMsg"></div>
 
-
 <form id="editForm">
 
-<input
-type="hidden"
-id="editId">
-
+<input type="hidden" id="editId">
 
 <div class="form-grid">
 
-
 <div>
-
-<label>
-Kategori
-</label>
+<label>Kategori</label>
 
 <select id="editKategori">
-
 <option>Evden Eve Taşıma</option>
 <option>Parça Eşya</option>
 <option>Küçük Yük</option>
@@ -1489,90 +1101,54 @@ Kategori
 <option>Beyaz Eşya</option>
 <option>Koli / Paket</option>
 <option>Diğer</option>
-
 </select>
-
 </div>
 
 
 <div>
+<label>Yük türü</label>
 
-<label>
-Yük türü
-</label>
-
-<input
-id="editYuk"
-required>
-
+<input id="editYuk" required>
 </div>
 
 
 <div>
-
-<label>
-Araç tipi
-</label>
+<label>Araç tipi</label>
 
 <select id="editArac">
-
 <option>Panelvan</option>
 <option>Kamyonet</option>
 <option>Kamyon</option>
 <option>Tır</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Taşıma tipi
-</label>
+<label>Taşıma tipi</label>
 
 <select id="editTasima">
-
 <option>Şehir içi</option>
 <option>Şehirler arası</option>
-
 </select>
-
 </div>
 
 
 <div>
-
-<label>
-Nereden
-</label>
-
-<input
-id="editFrom"
-required>
-
+<label>Nereden</label>
+<input id="editFrom" required>
 </div>
 
 
 <div>
-
-<label>
-Nereye
-</label>
-
-<input
-id="editTo"
-required>
-
+<label>Nereye</label>
+<input id="editTo" required>
 </div>
 
 
 <div class="full">
 
-<label>
-Açıklama
-</label>
+<label>Açıklama</label>
 
 <textarea id="editDesc"></textarea>
 
@@ -1586,17 +1162,13 @@ Açıklama
 <button
 class="btn btn-dark"
 type="submit">
-
 Kaydet
-
 </button>
 
 </div>
 
 </form>
-
 </div>
-
 </div>
 
 
@@ -1604,7 +1176,7 @@ Kaydet
 
 /* =========================================================
    SUPABASE
-   ========================================================= */
+========================================================= */
 
 const SUPABASE_URL =
 "https://wacmbcmgpemcwdlwwjrh.supabase.co";
@@ -1619,15 +1191,15 @@ supabase.createClient(
 );
 
 
-let ilanlar = [];
-let nakliyeciler = [];
+let ilanlar=[];
+let nakliyeciler=[];
 
 
 /* =========================================================
    TÜRKİYE İLLERİ
-   ========================================================= */
+========================================================= */
 
-const cities = [
+const cities=[
 "Adana","Adıyaman","Afyonkarahisar","Ağrı","Aksaray",
 "Amasya","Ankara","Antalya","Ardahan","Artvin",
 "Aydın","Balıkesir","Bartın","Batman","Bayburt",
@@ -1648,10 +1220,10 @@ const cities = [
 
 
 /* =========================================================
-   BASİT İLÇE VERİSİ
-   ========================================================= */
+   İLÇELER
+========================================================= */
 
-const districts = {
+const districts={
 
 "İstanbul":[
 "Adalar","Arnavutköy","Ataşehir","Avcılar","Bağcılar",
@@ -1703,8 +1275,8 @@ const districts = {
 
 "Konya":[
 "Ahırlı","Akören","Akşehir","Altınekin","Beyşehir",
-"Bozkır","Cihanbeyli","Çeltik","Cihanbeyli","Çumra",
-"Derbent","Derebucak","Doğanhisar","Ereğli","Hadim",
+"Bozkır","Cihanbeyli","Çeltik","Çumra","Derbent",
+"Derebucak","Doğanhisar","Ereğli","Hadim",
 "Halkapınar","Hüyük","Ilgın","Kadınhanı","Karapınar",
 "Karatay","Kulu","Meram","Sarayönü","Selçuklu",
 "Seydişehir","Taşkent","Tuzlukçu","Yalıhüyük","Yunak"
@@ -1714,1474 +1286,1275 @@ const districts = {
 
 
 /* =========================================================
-   YARDIMCI
-   ========================================================= */
+   YARDIMCI FONKSİYONLAR
+========================================================= */
 
 function esc(value){
 
-  return String(value ?? "")
-    .replace(/[&<>"']/g,function(m){
+return String(value??"")
+.replace(/[&<>"']/g,function(m){
 
-      return {
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
-      }[m];
+return{
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+}[m];
 
-    });
+});
 
 }
 
 
 function norm(value){
 
-  return String(value ?? "")
-    .toLocaleLowerCase("tr-TR");
+return String(value??"")
+.toLocaleLowerCase("tr-TR");
 
 }
 
 
 function go(id){
 
-  const element =
-    document.getElementById(id);
+const el=document.getElementById(id);
 
-  if(element){
+if(el){
 
-    element.scrollIntoView({
-      behavior:"smooth"
-    });
+el.scrollIntoView({
+behavior:"smooth"
+});
 
-  }
+}
 
 }
 
 
 function openModal(id){
 
-  const element =
-    document.getElementById(id);
+const el=document.getElementById(id);
 
-  if(element){
+if(el){
 
-    element.classList.remove("hidden");
+el.classList.remove("hidden");
 
-  }
+}
 
 }
 
 
 function closeModal(id){
 
-  const element =
-    document.getElementById(id);
+const el=document.getElementById(id);
 
-  if(element){
+if(el){
 
-    element.classList.add("hidden");
+el.classList.add("hidden");
 
-  }
+}
 
 }
 
 
 function message(id,text,type=""){
 
-  const element =
-    document.getElementById(id);
+const el=document.getElementById(id);
 
-  if(!element) return;
+if(!el)return;
 
-  if(!text){
+if(!text){
 
-    element.innerHTML="";
-    return;
+el.innerHTML="";
+return;
 
-  }
+}
 
-  element.innerHTML =
-    `<div class="notice ${type}">
-      ${esc(text)}
-    </div>`;
+el.innerHTML=
+`<div class="notice ${type}">
+${esc(text)}
+</div>`;
 
 }
 
 
 function whatsapp(phone){
 
-  const digits =
-    String(phone || "")
-      .replace(/\D/g,"");
+const digits=
+String(phone||"")
+.replace(/\D/g,"");
 
-  if(!digits){
+if(!digits)return "#";
 
-    return "#";
+const tr=
+digits.startsWith("0")
+?"90"+digits.slice(1)
+:digits;
 
-  }
-
-  const tr =
-    digits.startsWith("0")
-      ? "90" + digits.slice(1)
-      : digits;
-
-  return "https://wa.me/" + tr;
+return "https://wa.me/"+tr;
 
 }
 
 
 /* =========================================================
    İLLERİ DOLDUR
-   ========================================================= */
+========================================================= */
 
 function fillCities(){
 
-  const ids = [
-    "nereden_il",
-    "nereye_il",
-    "nak_sehir"
-  ];
+[
+"nereden_il",
+"nereye_il",
+"nak_sehir"
+].forEach(function(id){
 
-  ids.forEach(function(id){
+const el=document.getElementById(id);
 
-    const el =
-      document.getElementById(id);
+if(!el)return;
 
-    if(!el) return;
+cities.forEach(function(city){
 
-    cities.forEach(function(city){
+const option=
+document.createElement("option");
 
-      const option =
-        document.createElement("option");
+option.value=city;
+option.textContent=city;
 
-      option.value = city;
-      option.textContent = city;
+el.appendChild(option);
 
-      el.appendChild(option);
+});
 
-    });
-
-  });
+});
 
 }
 
 
 /* =========================================================
-   İLÇELER
-   ========================================================= */
+   İLÇE
+========================================================= */
 
 function updateDistricts(prefix){
 
-  const city =
-    document.getElementById(
-      prefix + "_il"
-    ).value;
+const city=
+document.getElementById(
+prefix+"_il"
+).value;
 
-  const district =
-    document.getElementById(
-      prefix + "_ilce"
-    );
+const district=
+document.getElementById(
+prefix+"_ilce"
+);
 
-  const neighborhood =
-    document.getElementById(
-      prefix + "_mahalle"
-    );
+district.innerHTML=
+`<option value="">İlçe seçin</option>`;
 
-  district.innerHTML =
-    `<option value="">İlçe seçin</option>`;
+const list=districts[city]||[];
 
-  neighborhood.innerHTML =
-    `<option value="">Önce ilçe seçin</option>`;
+list.forEach(function(item){
 
-  const list =
-    districts[city] || [];
+const option=
+document.createElement("option");
 
-  if(list.length){
+option.value=item;
+option.textContent=item;
 
-    list.forEach(function(item){
+district.appendChild(option);
 
-      const option =
-        document.createElement("option");
-
-      option.value = item;
-      option.textContent = item;
-
-      district.appendChild(option);
-
-    });
-
-  }
+});
 
 }
 
 
 function updateNeighborhoods(prefix){
 
-  const district =
-    document.getElementById(
-      prefix + "_ilce"
-    ).value;
-
-  const neighborhood =
-    document.getElementById(
-      prefix + "_mahalle"
-    );
-
-  neighborhood.innerHTML =
-    `<option value="">Mahalle seçin</option>`;
-
-  /*
-    Mahalleler ilçe bazlı gerçek veri servisi
-    eklenmeden burada örnek olarak boş bırakılır.
-    Kullanıcı isterse mahalle adı manuel yazabilecektir.
-  */
-
-  if(district){
-
-    const option =
-      document.createElement("option");
-
-    option.value =
-      "Mahalle seçilmedi";
-
-    option.textContent =
-      "Mahalle seçilmedi";
-
-    neighborhood.appendChild(option);
-
-  }
+/*
+ Mahalle alanı manuel yazıldığı için
+ burada ayrıca API gerekmiyor.
+*/
 
 }
 
 
 /* =========================================================
-   ŞEHİR İÇİ / ŞEHİRLER ARASI
-   ========================================================= */
+   TAŞIMA TİPİ
+========================================================= */
 
 function updateLocationMode(){
 
-  const mode =
-    document.getElementById(
-      "tasima_tipi"
-    ).value;
+const mode=
+document.getElementById(
+"tasima_tipi"
+).value;
 
-  const boxes = [
-    document.getElementById(
-      "neredenMahalleBox"
-    ),
-    document.getElementById(
-      "nereyeMahalleBox"
-    )
-  ];
+const boxes=[
+document.getElementById(
+"neredenMahalleBox"
+),
+document.getElementById(
+"nereyeMahalleBox"
+)
+];
 
-  boxes.forEach(function(box){
+boxes.forEach(function(box){
 
-    if(!box) return;
+if(!box)return;
 
-    if(mode === "Şehir içi"){
+box.style.display=
+mode==="Şehir içi"
+?"block"
+:"block";
 
-      box.style.display="block";
-
-    }else{
-
-      box.style.display="none";
-
-    }
-
-  });
+});
 
 }
 
 
 /* =========================================================
    TARİH
-   ========================================================= */
+========================================================= */
 
 function setMinDate(){
 
-  const today =
-    new Date();
+const today=new Date();
 
-  const year =
-    today.getFullYear();
+const year=today.getFullYear();
 
-  const month =
-    String(today.getMonth()+1)
-      .padStart(2,"0");
+const month=
+String(today.getMonth()+1)
+.padStart(2,"0");
 
-  const day =
-    String(today.getDate())
-      .padStart(2,"0");
+const day=
+String(today.getDate())
+.padStart(2,"0");
 
-  const min =
-    year + "-" + month + "-" + day;
+const min=
+year+"-"+month+"-"+day;
 
-  const dateInput =
-    document.getElementById("tarih");
+const el=
+document.getElementById("tarih");
 
-  if(dateInput){
-
-    dateInput.min = min;
-
-  }
+if(el)el.min=min;
 
 }
 
 
 /* =========================================================
-   KATEGORİ SEÇ
-   ========================================================= */
+   KATEGORİ
+========================================================= */
 
 function selectCategory(category){
 
-  openModal("ilanModal");
+openModal("ilanModal");
 
-  setTimeout(function(){
+setTimeout(function(){
 
-    const select =
-      document.getElementById(
-        "kategori"
-      );
+const select=
+document.getElementById("kategori");
 
-    if(select){
+if(select){
 
-      select.value = category;
+select.value=category;
 
-    }
+}
 
-  },100);
+},100);
 
 }
 
 
 /* =========================================================
-   VERİLER
-   ========================================================= */
+   VERİLERİ YÜKLE
+========================================================= */
 
 async function loadAll(){
 
-  const [
-    ilanResult,
-    nakliyeciResult
-  ] = await Promise.all([
+const ilanList=
+document.getElementById("ilanList");
 
-    supabaseClient
-      .from("ilanlar")
-      .select("*")
-      .order("created_at",{
-        ascending:false
-      }),
+const nakList=
+document.getElementById("nakList");
 
-    supabaseClient
-      .from("nakliyeciler")
-      .select("*")
-      .order("created_at",{
-        ascending:false
-      })
+if(ilanList)
+ilanList.innerHTML=
+`<div class="loading">İlanlar yükleniyor...</div>`;
 
-  ]);
+if(nakList)
+nakList.innerHTML=
+`<div class="loading">Nakliyeciler yükleniyor...</div>`;
 
 
-  if(ilanResult.error){
+const [
+ilanResult,
+nakResult
+]=await Promise.all([
 
-    console.error(
-      "ilanlar:",
-      ilanResult.error
-    );
+supabaseClient
+.from("ilanlar")
+.select("*")
+.order("created_at",{ascending:false}),
 
-  }
+supabaseClient
+.from("nakliyeciler")
+.select("*")
+.order("created_at",{ascending:false})
 
-
-  if(nakliyeciResult.error){
-
-    console.error(
-      "nakliyeciler:",
-      nakliyeciResult.error
-    );
-
-  }
+]);
 
 
-  ilanlar =
-    ilanResult.data || [];
+if(ilanResult.error){
+
+console.error(
+"ilanlar:",
+ilanResult.error
+);
+
+}
+
+if(nakResult.error){
+
+console.error(
+"nakliyeciler:",
+nakResult.error
+);
+
+}
+
+ilanlar=ilanResult.data||[];
+nakliyeciler=nakResult.data||[];
 
 
-  nakliyeciler =
-    nakliyeciResult.data || [];
+document.getElementById(
+"ilanCount"
+).textContent=ilanlar.length;
+
+document.getElementById(
+"nakliyeciCount"
+).textContent=nakliyeciler.length;
 
 
-  document.getElementById(
-    "ilanCount"
-  ).textContent =
-    ilanlar.length;
-
-
-  document.getElementById(
-    "nakliyeciCount"
-  ).textContent =
-    nakliyeciler.length;
-
-
-  renderIlanlar();
-
-  renderNakliyeciler();
+renderIlanlar();
+renderNakliyeciler();
 
 }
 
 
 /* =========================================================
-   İLANLARI RENDER
-   ========================================================= */
+   İLANLARI GÖSTER
+========================================================= */
 
 function renderIlanlar(){
 
-  const search =
-    norm(
-      document.getElementById(
-        "ilanSearch"
-      ).value
-    );
+const search=
+norm(
+document.getElementById(
+"ilanSearch"
+).value
+);
 
+const arac=
+document.getElementById(
+"ilanAracFilter"
+).value;
 
-  const arac =
-    document.getElementById(
-      "ilanAracFilter"
-    ).value;
+const yol=
+document.getElementById(
+"ilanYolFilter"
+).value;
 
 
-  const yol =
-    document.getElementById(
-      "ilanYolFilter"
-    ).value;
+const list=ilanlar.filter(function(x){
 
+const haystack=
+norm([
+x.yuk_tipi,
+x.yuk_turu,
+x.kategori,
+x.nereden,
+x.nereye,
+x.arac_tipi,
+x.aciklama,
+x.tasima_tipi
+].join(" "));
 
-  const list =
-    ilanlar.filter(function(x){
 
-      const haystack =
-        norm([
-          x.yuk_tipi,
-          x.yuk_turu,
-          x.kategori,
-          x.nereden,
-          x.nereye,
-          x.arac_tipi,
-          x.aciklama,
-          x.tasima_tipi
-        ].join(" "));
+return(
+(!search||haystack.includes(search))
+&&
+(!arac||x.arac_tipi===arac)
+&&
+(!yol||x.tasima_tipi===yol)
+);
 
+});
 
-      return (
 
-        (!search ||
-          haystack.includes(search))
+const container=
+document.getElementById("ilanList");
 
-        &&
 
-        (!arac ||
-          x.arac_tipi === arac)
+if(!list.length){
 
-        &&
+container.innerHTML=`
+<div class="empty" style="grid-column:1/-1">
+Henüz bu kriterlere uygun ilan yok.
+</div>
+`;
 
-        (!yol ||
-          x.tasima_tipi === yol)
+return;
 
-      );
+}
 
-    });
 
+container.innerHTML=
+list.map(function(x){
 
-  const container =
-    document.getElementById(
-      "ilanList"
-    );
+const from=x.nereden||"—";
+const to=x.nereye||"—";
 
+return`
 
-  if(!list.length){
+<article class="card">
 
-    container.innerHTML = `
-      <div
-        class="empty"
-        style="grid-column:1/-1">
+<div class="item-head">
 
-        Henüz bu kriterlere uygun ilan yok.
+<div>
 
-      </div>
-    `;
+<h3>
+📦
+${esc(
+x.yuk_tipi||
+x.yuk_turu||
+"Taşıma ilanı"
+)}
+</h3>
 
-    return;
+${
+x.kategori
+?
+`
+<span class="badge">
+${esc(x.kategori)}
+</span>
+`
+:""
+}
 
-  }
+<span class="badge">
+${esc(x.tasima_tipi||"Taşıma")}
+</span>
 
+<span class="badge">
+${esc(x.arac_tipi||"Araç belirtilmemiş")}
+</span>
 
-  container.innerHTML =
-    list.map(function(x){
+</div>
 
-      const from =
-        x.nereden ||
-        "—";
+<span class="muted">
+${esc(
+(x.created_at||"")
+.slice(0,10)
+)}
+</span>
 
-      const to =
-        x.nereye ||
-        "—";
+</div>
 
 
-      return `
+<div class="route">
 
-      <article class="card">
+📍
 
-        <div class="item-head">
+<strong>${esc(from)}</strong>
 
-          <div>
+→
 
-            <h3>
-              📦
-              ${esc(
-                x.yuk_tipi ||
-                x.yuk_turu ||
-                "Taşıma ilanı"
-              )}
-            </h3>
-
-
-            ${
-              x.kategori
-              ?
-              `
-              <span class="badge">
-                ${esc(x.kategori)}
-              </span>
-              `
-              :
-              ""
-            }
-
-
-            <span class="badge">
-              ${esc(
-                x.tasima_tipi ||
-                "Taşıma"
-              )}
-            </span>
-
-
-            <span class="badge">
-              ${esc(
-                x.arac_tipi ||
-                "Araç belirtilmemiş"
-              )}
-            </span>
-
-          </div>
-
-
-          <span class="muted">
-
-            ${esc(
-              (x.created_at || "")
-              .slice(0,10)
-            )}
+<strong>${esc(to)}</strong>
 
-          </span>
+</div>
 
-        </div>
 
+${
+x.tonaj
+?
+`
+<p>
+⚖️ <b>Tonaj:</b>
+${esc(x.tonaj)}
+</p>
+`
+:""
+}
 
-        <div class="route">
 
-          📍
+${
+x.tarih
+?
+`
+<p>
+📅 <b>Taşıma tarihi:</b>
+${esc(x.tarih)}
+</p>
+`
+:""
+}
 
-          <strong>
-            ${esc(from)}
-          </strong>
 
-          →
+${
+x.aciklama
+?
+`
+<p class="muted">
+${esc(x.aciklama)}
+</p>
+`
+:""
+}
 
-          <strong>
-            ${esc(to)}
-          </strong>
 
-        </div>
+<div class="item-actions">
 
+${
+x.telefon
+?
+`
+<a
+class="small wa"
+target="_blank"
+rel="noopener"
+href="${whatsapp(x.telefon)}">
+WhatsApp
+</a>
+`
+:""
+}
 
-        ${
-          x.tonaj
-          ?
-          `
-          <p>
-            ⚖️
-            <b>Tonaj:</b>
-            ${esc(x.tonaj)}
-          </p>
-          `
-          :
-          ""
-        }
 
+<button
+class="small edit"
+onclick="editIlan('${String(x.id)}')">
+Düzenle
+</button>
 
-        ${
-          x.tarih
-          ?
-          `
-          <p>
-            📅
-            <b>Taşıma tarihi:</b>
-            ${esc(x.tarih)}
-          </p>
-          `
-          :
-          ""
-        }
 
+<button
+class="small delete"
+onclick="deleteIlan('${String(x.id)}')">
+Sil
+</button>
 
-        ${
-          x.aciklama
-          ?
-          `
-          <p class="muted">
-            ${esc(x.aciklama)}
-          </p>
-          `
-          :
-          ""
-        }
+</div>
 
+</article>
 
-        <div class="item-actions">
+`;
 
-          ${
-            x.telefon
-            ?
-            `
-            <a
-              class="small wa"
-              target="_blank"
-              rel="noopener"
-              href="${whatsapp(x.telefon)}">
-
-              WhatsApp
-
-            </a>
-            `
-            :
-            ""
-          }
-
-
-          <button
-            class="small edit"
-            onclick="editIlan('${esc(x.id)}')">
-
-            Düzenle
-
-          </button>
-
-
-          <button
-            class="small delete"
-            onclick="deleteIlan('${esc(x.id)}')">
-
-            Sil
-
-          </button>
-
-        </div>
-
-      </article>
-
-      `;
-
-    }).join("");
+}).join("");
 
 }
 
 
 /* =========================================================
-   NAKLİYECİLER
-   ========================================================= */
+   NAKLİYECİLERİ GÖSTER
+========================================================= */
 
 function renderNakliyeciler(){
 
-  const search =
-    norm(
-      document.getElementById(
-        "nakSearch"
-      ).value
-    );
+const search=
+norm(
+document.getElementById(
+"nakSearch"
+).value
+);
+
+const arac=
+document.getElementById(
+"nakAracFilter"
+).value;
 
 
-  const arac =
-    document.getElementById(
-      "nakAracFilter"
-    ).value;
+const list=
+nakliyeciler.filter(function(x){
+
+const haystack=
+norm([
+x.ad_soyad,
+x.ad,
+x.firma,
+x.sehir,
+x.arac_tipi,
+x.guzergah,
+x.aciklama,
+x.tasima_tipi
+].join(" "));
 
 
-  const list =
-    nakliyeciler.filter(function(x){
+return(
+(!search||haystack.includes(search))
+&&
+(!arac||x.arac_tipi===arac)
+);
 
-      const haystack =
-        norm([
-          x.ad_soyad,
-          x.ad,
-          x.firma,
-          x.sehir,
-          x.arac_tipi,
-          x.guzergah,
-          x.aciklama,
-          x.tasima_tipi
-        ].join(" "));
+});
 
 
-      return (
-
-        (!search ||
-          haystack.includes(search))
-
-        &&
-
-        (!arac ||
-          x.arac_tipi === arac)
-
-      );
-
-    });
+const container=
+document.getElementById("nakList");
 
 
-  const container =
-    document.getElementById(
-      "nakList"
-    );
+if(!list.length){
+
+container.innerHTML=`
+<div class="empty" style="grid-column:1/-1">
+Henüz nakliyeci ilanı yok.
+</div>
+`;
+
+return;
+
+}
 
 
-  if(!list.length){
+container.innerHTML=
+list.map(function(x){
 
-    container.innerHTML = `
-      <div
-        class="empty"
-        style="grid-column:1/-1">
+return`
 
-        Henüz nakliyeci ilanı yok.
+<article class="card">
 
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  container.innerHTML =
-    list.map(function(x){
-
-      return `
-
-      <article class="card">
-
-        <h3>
-
-          🚛
-
-          ${esc(
-            x.ad_soyad ||
-            x.ad ||
-            x.firma ||
-            "Nakliyeci"
-          )}
-
-        </h3>
+<h3>
+🚛
+${esc(
+x.ad_soyad||
+x.ad||
+x.firma||
+"Nakliyeci"
+)}
+</h3>
 
 
-        <span class="badge">
-
-          ${esc(
-            x.arac_tipi ||
-            "Araç belirtilmemiş"
-          )}
-
-        </span>
+<span class="badge">
+${esc(
+x.arac_tipi||
+"Araç belirtilmemiş"
+)}
+</span>
 
 
-        ${
-          x.sehir
-          ?
-          `
-          <span class="badge">
-
-            📍
-            ${esc(x.sehir)}
-
-          </span>
-          `
-          :
-          ""
-        }
+${
+x.sehir
+?
+`
+<span class="badge">
+📍 ${esc(x.sehir)}
+</span>
+`
+:""
+}
 
 
-        ${
-          x.tasima_tipi
-          ?
-          `
-          <span class="badge">
-            ${esc(x.tasima_tipi)}
-          </span>
-          `
-          :
-          ""
-        }
+${
+x.tasima_tipi
+?
+`
+<span class="badge">
+${esc(x.tasima_tipi)}
+</span>
+`
+:""
+}
 
 
-        ${
-          x.guzergah
-          ?
-          `
-          <p>
-
-            <b>
-              Güzergâh:
-            </b>
-
-            ${esc(x.guzergah)}
-
-          </p>
-          `
-          :
-          ""
-        }
+${
+x.guzergah
+?
+`
+<p>
+<b>Güzergâh:</b>
+${esc(x.guzergah)}
+</p>
+`
+:""
+}
 
 
-        ${
-          x.aciklama
-          ?
-          `
-          <p class="muted">
-
-            ${esc(x.aciklama)}
-
-          </p>
-          `
-          :
-          ""
-        }
+${
+x.aciklama
+?
+`
+<p class="muted">
+${esc(x.aciklama)}
+</p>
+`
+:""
+}
 
 
-        <div class="item-actions">
+${
+x.telefon
+?
+`
+<div class="item-actions">
 
-          ${
-            x.telefon
-            ?
-            `
-            <a
-              class="small wa"
-              target="_blank"
-              rel="noopener"
-              href="${whatsapp(x.telefon)}">
+<a
+class="small wa"
+target="_blank"
+rel="noopener"
+href="${whatsapp(x.telefon)}">
+WhatsApp
+</a>
 
-              WhatsApp
+</div>
+`
+:""
+}
 
-            </a>
-            `
-            :
-            ""
-          }
+</article>
 
-        </div>
+`;
 
-      </article>
-
-      `;
-
-    }).join("");
+}).join("");
 
 }
 
 
 /* =========================================================
-   YENİ YÜK İLANI
-   ========================================================= */
+   YENİ İLAN
+========================================================= */
 
 document
 .getElementById("ilanForm")
 .addEventListener(
-  "submit",
-  async function(e){
+"submit",
+async function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
-
-    message(
-      "ilanMsg",
-      "İlan yayınlanıyor..."
-    );
-
-
-    const {
-      data:{
-        user
-      }
-    } =
-      await supabaseClient
-        .auth
-        .getUser();
-
-
-    const neredenIl =
-      document.getElementById(
-        "nereden_il"
-      ).value;
-
-
-    const neredenIlce =
-      document.getElementById(
-        "nereden_ilce"
-      ).value;
-
-
-    const neredenMahalle =
-      document.getElementById(
-        "nereden_mahalle"
-      ).value;
-
-
-    const nereyeIl =
-      document.getElementById(
-        "nereye_il"
-      ).value;
-
-
-    const nereyeIlce =
-      document.getElementById(
-        "nereye_ilce"
-      ).value;
-
-
-    const nereyeMahalle =
-      document.getElementById(
-        "nereye_mahalle"
-      ).value;
-
-
-    const nereden =
-      [
-        neredenIl,
-        neredenIlce,
-        neredenMahalle
-      ]
-      .filter(Boolean)
-      .join(" / ");
-
-
-    const nereye =
-      [
-        nereyeIl,
-        nereyeIlce,
-        nereyeMahalle
-      ]
-      .filter(Boolean)
-      .join(" / ");
-
-
-    const row = {
-
-      owner_id:
-        user?.id || null,
-
-      yuk_tipi:
-        document
-          .getElementById("yuk_tipi")
-          .value
-          .trim(),
-
-      tasima_tipi:
-        document
-          .getElementById("tasima_tipi")
-          .value,
-
-      nereden:
-        nereden,
-
-      nereye:
-        nereye,
-
-      arac_tipi:
-        document
-          .getElementById("arac_tipi")
-          .value,
-
-      tonaj:
-        document
-          .getElementById("tonaj")
-          .value
-          .trim(),
-
-      tarih:
-        document
-          .getElementById("tarih")
-          .value || null,
-
-      telefon:
-        document
-          .getElementById("telefon")
-          .value
-          .trim(),
-
-      aciklama:
-        (
-          "[" +
-          document
-            .getElementById("kategori")
-            .value +
-          "] " +
-          document
-            .getElementById("aciklama")
-            .value
-            .trim()
-        )
-
-    };
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("ilanlar")
-        .insert(row);
-
-
-    if(error){
-
-      console.error(error);
-
-      message(
-        "ilanMsg",
-        "İlan kaydedilemedi: " +
-        error.message,
-        "danger"
-      );
-
-      return;
-
-    }
-
-
-    message(
-      "ilanMsg",
-      "İlan başarıyla yayınlandı.",
-      "success"
-    );
-
-
-    e.target.reset();
-
-    setMinDate();
-
-    await loadAll();
-
-
-    setTimeout(
-      function(){
-
-        closeModal("ilanModal");
-
-        message(
-          "ilanMsg",
-          ""
-        );
-
-      },
-      700
-    );
-
-  }
+message(
+"ilanMsg",
+"İlan yayınlanıyor..."
 );
 
 
+const {
+data:{user}
+}=
+await supabaseClient
+.auth
+.getUser();
+
+
+const neredenIl=
+document.getElementById(
+"nereden_il"
+).value;
+
+const neredenIlce=
+document.getElementById(
+"nereden_ilce"
+).value;
+
+const neredenMahalle=
+document.getElementById(
+"nereden_mahalle"
+).value;
+
+const nereyeIl=
+document.getElementById(
+"nereye_il"
+).value;
+
+const nereyeIlce=
+document.getElementById(
+"nereye_ilce"
+).value;
+
+const nereyeMahalle=
+document.getElementById(
+"nereye_mahalle"
+).value;
+
+
+const nereden=
+[
+neredenIl,
+neredenIlce,
+neredenMahalle
+]
+.filter(Boolean)
+.join(" / ");
+
+
+const nereye=
+[
+nereyeIl,
+nereyeIlce,
+nereyeMahalle
+]
+.filter(Boolean)
+.join(" / ");
+
+
+const row={
+
+owner_id:user?.id||null,
+
+kategori:
+document.getElementById(
+"kategori"
+).value,
+
+yuk_tipi:
+document.getElementById(
+"yuk_tipi"
+).value.trim(),
+
+tasima_tipi:
+document.getElementById(
+"tasima_tipi"
+).value,
+
+nereden:nereden,
+
+nereye:nereye,
+
+arac_tipi:
+document.getElementById(
+"arac_tipi"
+).value,
+
+tonaj:
+document.getElementById(
+"tonaj"
+).value.trim(),
+
+tarih:
+document.getElementById(
+"tarih"
+).value||null,
+
+telefon:
+document.getElementById(
+"telefon"
+).value.trim(),
+
+aciklama:
+document.getElementById(
+"aciklama"
+).value.trim()
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("ilanlar")
+.insert(row);
+
+
+if(error){
+
+console.error(error);
+
+message(
+"ilanMsg",
+"İlan kaydedilemedi: "+
+error.message,
+"danger"
+);
+
+return;
+
+}
+
+
+message(
+"ilanMsg",
+"İlan başarıyla yayınlandı.",
+"success"
+);
+
+
+e.target.reset();
+
+setMinDate();
+
+await loadAll();
+
+
+setTimeout(function(){
+
+closeModal("ilanModal");
+
+message("ilanMsg","");
+
+},700);
+
+});
+
+
 /* =========================================================
-   NAKLİYECİ
-   ========================================================= */
+   NAKLİYECİ EKLE
+========================================================= */
 
 document
 .getElementById("nakForm")
 .addEventListener(
-  "submit",
-  async function(e){
+"submit",
+async function(e){
 
-    e.preventDefault();
+e.preventDefault();
 
-
-    message(
-      "nakMsg",
-      "Nakliyeci ilanı yayınlanıyor..."
-    );
-
-
-    const {
-      data:{
-        user
-      }
-    } =
-      await supabaseClient
-        .auth
-        .getUser();
-
-
-    const row = {
-
-      owner_id:
-        user?.id || null,
-
-      ad_soyad:
-        document
-          .getElementById("nak_ad")
-          .value
-          .trim(),
-
-      telefon:
-        document
-          .getElementById("nak_telefon")
-          .value
-          .trim(),
-
-      sehir:
-        document
-          .getElementById("nak_sehir")
-          .value
-          .trim(),
-
-      arac_tipi:
-        document
-          .getElementById("nak_arac")
-          .value,
-
-      guzergah:
-        document
-          .getElementById("nak_guzergah")
-          .value
-          .trim(),
-
-      aciklama:
-        document
-          .getElementById("nak_aciklama")
-          .value
-          .trim(),
-
-      tasima_tipi:
-        document
-          .getElementById("nak_tasima")
-          .value
-
-    };
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("nakliyeciler")
-        .insert(row);
-
-
-    if(error){
-
-      console.error(error);
-
-      message(
-        "nakMsg",
-        "Nakliyeci kaydedilemedi: " +
-        error.message,
-        "danger"
-      );
-
-      return;
-
-    }
-
-
-    message(
-      "nakMsg",
-      "Nakliyeci ilanı başarıyla yayınlandı.",
-      "success"
-    );
-
-
-    e.target.reset();
-
-
-    await loadAll();
-
-
-    setTimeout(
-      function(){
-
-        closeModal("nakliyeciModal");
-
-        message(
-          "nakMsg",
-          ""
-        );
-
-      },
-      700
-    );
-
-  }
+message(
+"nakMsg",
+"Nakliyeci ilanı yayınlanıyor..."
 );
+
+
+const {
+data:{user}
+}=
+await supabaseClient
+.auth
+.getUser();
+
+
+const row={
+
+owner_id:user?.id||null,
+
+ad_soyad:
+document.getElementById(
+"nak_ad"
+).value.trim(),
+
+telefon:
+document.getElementById(
+"nak_telefon"
+).value.trim(),
+
+sehir:
+document.getElementById(
+"nak_sehir"
+).value.trim(),
+
+arac_tipi:
+document.getElementById(
+"nak_arac"
+).value,
+
+guzergah:
+document.getElementById(
+"nak_guzergah"
+).value.trim(),
+
+aciklama:
+document.getElementById(
+"nak_aciklama"
+).value.trim(),
+
+tasima_tipi:
+document.getElementById(
+"nak_tasima"
+).value
+
+};
+
+
+const {error}=
+await supabaseClient
+.from("nakliyeciler")
+.insert(row);
+
+
+if(error){
+
+console.error(error);
+
+message(
+"nakMsg",
+"Nakliyeci kaydedilemedi: "+
+error.message,
+"danger"
+);
+
+return;
+
+}
+
+
+message(
+"nakMsg",
+"Nakliyeci ilanı başarıyla yayınlandı.",
+"success"
+);
+
+
+e.target.reset();
+
+await loadAll();
+
+
+setTimeout(function(){
+
+closeModal("nakliyeciModal");
+
+message("nakMsg","");
+
+},700);
+
+});
 
 
 /* =========================================================
    İLAN DÜZENLE
-   ========================================================= */
+========================================================= */
 
 function editIlan(id){
 
-  const x =
-    ilanlar.find(
-      function(i){
+const x=
+ilanlar.find(function(i){
 
-        return String(i.id) ===
-          String(id);
+return String(i.id)===String(id);
 
-      }
-    );
+});
 
 
-  if(!x) return;
+if(!x)return;
 
 
-  document.getElementById(
-    "editId"
-  ).value =
-    x.id;
+document.getElementById(
+"editId"
+).value=x.id;
 
 
-  document.getElementById(
-    "editYuk"
-  ).value =
-    x.yuk_tipi ||
-    x.yuk_turu ||
-    "";
+document.getElementById(
+"editKategori"
+).value=
+x.kategori||
+"Diğer";
 
 
-  document.getElementById(
-    "editArac"
-  ).value =
-    x.arac_tipi ||
-    "Panelvan";
+document.getElementById(
+"editYuk"
+).value=
+x.yuk_tipi||
+x.yuk_turu||
+"";
 
 
-  document.getElementById(
-    "editTasima"
-  ).value =
-    x.tasima_tipi ||
-    "Şehir içi";
+document.getElementById(
+"editArac"
+).value=
+x.arac_tipi||
+"Panelvan";
 
 
-  document.getElementById(
-    "editFrom"
-  ).value =
-    x.nereden || "";
+document.getElementById(
+"editTasima"
+).value=
+x.tasima_tipi||
+"Şehir içi";
 
 
-  document.getElementById(
-    "editTo"
-  ).value =
-    x.nereye || "";
+document.getElementById(
+"editFrom"
+).value=
+x.nereden||"";
 
 
-  document.getElementById(
-    "editDesc"
-  ).value =
-    x.aciklama || "";
+document.getElementById(
+"editTo"
+).value=
+x.nereye||"";
 
 
-  openModal("editModal");
+document.getElementById(
+"editDesc"
+).value=
+x.aciklama||"";
+
+
+openModal("editModal");
 
 }
 
 
 /* =========================================================
    GÜNCELLE
-   ========================================================= */
+========================================================= */
 
 document
 .getElementById("editForm")
 .addEventListener(
-  "submit",
-  async function(e){
+"submit",
+async function(e){
 
-    e.preventDefault();
-
-
-    const id =
-      document.getElementById(
-        "editId"
-      ).value;
+e.preventDefault();
 
 
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("ilanlar")
-        .update({
-
-          yuk_tipi:
-            document
-              .getElementById("editYuk")
-              .value
-              .trim(),
-
-          arac_tipi:
-            document
-              .getElementById("editArac")
-              .value,
-
-          tasima_tipi:
-            document
-              .getElementById("editTasima")
-              .value,
-
-          nereden:
-            document
-              .getElementById("editFrom")
-              .value
-              .trim(),
-
-          nereye:
-            document
-              .getElementById("editTo")
-              .value
-              .trim(),
-
-          aciklama:
-            document
-              .getElementById("editDesc")
-              .value
-              .trim()
-
-        })
-        .eq("id",id);
+const id=
+document.getElementById(
+"editId"
+).value;
 
 
-    if(error){
+const {error}=
+await supabaseClient
+.from("ilanlar")
+.update({
 
-      message(
-        "editMsg",
-        "Güncelleme başarısız: " +
-        error.message,
-        "danger"
-      );
+kategori:
+document.getElementById(
+"editKategori"
+).value,
 
-      return;
+yuk_tipi:
+document.getElementById(
+"editYuk"
+).value.trim(),
 
-    }
+arac_tipi:
+document.getElementById(
+"editArac"
+).value,
+
+tasima_tipi:
+document.getElementById(
+"editTasima"
+).value,
+
+nereden:
+document.getElementById(
+"editFrom"
+).value.trim(),
+
+nereye:
+document.getElementById(
+"editTo"
+).value.trim(),
+
+aciklama:
+document.getElementById(
+"editDesc"
+).value.trim()
+
+})
+.eq("id",id);
 
 
-    closeModal("editModal");
+if(error){
 
-    await loadAll();
-
-  }
+message(
+"editMsg",
+"Güncelleme başarısız: "+
+error.message,
+"danger"
 );
+
+return;
+
+}
+
+
+closeModal("editModal");
+
+await loadAll();
+
+});
 
 
 /* =========================================================
    SİL
-   ========================================================= */
+========================================================= */
 
 async function deleteIlan(id){
 
-  if(
-    !confirm(
-      "Bu ilanı silmek istediğine emin misin?"
-    )
-  ){
+if(
+!confirm(
+"Bu ilanı silmek istediğine emin misin?"
+)
+){
 
-    return;
+return;
 
-  }
-
-
-  const {
-    error
-  } =
-    await supabaseClient
-      .from("ilanlar")
-      .delete()
-      .eq("id",id);
+}
 
 
-  if(error){
-
-    alert(
-      "Silinemedi: " +
-      error.message
-    );
-
-    return;
-
-  }
+const {error}=
+await supabaseClient
+.from("ilanlar")
+.delete()
+.eq("id",id);
 
 
-  await loadAll();
+if(error){
+
+alert(
+"Silinemedi: "+
+error.message
+);
+
+return;
+
+}
+
+
+await loadAll();
 
 }
 
 
 /* =========================================================
    REALTIME
-   ========================================================= */
+========================================================= */
 
 supabaseClient
 .channel("tasibunu-realtime")
+
 .on(
-  "postgres_changes",
-  {
-    event:"*",
-    schema:"public",
-    table:"ilanlar"
-  },
-  function(){
+"postgres_changes",
+{
+event:"*",
+schema:"public",
+table:"ilanlar"
+},
+function(){
 
-    loadAll();
+loadAll();
 
-  }
-)
+})
+
 .on(
-  "postgres_changes",
-  {
-    event:"*",
-    schema:"public",
-    table:"nakliyeciler"
-  },
-  function(){
+"postgres_changes",
+{
+event:"*",
+schema:"public",
+table:"nakliyeciler"
+},
+function(){
 
-    loadAll();
+loadAll();
 
-  }
-)
+})
+
 .subscribe();
 
 
 /* =========================================================
    BAŞLANGIÇ
-   ========================================================= */
+========================================================= */
 
 document.addEventListener(
-  "DOMContentLoaded",
-  function(){
+"DOMContentLoaded",
+function(){
 
-    fillCities();
+fillCities();
 
-    setMinDate();
+setMinDate();
 
-    updateLocationMode();
+updateLocationMode();
 
-    loadAll();
+loadAll();
 
-  }
-);
+});
 
 </script>
 
