@@ -1,0 +1,2813 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<title>TaşıBunu | Yükünü Taşıt, Taşıyıcını Bul</title>
+
+<meta name="description" content="TaşıBunu ile küçük yükten komple ev taşımaya kadar uygun taşıyıcı ve araç bul.">
+
+<meta name="theme-color" content="#082d5b">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --navy:#082d5b;
+  --navy2:#0d3d76;
+  --blue:#1976e8;
+  --blue2:#1169d2;
+  --bg:#f3f7fc;
+  --white:#fff;
+  --text:#172238;
+  --muted:#6b7a8e;
+  --border:#dbe3ec;
+  --soft:#edf6ff;
+  --danger:#c62828;
+  --success:#16834a;
+  --shadow:0 12px 35px rgba(8,45,91,.08);
+  --radius:25px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  overflow-x:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+/* HEADER */
+
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  background:linear-gradient(135deg,#082d5b,#0d3d76);
+  box-shadow:0 4px 20px rgba(0,0,0,.12);
+}
+
+.header-inner{
+  max-width:1200px;
+  margin:auto;
+  min-height:100px;
+  padding:15px 22px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+}
+
+.logo{
+  font-size:34px;
+  font-weight:900;
+  letter-spacing:-1.5px;
+  color:white;
+  white-space:nowrap;
+}
+
+.logo span{
+  color:#2385f3;
+}
+
+.logo-icon{
+  font-size:38px;
+  vertical-align:middle;
+  margin-right:6px;
+}
+
+.top-button{
+  border:0;
+  background:#1976e8;
+  color:white;
+  font-weight:800;
+  font-size:19px;
+  padding:17px 24px;
+  border-radius:18px;
+  box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+/* HERO */
+
+.hero{
+  background:linear-gradient(135deg,#082d5b 0%,#0b477f 100%);
+  color:white;
+  padding:55px 20px 80px;
+}
+
+.hero-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+.hero h1{
+  margin:0 0 18px;
+  font-size:clamp(36px,7vw,66px);
+  line-height:1.05;
+  letter-spacing:-2px;
+}
+
+.hero h1 span{
+  color:#2385f3;
+}
+
+.hero p{
+  max-width:750px;
+  font-size:21px;
+  line-height:1.55;
+  margin:0 0 28px;
+  color:#eaf3ff;
+}
+
+.hero-tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:32px;
+}
+
+.hero-tag{
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.09);
+  padding:13px 17px;
+  border-radius:14px;
+  font-weight:700;
+}
+
+/* SEARCH */
+
+.search-box{
+  background:white;
+  color:var(--text);
+  border-radius:28px;
+  padding:30px;
+  max-width:950px;
+  box-shadow:0 20px 45px rgba(0,0,0,.18);
+}
+
+.search-box h2{
+  margin:0 0 25px;
+  font-size:31px;
+}
+
+.search-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr auto;
+  gap:14px;
+}
+
+.field label{
+  display:block;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:15px 16px;
+  background:white;
+  color:var(--text);
+  outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:#1976e8;
+  box-shadow:0 0 0 3px rgba(25,118,232,.1);
+}
+
+.search-button,
+.primary-button{
+  border:0;
+  border-radius:15px;
+  background:var(--blue);
+  color:white;
+  font-weight:800;
+  padding:15px 22px;
+}
+
+/* MAIN */
+
+main{
+  max-width:1150px;
+  margin:auto;
+  padding:35px 20px 80px;
+}
+
+.section{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:34px;
+  margin-bottom:30px;
+  box-shadow:var(--shadow);
+}
+
+.section h2{
+  margin:0 0 12px;
+  font-size:38px;
+  letter-spacing:-1px;
+}
+
+.section-intro{
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.55;
+  margin:0 0 25px;
+}
+
+/* CATEGORIES */
+
+.categories{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+}
+
+.category{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:28px 18px;
+  text-align:center;
+  transition:.2s;
+  min-height:230px;
+}
+
+.category:hover,
+.category.active{
+  border:3px solid #1976e8;
+  background:#eff7ff;
+  transform:translateY(-2px);
+}
+
+.category-icon{
+  font-size:62px;
+  margin-bottom:15px;
+}
+
+.category h3{
+  margin:0 0 12px;
+  font-size:27px;
+}
+
+.category p{
+  margin:0;
+  color:var(--muted);
+  font-size:18px;
+  line-height:1.45;
+}
+
+/* ROUTE / NOTIFICATION */
+
+.info-card{
+  background:#edf6ff;
+  border:3px solid #c5def7;
+  border-radius:24px;
+  padding:28px;
+}
+
+.info-card h3{
+  margin:0 0 18px;
+  font-size:29px;
+}
+
+.info-card p{
+  font-size:19px;
+  line-height:1.45;
+}
+
+.info-example{
+  margin-top:22px;
+  padding:20px;
+  background:white;
+  border-radius:18px;
+}
+
+.notify-button{
+  border:0;
+  background:#1976e8;
+  color:white;
+  font-weight:800;
+  padding:16px 25px;
+  border-radius:16px;
+}
+
+/* FILTERS */
+
+.filters{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.status{
+  padding:12px 15px;
+  border-radius:12px;
+  background:#edf8f1;
+  color:var(--success);
+  font-weight:700;
+  margin-bottom:20px;
+}
+
+.error-box{
+  padding:18px;
+  border-radius:15px;
+  background:#fff1f1;
+  border:1px solid #efb5b5;
+  color:#922b2b;
+  margin-bottom:20px;
+  line-height:1.5;
+}
+
+.count{
+  color:var(--muted);
+  font-size:20px;
+  font-weight:800;
+  margin-bottom:20px;
+}
+
+/* LISTINGS */
+
+.listings{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.listing,
+.carrier{
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px;
+  background:white;
+}
+
+.listing-head{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:14px;
+}
+
+.badge{
+  display:inline-block;
+  background:#edf6ff;
+  color:#125dab;
+  padding:7px 11px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:800;
+}
+
+.listing h3,
+.carrier h3{
+  margin:5px 0 17px;
+  font-size:23px;
+}
+
+.listing-row{
+  margin:10px 0;
+  line-height:1.45;
+  color:#35445a;
+}
+
+.listing-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:18px;
+}
+
+.whatsapp{
+  display:inline-block;
+  background:#18a957;
+  color:white;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+.delete{
+  border:0;
+  background:#fff0f0;
+  color:#b22;
+  padding:12px 16px;
+  border-radius:12px;
+  font-weight:800;
+}
+
+/* CARRIER */
+
+.carrier-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:18px;
+}
+
+.carrier-search{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr auto;
+  gap:12px;
+  margin-bottom:22px;
+}
+
+/* EMPTY */
+
+.empty{
+  text-align:center;
+  padding:45px 25px;
+  border:2px dashed #d2dce8;
+  border-radius:22px;
+  color:var(--muted);
+}
+
+.empty h3{
+  color:#65758a;
+  font-size:25px;
+}
+
+.empty p{
+  font-size:18px;
+  line-height:1.5;
+}
+
+/* MODAL */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:2000;
+  background:rgba(5,22,43,.65);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:white;
+  border-radius:25px;
+  padding:28px;
+}
+
+.modal-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:25px;
+}
+
+.modal-top h2{
+  margin:0;
+  font-size:30px;
+}
+
+.close{
+  width:45px;
+  height:45px;
+  border:0;
+  border-radius:50%;
+  background:#edf1f6;
+  font-size:30px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.form-actions{
+  display:flex;
+  justify-content:flex-end;
+  gap:10px;
+  margin-top:24px;
+}
+
+.secondary-btn{
+  border:1px solid var(--border);
+  background:#f4f7fa;
+  color:var(--text);
+  padding:14px 20px;
+  border-radius:14px;
+  font-weight:800;
+}
+
+/* TOAST */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,120px);
+  z-index:3000;
+  background:#082d5b;
+  color:white;
+  padding:16px 24px;
+  border-radius:15px;
+  box-shadow:0 10px 30px rgba(0,0,0,.25);
+  font-weight:700;
+  transition:.25s;
+  max-width:90%;
+  text-align:center;
+}
+
+.toast.show{
+  transform:translate(-50%,0);
+}
+
+/* FOOTER */
+
+footer{
+  background:#061f3e;
+  color:#dbe8f7;
+  text-align:center;
+  padding:35px 20px;
+}
+
+footer strong{
+  color:white;
+}
+
+/* MOBILE */
+
+@media(max-width:800px){
+
+  .header-inner{
+    min-height:98px;
+    padding:14px 20px;
+  }
+
+  .logo{
+    font-size:30px;
+  }
+
+  .logo-icon{
+    font-size:32px;
+  }
+
+  .top-button{
+    font-size:16px;
+    padding:15px 16px;
+  }
+
+  .hero{
+    padding:38px 20px 55px;
+  }
+
+  .hero p{
+    font-size:18px;
+  }
+
+  .search-box{
+    padding:23px;
+  }
+
+  .search-grid,
+  .carrier-search,
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  main{
+    padding:25px 20px 60px;
+  }
+
+  .section{
+    padding:25px 20px;
+  }
+
+  .section h2{
+    font-size:32px;
+  }
+
+  .categories{
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+
+  .category{
+    min-height:210px;
+    padding:22px 12px;
+  }
+
+  .category-icon{
+    font-size:50px;
+  }
+
+  .category h3{
+    font-size:22px;
+  }
+
+  .category p{
+    font-size:16px;
+  }
+
+  .listings,
+  .carrier-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .form-actions{
+    flex-direction:column-reverse;
+  }
+
+  .form-actions button{
+    width:100%;
+  }
+}
+
+@media(max-width:480px){
+
+  .logo{
+    font-size:27px;
+  }
+
+  .logo-icon{
+    font-size:28px;
+  }
+
+  .top-button{
+    font-size:14px;
+    padding:14px 13px;
+  }
+
+  .hero h1{
+    font-size:38px;
+  }
+
+  .categories{
+    gap:10px;
+  }
+
+  .category{
+    min-height:190px;
+    padding:18px 8px;
+  }
+
+  .category-icon{
+    font-size:43px;
+  }
+
+  .category h3{
+    font-size:19px;
+  }
+
+  .category p{
+    font-size:14px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      <span class="logo-icon">🚚</span>
+      Taşı<span>Bunu</span>
+    </div>
+
+    <button class="top-button" id="openLoadTop">
+      + Yük İlanı Ver
+    </button>
+
+  </div>
+</header>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <h1>
+      Yükünü taşıt,<br>
+      <span>taşıyıcını bul.</span>
+    </h1>
+
+    <p>
+      Küçük yüklerden komple ev taşımaya kadar
+      Türkiye'nin dört bir yanında uygun araç ve
+      taşıyıcı bul.
+    </p>
+
+    <div class="hero-tags">
+      <div class="hero-tag">🇹🇷 81 İl</div>
+      <div class="hero-tag">📍 İlçe & Mahalle</div>
+      <div class="hero-tag">🚚 Büyük & Küçük Yük</div>
+      <div class="hero-tag">🔔 Yakındaki Yük Bildirimi</div>
+    </div>
+
+    <div class="search-box">
+
+      <h2>Hızlı Yük Ara</h2>
+
+      <div class="search-grid">
+
+        <div class="field">
+          <label>Nereden</label>
+          <input
+            id="fromSearch"
+            placeholder="Örn. Gaziantep / Şahinbey">
+        </div>
+
+        <div class="field">
+          <label>Nereye</label>
+          <input
+            id="toSearch"
+            placeholder="Örn. Bursa / Nilüfer">
+        </div>
+
+        <div class="field">
+          <label>Yük / araç</label>
+          <select id="typeSearch">
+            <option value="">Tümü</option>
+            <option>Büyük Yük</option>
+            <option>Orta Yük</option>
+            <option>Küçük Yük</option>
+            <option>Parça Yük</option>
+            <option>Evden Eve</option>
+            <option>Özel Taşıma</option>
+          </select>
+        </div>
+
+        <button class="search-button" id="searchBtn">
+          Yükleri Ara
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<main>
+
+<!-- =========================================================
+     KATEGORİLER
+========================================================= -->
+
+<section class="section">
+
+  <h2>Taşıma İhtiyacını Seç</h2>
+
+  <p class="section-intro">
+    İhtiyacına uygun yük kategorisini seç,
+    uygun taşıyıcıları ve ilanları daha kolay bul.
+  </p>
+
+  <div class="categories">
+
+    <div class="category" data-category="Büyük Yük">
+      <div class="category-icon">🚛</div>
+      <h3>Büyük Yük</h3>
+      <p>Kamyon, TIR ve ağır yük taşımaları</p>
+    </div>
+
+    <div class="category" data-category="Orta Yük">
+      <div class="category-icon">🚚</div>
+      <h3>Orta Yük</h3>
+      <p>Kamyonet ve uygun araçlar</p>
+    </div>
+
+    <div class="category" data-category="Küçük Yük">
+      <div class="category-icon">📦</div>
+      <h3>Küçük Yük</h3>
+      <p>Küçük ve hacimli yükler</p>
+    </div>
+
+    <div class="category" data-category="Parça Yük">
+      <div class="category-icon">🧩</div>
+      <h3>Parça Yük</h3>
+      <p>Güzergâh üzerindeki yükler</p>
+    </div>
+
+    <div class="category" data-category="Evden Eve">
+      <div class="category-icon">🏠</div>
+      <h3>Evden Eve</h3>
+      <p>Ev ve ofis taşımacılığı</p>
+    </div>
+
+    <div class="category" data-category="Özel Taşıma">
+      <div class="category-icon">❄️</div>
+      <h3>Özel Taşıma</h3>
+      <p>Frigorifik ve özel araçlar</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     YAKINDAKİ YÜK BİLDİRİMİ
+========================================================= -->
+
+<section class="section">
+
+  <h2>🔔 Yakındaki Yük Bildirimi</h2>
+
+  <p class="section-intro">
+    Güzergâhını kaydettiğinde uygun yükleri
+    takip edebilirsin.
+  </p>
+
+  <div class="info-card">
+
+    <h3>Örnek sistem</h3>
+
+    <p>
+      <strong>Gaziantep → Bursa</strong> güzergâhını
+      kaydeden taşıyıcı, Bursa'ya yaklaştığında
+      Bursa'daki uygun yükler kontrol edilir.
+    </p>
+
+    <p>Örneğin:</p>
+
+    <div class="info-example">
+
+      <strong>📍 Bursa / Nilüfer</strong><br>
+      🚛 18 Ton Yük<br>
+      ➡️ Bursa → Ankara
+
+      <br><br>
+
+      <button class="notify-button" id="notifyBtn">
+        🔔 Bildirimleri Aç
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     GÜNCEL İLANLAR
+========================================================= -->
+
+<section class="section" id="listingsSection">
+
+  <h2>Güncel Yük İlanları</h2>
+
+  <div class="filters">
+
+    <select id="vehicleFilter">
+      <option value="">Tüm Araçlar</option>
+      <option>Panelvan</option>
+      <option>Kamyonet</option>
+      <option>Kamyon</option>
+      <option>TIR</option>
+      <option>Tenteli Araç</option>
+      <option>Frigorifik Araç</option>
+      <option>Evden Eve Servis</option>
+    </select>
+
+    <select id="loadFilter">
+      <option value="">Tüm Yükler</option>
+      <option>Büyük Yük</option>
+      <option>Orta Yük</option>
+      <option>Küçük Yük</option>
+      <option>Parça Yük</option>
+      <option>Evden Eve</option>
+      <option>Özel Taşıma</option>
+    </select>
+
+    <select id="transportFilter">
+      <option value="">Tüm Taşıma Tipleri</option>
+      <option>Şehir İçi</option>
+      <option>Şehirler Arası</option>
+      <option>Her İkisi</option>
+    </select>
+
+  </div>
+
+  <div id="dbMessage"></div>
+
+  <div class="count" id="listingCount">
+    0 aktif ilan
+  </div>
+
+  <div class="listings" id="listings"></div>
+
+</section>
+
+
+<!-- =========================================================
+     TAŞIYICI BUL
+========================================================= -->
+
+<section class="section">
+
+  <h2>🚚 Kayıtlı Taşıyıcılar</h2>
+
+  <p class="section-intro">
+    Güzergâh ve araç bilgisine göre uygun
+    taşıyıcıları görüntüle.
+  </p>
+
+  <div class="carrier-search">
+
+    <input
+      id="carrierFrom"
+      placeholder="Nereden">
+
+    <input
+      id="carrierTo"
+      placeholder="Nereye">
+
+    <select id="carrierVehicle">
+
+      <option value="">Tüm Araçlar</option>
+
+      <option>Panelvan</option>
+      <option>Kamyonet</option>
+      <option>Kamyon</option>
+      <option>TIR</option>
+      <option>Tenteli Araç</option>
+      <option>Frigorifik Araç</option>
+      <option>Evden Eve Servis</option>
+
+    </select>
+
+    <button
+      class="primary-button"
+      id="carrierSearchBtn">
+
+      Taşıyıcı Ara
+
+    </button>
+
+  </div>
+
+  <div class="carrier-grid" id="carriers"></div>
+
+  <br>
+
+  <button
+    class="primary-button"
+    id="openCarrier">
+
+    🚚 Taşıyıcı Olarak Kayıt Ol
+
+  </button>
+
+</section>
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+  <strong>TaşıBunu</strong>
+
+  <p>
+    Yükünü taşıt, taşıyıcını bul.
+  </p>
+
+  <small>
+    © 2026 TaşıBunu
+  </small>
+
+</footer>
+
+
+<!-- =========================================================
+     YÜK İLANI MODALI
+========================================================= -->
+
+<div class="modal" id="loadModal">
+
+  <div class="modal-box">
+
+    <div class="modal-top">
+
+      <h2>📦 Yük İlanı Ver</h2>
+
+      <button
+        class="close"
+        data-close="loadModal">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <form id="loadForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>Yük kategorisi *</label>
+
+          <select id="fCategory" required>
+
+            <option value="">Seçiniz</option>
+
+            <option>Büyük Yük</option>
+            <option>Orta Yük</option>
+            <option>Küçük Yük</option>
+            <option>Parça Yük</option>
+            <option>Evden Eve</option>
+            <option>Özel Taşıma</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Yük tipi *</label>
+
+          <input
+            id="fLoadType"
+            required
+            placeholder="Örn. Ev eşyası">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Taşıma tipi *</label>
+
+          <select id="fTransport" required>
+
+            <option value="">Seçiniz</option>
+
+            <option>Şehir İçi</option>
+            <option>Şehirler Arası</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Araç tipi *</label>
+
+          <select id="fVehicle" required>
+
+            <option value="">Seçiniz</option>
+
+            <option>Panelvan</option>
+            <option>Kamyonet</option>
+            <option>Kamyon</option>
+            <option>TIR</option>
+            <option>Tenteli Araç</option>
+            <option>Frigorifik Araç</option>
+            <option>Evden Eve Servis</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Nereden *</label>
+
+          <input
+            id="fFrom"
+            required
+            placeholder="Örn. Gaziantep / Şahinbey">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Nereye *</label>
+
+          <input
+            id="fTo"
+            required
+            placeholder="Örn. Bursa / Nilüfer">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Tonaj / ağırlık</label>
+
+          <input
+            id="fTonaj"
+            placeholder="Örn. 18 Ton">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Taşıma tarihi</label>
+
+          <input
+            id="fDate"
+            type="date">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Ad soyad</label>
+
+          <input
+            id="fName"
+            placeholder="Ad Soyad">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Telefon *</label>
+
+          <input
+            id="fPhone"
+            required
+            inputmode="tel"
+            placeholder="05xx xxx xx xx">
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>Açıklama</label>
+
+          <textarea
+            id="fDescription"
+            placeholder="Yükün detaylarını, kat/asansör, adet, hacim vb. bilgileri yazabilirsin."></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          data-close="loadModal">
+
+          Vazgeç
+
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button">
+
+          İlanı Yayınla
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     TAŞIYICI MODALI
+========================================================= -->
+
+<div class="modal" id="carrierModal">
+
+  <div class="modal-box">
+
+    <div class="modal-top">
+
+      <h2>🚚 Taşıyıcı Kaydı</h2>
+
+      <button
+        class="close"
+        data-close="carrierModal">
+
+        ×
+
+      </button>
+
+    </div>
+
+
+    <form id="carrierForm">
+
+      <div class="form-grid">
+
+        <div class="field">
+
+          <label>Ad soyad *</label>
+
+          <input
+            id="cName"
+            required
+            placeholder="Ad Soyad">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Telefon *</label>
+
+          <input
+            id="cPhone"
+            required
+            inputmode="tel"
+            placeholder="05xx xxx xx xx">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Şehir *</label>
+
+          <input
+            id="cCity"
+            required
+            placeholder="Örn. Gaziantep">
+
+        </div>
+
+
+        <div class="field">
+
+          <label>Araç tipi *</label>
+
+          <select id="cVehicle" required>
+
+            <option value="">Seçiniz</option>
+
+            <option>Panelvan</option>
+            <option>Kamyonet</option>
+            <option>Kamyon</option>
+            <option>TIR</option>
+            <option>Tenteli Araç</option>
+            <option>Frigorifik Araç</option>
+            <option>Evden Eve Servis</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>Güzergâh *</label>
+
+          <input
+            id="cRoute"
+            required
+            placeholder="Örn. Gaziantep → Bursa → İstanbul">
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>Taşıma tipi</label>
+
+          <select id="cTransport">
+
+            <option>Şehirler Arası</option>
+            <option>Şehir İçi</option>
+            <option>Her İkisi</option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field full">
+
+          <label>Açıklama</label>
+
+          <textarea
+            id="cDescription"
+            placeholder="Kapasite, dönüş yükü, çalışma bölgeleri vb."></textarea>
+
+        </div>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          data-close="carrierModal">
+
+          Vazgeç
+
+        </button>
+
+        <button
+          type="submit"
+          class="primary-button">
+
+          Taşıyıcıyı Kaydet
+
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+"use strict";
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://wacmbcmgpemcwdlwwjrh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_Q3R-e7e3MoOFc06_28Wr7A_WVOYzImC";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY,
+    {
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true
+      }
+    }
+  );
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const state = {
+
+  listings:[],
+  carriers:[],
+
+  category:"",
+  from:"",
+  to:"",
+  vehicle:"",
+  load:"",
+  transport:""
+
+};
+
+
+const $ = id =>
+  document.getElementById(id);
+
+
+/* =========================================================
+   YARDIMCI
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+function normalize(value){
+
+  return String(value ?? "")
+    .toLocaleLowerCase("tr-TR")
+    .trim();
+
+}
+
+
+function toast(message){
+
+  const el = $("toast");
+
+  el.textContent = message;
+
+  el.classList.add("show");
+
+  clearTimeout(window.__toastTimer);
+
+  window.__toastTimer =
+    setTimeout(
+      () => el.classList.remove("show"),
+      3000
+    );
+
+}
+
+
+/* =========================================================
+   MODALLAR
+========================================================= */
+
+function openModal(id){
+
+  $(id).classList.add("show");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+function closeModal(id){
+
+  $(id).classList.remove("show");
+
+  document.body.style.overflow = "";
+
+}
+
+
+document
+  .querySelectorAll("[data-close]")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => closeModal(button.dataset.close)
+    );
+
+  });
+
+
+document
+  .querySelectorAll(".modal")
+  .forEach(modal => {
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if(event.target === modal){
+
+          closeModal(modal.id);
+
+        }
+
+      }
+    );
+
+  });
+
+
+$("openLoadTop")
+  .addEventListener(
+    "click",
+    () => openModal("loadModal")
+  );
+
+
+$("openCarrier")
+  .addEventListener(
+    "click",
+    () => openModal("carrierModal")
+  );
+
+
+/* =========================================================
+   SUPABASE VERİLERİ
+========================================================= */
+
+async function getCurrentUser(){
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth.getUser();
+
+  if(error){
+
+    console.warn(error);
+
+    return null;
+
+  }
+
+  return data?.user || null;
+
+}
+
+
+async function loadData(){
+
+  $("dbMessage").innerHTML =
+    '<div class="status">● Supabase bağlantısı kontrol ediliyor...</div>';
+
+
+  try{
+
+    const [
+      loadsResult,
+      carriersResult
+    ] = await Promise.all([
+
+      supabaseClient
+        .from("ilanlar")
+        .select("*")
+        .eq("durum","aktif")
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        ),
+
+      supabaseClient
+        .from("nakliyeciler")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending:false
+          }
+        )
+
+    ]);
+
+
+    if(loadsResult.error)
+      throw loadsResult.error;
+
+
+    if(carriersResult.error)
+      throw carriersResult.error;
+
+
+    state.listings =
+      loadsResult.data || [];
+
+
+    state.carriers =
+      carriersResult.data || [];
+
+
+    $("dbMessage").innerHTML =
+      '<div class="status">● Supabase bağlantısı hazır</div>';
+
+
+    renderAll();
+
+  }
+
+  catch(error){
+
+    console.error(
+      "Supabase:",
+      error
+    );
+
+
+    $("dbMessage").innerHTML =
+
+      '<div class="error-box">' +
+
+      '<b>Supabase verileri alınamadı.</b><br>' +
+
+      escapeHTML(
+        error.message ||
+        "Supabase bağlantı hatası."
+      ) +
+
+      '</div>';
+
+
+    state.listings = [];
+
+    state.carriers = [];
+
+    renderAll();
+
+  }
+
+}
+
+
+/* =========================================================
+   İLAN FİLTRELEME
+========================================================= */
+
+function listingCategory(item){
+
+  return (
+    item.kategori ||
+    item.yuk_tipi ||
+    ""
+  );
+
+}
+
+
+function listingVehicle(item){
+
+  return item.arac_tipi || "";
+
+}
+
+
+function listingTransport(item){
+
+  return item.tasima_tipi || "";
+
+}
+
+
+function filteredListings(){
+
+  return state.listings.filter(item => {
+
+    const category =
+      normalize(
+        listingCategory(item)
+      );
+
+    const vehicle =
+      normalize(
+        listingVehicle(item)
+      );
+
+    const transport =
+      normalize(
+        listingTransport(item)
+      );
+
+    const from =
+      normalize(item.nereden);
+
+    const to =
+      normalize(item.nereye);
+
+
+    if(
+      state.category &&
+      !category.includes(
+        normalize(state.category)
+      )
+    ){
+
+      return false;
+
+    }
+
+
+    if(
+      state.vehicle &&
+      !vehicle.includes(
+        normalize(state.vehicle)
+      )
+    ){
+
+      return false;
+
+    }
+
+
+    if(
+      state.load &&
+      !category.includes(
+        normalize(state.load)
+      ) &&
+      !normalize(item.yuk_tipi)
+        .includes(
+          normalize(state.load)
+        )
+    ){
+
+      return false;
+
+    }
+
+
+    if(
+      state.transport &&
+      !transport.includes(
+        normalize(state.transport)
+      )
+    ){
+
+      return false;
+
+    }
+
+
+    if(
+      state.from &&
+      !from.includes(
+        normalize(state.from)
+      )
+    ){
+
+      return false;
+
+    }
+
+
+    if(
+      state.to &&
+      !to.includes(
+        normalize(state.to)
+      )
+    ){
+
+      return false;
+
+    }
+
+
+    return true;
+
+  });
+
+}
+
+
+/* =========================================================
+   İLANLARI GÖSTER
+========================================================= */
+
+function renderListings(){
+
+  const items =
+    filteredListings();
+
+
+  $("listingCount")
+    .textContent =
+      items.length +
+      " aktif ilan";
+
+
+  if(!items.length){
+
+    $("listings").innerHTML =
+
+      '<div class="empty" style="grid-column:1/-1">' +
+
+      '<div style="font-size:48px">📦</div>' +
+
+      '<h3>Bu filtreye uygun ilan bulunamadı.</h3>' +
+
+      '<p>' +
+      'Yeni bir yük ilanı oluşturabilir veya ' +
+      'filtreleri değiştirebilirsin.' +
+      '</p>' +
+
+      '<button class="primary-button" ' +
+      'onclick="openModal(\'loadModal\')">' +
+
+      'Yük İlanı Ver' +
+
+      '</button>' +
+
+      '</div>';
+
+    return;
+
+  }
+
+
+  $("listings").innerHTML =
+
+    items.map(item => {
+
+      const id =
+        item.ilan_id ??
+        item.id ??
+        "";
+
+
+      const title =
+        item.yuk_tipi ||
+        listingCategory(item) ||
+        "Yük İlanı";
+
+
+      const route =
+        (item.nereden || "Belirtilmedi") +
+        " → " +
+        (item.nereye || "Belirtilmedi");
+
+
+      const phone =
+        item.telefon || "";
+
+
+      return `
+
+        <article class="listing">
+
+          <div class="listing-head">
+
+            <span class="badge">
+              ${escapeHTML(
+                listingCategory(item) || "Yük"
+              )}
+            </span>
+
+            ${
+              item.tasima_tipi
+              ?
+              `<span class="badge">
+                ${escapeHTML(
+                  item.tasima_tipi
+                )}
+              </span>`
+              :
+              ""
+            }
+
+          </div>
+
+
+          <h3>
+            📦 ${escapeHTML(title)}
+          </h3>
+
+
+          <div class="listing-row">
+            📍 <strong>Güzergâh:</strong>
+            ${escapeHTML(route)}
+          </div>
+
+
+          ${
+            item.arac_tipi
+            ?
+            `<div class="listing-row">
+              🚚 <strong>Araç:</strong>
+              ${escapeHTML(
+                item.arac_tipi
+              )}
+            </div>`
+            :
+            ""
+          }
+
+
+          ${
+            item.tonaj ||
+            item.agirlik
+            ?
+            `<div class="listing-row">
+              ⚖️ <strong>Tonaj:</strong>
+              ${escapeHTML(
+                item.tonaj ||
+                item.agirlik
+              )}
+            </div>`
+            :
+            ""
+          }
+
+
+          ${
+            item.tarih
+            ?
+            `<div class="listing-row">
+              📅 <strong>Tarih:</strong>
+              ${escapeHTML(item.tarih)}
+            </div>`
+            :
+            ""
+          }
+
+
+          ${
+            item.aciklama
+            ?
+            `<div class="listing-row">
+              📝 ${escapeHTML(
+                item.aciklama
+              )}
+            </div>`
+            :
+            ""
+          }
+
+
+          <div class="listing-actions">
+
+            ${
+              phone
+              ?
+              `<a
+                class="whatsapp"
+                target="_blank"
+                rel="noopener"
+                href="https://wa.me/${String(
+                  phone
+                ).replace(/\D/g,"")}"
+              >
+                💬 WhatsApp
+              </a>`
+              :
+              ""
+            }
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   TAŞIYICILAR
+========================================================= */
+
+function renderCarriers(){
+
+  let items =
+    [...state.carriers];
+
+
+  const from =
+    normalize(
+      $("carrierFrom").value
+    );
+
+
+  const to =
+    normalize(
+      $("carrierTo").value
+    );
+
+
+  const vehicle =
+    normalize(
+      $("carrierVehicle").value
+    );
+
+
+  if(from){
+
+    items =
+      items.filter(item =>
+
+        normalize(
+          item.guzergah
+        ).includes(from)
+
+        ||
+
+        normalize(
+          item.sehir
+        ).includes(from)
+
+      );
+
+  }
+
+
+  if(to){
+
+    items =
+      items.filter(item =>
+
+        normalize(
+          item.guzergah
+        ).includes(to)
+
+      );
+
+  }
+
+
+  if(vehicle){
+
+    items =
+      items.filter(item =>
+
+        normalize(
+          item.arac_tipi
+        ).includes(vehicle)
+
+      );
+
+  }
+
+
+  if(!items.length){
+
+    $("carriers").innerHTML =
+
+      '<div class="empty" style="grid-column:1/-1">' +
+
+      '<div style="font-size:48px">🚚</div>' +
+
+      '<h3>Uygun taşıyıcı bulunamadı.</h3>' +
+
+      '<p>' +
+      'Güzergâhını genişleterek tekrar deneyebilirsin.' +
+      '</p>' +
+
+      '</div>';
+
+    return;
+
+  }
+
+
+  $("carriers").innerHTML =
+
+    items.map(item => `
+
+      <article class="carrier">
+
+        <span class="badge">
+          ${escapeHTML(
+            item.arac_tipi ||
+            "Araç"
+          )}
+        </span>
+
+
+        <h3>
+          🚚 ${escapeHTML(
+            item.ad_soyad ||
+            "Taşıyıcı"
+          )}
+        </h3>
+
+
+        ${
+          item.sehir
+          ?
+          `<div class="listing-row">
+            📍 ${escapeHTML(
+              item.sehir
+            )}
+          </div>`
+          :
+          ""
+        }
+
+
+        <div class="listing-row">
+          ➡️ <strong>Güzergâh:</strong>
+          ${escapeHTML(
+            item.guzergah ||
+            "Belirtilmedi"
+          )}
+        </div>
+
+
+        ${
+          item.tasima_tipi
+          ?
+          `<div class="listing-row">
+            🚛 ${escapeHTML(
+              item.tasima_tipi
+            )}
+          </div>`
+          :
+          ""
+        }
+
+
+        ${
+          item.aciklama
+          ?
+          `<div class="listing-row">
+            📝 ${escapeHTML(
+              item.aciklama
+            )}
+          </div>`
+          :
+          ""
+        }
+
+
+        ${
+          item.telefon
+          ?
+          `<div class="listing-actions">
+
+            <a
+              class="whatsapp"
+              target="_blank"
+              rel="noopener"
+              href="https://wa.me/${String(
+                item.telefon
+              ).replace(/\D/g,"")}"
+            >
+              💬 WhatsApp
+            </a>
+
+          </div>`
+          :
+          ""
+        }
+
+      </article>
+
+    `).join("");
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderAll(){
+
+  renderListings();
+
+  renderCarriers();
+
+}
+
+
+/* =========================================================
+   ARAMA
+========================================================= */
+
+function runSearch(){
+
+  state.from =
+    $("fromSearch").value;
+
+
+  state.to =
+    $("toSearch").value;
+
+
+  state.load =
+    $("typeSearch").value;
+
+
+  state.vehicle = "";
+
+  state.transport = "";
+
+  state.category = "";
+
+
+  $("vehicleFilter").value = "";
+
+  $("loadFilter").value =
+    state.load;
+
+  $("transportFilter").value = "";
+
+
+  document
+    .querySelectorAll(".category")
+    .forEach(card =>
+      card.classList.remove("active")
+    );
+
+
+  renderListings();
+
+
+  $("listingsSection")
+    .scrollIntoView({
+      behavior:"smooth"
+    });
+
+}
+
+
+$("searchBtn")
+  .addEventListener(
+    "click",
+    runSearch
+  );
+
+
+["fromSearch","toSearch"]
+  .forEach(id => {
+
+    $(id).addEventListener(
+      "keydown",
+      event => {
+
+        if(event.key === "Enter"){
+
+          runSearch();
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   FİLTRELER
+========================================================= */
+
+$("vehicleFilter")
+  .addEventListener(
+    "change",
+    event => {
+
+      state.vehicle =
+        event.target.value;
+
+      renderListings();
+
+    }
+  );
+
+
+$("loadFilter")
+  .addEventListener(
+    "change",
+    event => {
+
+      state.load =
+        event.target.value;
+
+      renderListings();
+
+    }
+  );
+
+
+$("transportFilter")
+  .addEventListener(
+    "change",
+    event => {
+
+      state.transport =
+        event.target.value;
+
+      renderListings();
+
+    }
+  );
+
+
+/* =========================================================
+   KATEGORİLER
+========================================================= */
+
+document
+  .querySelectorAll(".category")
+  .forEach(card => {
+
+    card.addEventListener(
+      "click",
+      () => {
+
+        const category =
+          card.dataset.category;
+
+
+        if(
+          state.category === category
+        ){
+
+          state.category = "";
+
+          card.classList.remove(
+            "active"
+          );
+
+        }
+
+        else{
+
+          state.category =
+            category;
+
+
+          document
+            .querySelectorAll(".category")
+            .forEach(x =>
+              x.classList.remove(
+                "active"
+              )
+            );
+
+
+          card.classList.add(
+            "active"
+          );
+
+        }
+
+
+        state.load = "";
+
+        $("loadFilter").value = "";
+
+
+        renderListings();
+
+
+        $("listingsSection")
+          .scrollIntoView({
+            behavior:"smooth"
+          });
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   TAŞIYICI ARAMA
+========================================================= */
+
+$("carrierSearchBtn")
+  .addEventListener(
+    "click",
+    () => {
+
+      renderCarriers();
+
+
+      document
+        .querySelector(".carrier-grid")
+        .scrollIntoView({
+          behavior:"smooth"
+        });
+
+    }
+  );
+
+
+/* =========================================================
+   BİLDİRİM
+========================================================= */
+
+$("notifyBtn")
+  .addEventListener(
+    "click",
+    async () => {
+
+      if(
+        !("Notification" in window)
+      ){
+
+        toast(
+          "Bu tarayıcı bildirim özelliğini desteklemiyor."
+        );
+
+        return;
+
+      }
+
+
+      try{
+
+        const permission =
+          await Notification.requestPermission();
+
+
+        if(permission === "granted"){
+
+          toast(
+            "Bildirim izni verildi."
+          );
+
+
+          new Notification(
+            "TaşıBunu",
+            {
+              body:
+              "Yakındaki uygun yük bildirimleri açıldı."
+            }
+          );
+
+        }
+
+        else{
+
+          toast(
+            "Bildirim izni verilmedi."
+          );
+
+        }
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+        toast(
+          "Bildirim izni alınamadı."
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   YÜK İLANI EKLEME
+========================================================= */
+
+$("loadForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      try{
+
+        const user =
+          await getCurrentUser();
+
+
+        if(!user){
+
+          toast(
+            "İlan vermek için önce giriş yapmalısın."
+          );
+
+          return;
+
+        }
+
+
+        const payload = {
+
+          owner_id:user.id,
+
+          kategori:
+            $("fCategory").value,
+
+          yuk_tipi:
+            $("fLoadType").value.trim(),
+
+          tasima_tipi:
+            $("fTransport").value,
+
+          nereden:
+            $("fFrom").value.trim(),
+
+          nereye:
+            $("fTo").value.trim(),
+
+          arac_tipi:
+            $("fVehicle").value,
+
+          tonaj:
+            $("fTonaj").value.trim(),
+
+          tarih:
+            $("fDate").value ||
+            null,
+
+          ad_soyad:
+            $("fName").value.trim(),
+
+          telefon:
+            $("fPhone").value.trim(),
+
+          aciklama:
+            $("fDescription").value.trim(),
+
+          durum:"aktif"
+
+        };
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("ilanlar")
+            .insert(payload);
+
+
+        if(error)
+          throw error;
+
+
+        $("loadForm").reset();
+
+
+        closeModal(
+          "loadModal"
+        );
+
+
+        toast(
+          "Yük ilanı başarıyla yayınlandı."
+        );
+
+
+        await loadData();
+
+
+        $("listingsSection")
+          .scrollIntoView({
+            behavior:"smooth"
+          });
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+
+        toast(
+          "İlan yayınlanamadı: " +
+          (
+            error.message ||
+            "Bir hata oluştu."
+          )
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   TAŞIYICI EKLEME
+========================================================= */
+
+$("carrierForm")
+  .addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      try{
+
+        const user =
+          await getCurrentUser();
+
+
+        if(!user){
+
+          toast(
+            "Taşıyıcı kaydı için önce giriş yapmalısın."
+          );
+
+          return;
+
+        }
+
+
+        const payload = {
+
+          owner_id:user.id,
+
+          ad_soyad:
+            $("cName").value.trim(),
+
+          telefon:
+            $("cPhone").value.trim(),
+
+          sehir:
+            $("cCity").value.trim(),
+
+          arac_tipi:
+            $("cVehicle").value,
+
+          guzergah:
+            $("cRoute").value.trim(),
+
+          tasima_tipi:
+            $("cTransport").value,
+
+          aciklama:
+            $("cDescription").value.trim()
+
+        };
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from("nakliyeciler")
+            .insert(payload);
+
+
+        if(error)
+          throw error;
+
+
+        $("carrierForm").reset();
+
+
+        closeModal(
+          "carrierModal"
+        );
+
+
+        toast(
+          "Taşıyıcı kaydı oluşturuldu."
+        );
+
+
+        await loadData();
+
+      }
+
+      catch(error){
+
+        console.error(error);
+
+
+        toast(
+          "Taşıyıcı kaydedilemedi: " +
+          (
+            error.message ||
+            "Bir hata oluştu."
+          )
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+function startRealtime(){
+
+  supabaseClient
+
+    .channel("tasibunu-ilanlar")
+
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"ilanlar"
+      },
+      () => loadData()
+    )
+
+    .subscribe();
+
+
+  supabaseClient
+
+    .channel("tasibunu-nakliyeciler")
+
+    .on(
+      "postgres_changes",
+      {
+        event:"*",
+        schema:"public",
+        table:"nakliyeciler"
+      },
+      () => loadData()
+    )
+
+    .subscribe();
+
+}
+
+
+/* =========================================================
+   BAŞLAT
+========================================================= */
+
+async function init(){
+
+  await loadData();
+
+  startRealtime();
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
