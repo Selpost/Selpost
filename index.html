@@ -1,0 +1,811 @@
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+html{
+scroll-behavior:smooth
+}
+
+body{
+font-family:Arial,Helvetica,sans-serif;
+background:#f3f6fa;
+color:#172033;
+line-height:1.45;
+font-size:15px
+}
+
+button,input,select,textarea{
+font:inherit
+}
+
+button{
+cursor:pointer
+}
+
+a{
+text-decoration:none;
+color:inherit
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+position:sticky;
+top:0;
+z-index:1000;
+background:#082d57;
+color:#fff;
+box-shadow:0 2px 10px #0002
+}
+
+.header-inner{
+max-width:1100px;
+margin:auto;
+min-height:64px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:8px 14px;
+gap:10px
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:6px;
+font-size:23px;
+font-weight:900;
+white-space:nowrap
+}
+
+.logo b{
+color:#48a0ff
+}
+
+.logo-icon{
+font-size:25px
+}
+
+.header-btn,
+.primary-btn,
+.notification-btn{
+border:0;
+background:#1976df;
+color:#fff;
+font-weight:800;
+border-radius:11px;
+box-shadow:0 3px 10px #0002
+}
+
+.header-btn{
+font-size:14px;
+padding:10px 13px
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+background:linear-gradient(135deg,#082d57,#104d87);
+color:#fff;
+padding:28px 16px 32px
+}
+
+.hero-inner,
+.container,
+.footer-inner{
+max-width:1100px;
+margin:auto
+}
+
+.hero-badge{
+display:inline-block;
+background:#ffffff1f;
+border:1px solid #ffffff33;
+padding:6px 10px;
+border-radius:999px;
+margin-bottom:11px;
+font-weight:800;
+font-size:13px
+}
+
+.hero h1{
+font-size:clamp(29px,5vw,48px);
+line-height:1.08;
+margin-bottom:11px
+}
+
+.hero p{
+font-size:16px;
+color:#dbe9f7;
+max-width:760px
+}
+
+/* =========================
+   ANA CONTAINER
+========================= */
+
+.container{
+padding:24px 14px 45px
+}
+
+.section{
+margin-bottom:28px
+}
+
+.section-title{
+font-size:25px;
+margin-bottom:5px
+}
+
+.section-subtitle{
+color:#68778a;
+font-size:14px;
+margin-bottom:15px
+}
+
+/* =========================
+   KATEGORİLER
+========================= */
+
+.category-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px
+}
+
+.category-card{
+width:100%;
+background:#fff;
+border:1px solid #dce3eb;
+border-radius:15px;
+padding:16px 10px;
+min-height:135px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:#172033;
+transition:.2s
+}
+
+.category-card.selected{
+background:#edf6ff;
+border-color:#1976df;
+box-shadow:0 0 0 2px #1976df14
+}
+
+.category-icon{
+font-size:37px;
+margin-bottom:5px
+}
+
+.category-title{
+font-size:17px;
+font-weight:900;
+margin-bottom:3px
+}
+
+.category-desc{
+color:#68778a;
+font-size:12px
+}
+
+/* =========================
+   FORMLAR
+========================= */
+
+.form-card,
+.notification-card,
+.listing-card,
+.stat{
+background:#fff;
+border:1px solid #dce3eb;
+border-radius:17px;
+box-shadow:0 3px 15px #122b460b
+}
+
+.form-card{
+padding:18px
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:11px
+}
+
+.form-group{
+display:flex;
+flex-direction:column;
+gap:5px
+}
+
+.form-group.full{
+grid-column:1/-1
+}
+
+.form-group label{
+font-weight:800;
+font-size:14px
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.filters select{
+width:100%;
+border:1px solid #d5dee8;
+border-radius:11px;
+padding:11px 12px;
+background:#fff;
+color:#172033;
+outline:none;
+font-size:15px
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus,
+.filters select:focus{
+border-color:#1976df;
+box-shadow:0 0 0 2px #1976df19
+}
+
+.form-group textarea{
+min-height:85px;
+resize:vertical
+}
+
+.primary-btn{
+width:100%;
+padding:13px 18px;
+margin-top:2px
+}
+
+.primary-btn:disabled{
+opacity:.6;
+cursor:not-allowed
+}
+
+/* =========================
+   KONUM
+========================= */
+
+.location-box{
+background:#f8fbff;
+border:1px solid #d8e6f5;
+border-radius:13px;
+padding:12px
+}
+
+.location-title{
+font-weight:900;
+color:#082d57;
+margin-bottom:8px;
+font-size:14px
+}
+
+.location-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:8px
+}
+
+.route-help,
+.same-city-note{
+padding:9px 11px;
+border-radius:11px;
+font-size:12px
+}
+
+.route-help{
+background:#edf6ff;
+border:1px solid #c6def8;
+color:#315779
+}
+
+.same-city-note{
+display:none;
+background:#ecfdf3;
+border:1px solid #b7e4ca;
+color:#166534;
+font-weight:700
+}
+
+.same-city-note.show{
+display:block
+}
+
+.api-note{
+font-size:11px;
+color:#64748b;
+margin-top:5px
+}
+
+/* =========================
+   FİLTRE
+========================= */
+
+.filters{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px;
+margin-bottom:14px
+}
+
+/* =========================
+   İLANLAR
+========================= */
+
+.listing-card{
+padding:15px;
+margin-bottom:10px
+}
+
+.listing-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:8px;
+margin-bottom:9px
+}
+
+.listing-type{
+display:inline-flex;
+padding:5px 9px;
+border-radius:999px;
+background:#eaf4ff;
+color:#1267c8;
+font-weight:900;
+font-size:13px
+}
+
+.listing-date{
+color:#68778a;
+font-size:12px
+}
+
+.route{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:8px;
+margin:10px 0
+}
+
+.route-box{
+background:#f6f8fb;
+border-radius:11px;
+padding:10px
+}
+
+.route-label{
+display:block;
+font-size:10px;
+color:#758397;
+margin-bottom:2px;
+font-weight:800
+}
+
+.route-value{
+font-weight:800;
+font-size:14px
+}
+
+.listing-info{
+display:flex;
+flex-wrap:wrap;
+gap:6px;
+margin:8px 0
+}
+
+.info-pill{
+background:#f1f4f8;
+padding:5px 8px;
+border-radius:8px;
+color:#445268;
+font-size:11px
+}
+
+.whatsapp-btn{
+display:inline-block;
+background:#16a34a;
+color:#fff;
+font-weight:900;
+padding:9px 12px;
+border-radius:9px;
+margin-top:7px;
+font-size:13px
+}
+
+.empty{
+text-align:center;
+background:#fff;
+border:1px dashed #cdd7e3;
+border-radius:14px;
+padding:24px 14px;
+color:#68778a;
+font-size:14px
+}
+
+.loading{
+color:#1976df;
+font-weight:800
+}
+
+/* =========================
+   İSTATİSTİK
+========================= */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:10px
+}
+
+.stat{
+padding:16px;
+text-align:center
+}
+
+.stat-number{
+color:#1976df;
+font-size:29px;
+font-weight:900
+}
+
+.stat div:last-child{
+font-size:13px
+}
+
+/* =========================
+   BİLDİRİM
+========================= */
+
+.notification-card{
+padding:18px
+}
+
+.notification-inner{
+background:#edf6ff;
+border:1px solid #bfdcf9;
+border-radius:14px;
+padding:15px
+}
+
+.notification-inner p{
+color:#334155;
+margin:6px 0 10px;
+font-size:13px
+}
+
+.notification-btn{
+padding:10px 14px;
+font-size:13px
+}
+
+.permission-warning{
+background:#fff5e9;
+color:#9a4b1e;
+padding:9px;
+border-radius:10px;
+margin-top:10px;
+font-weight:700;
+font-size:12px
+}
+
+.hidden{
+display:none!important
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+background:#082d57;
+color:#dce9f7;
+padding:24px 14px;
+text-align:center;
+font-size:13px
+}
+
+.footer strong{
+color:#fff;
+font-size:17px
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:18px;
+transform:translate(-50%,130px);
+background:#172033;
+color:#fff;
+padding:11px 15px;
+border-radius:11px;
+z-index:3000;
+transition:.25s;
+box-shadow:0 8px 20px #0003;
+max-width:92%;
+text-align:center;
+font-size:13px
+}
+
+.toast.show{
+transform:translate(-50%,0)
+}
+
+/* =========================
+   TABLET
+========================= */
+
+@media(max-width:800px){
+
+.header-inner{
+min-height:62px;
+padding:8px 12px
+}
+
+.logo{
+font-size:21px
+}
+
+.logo-icon{
+font-size:23px
+}
+
+.header-btn{
+font-size:12px;
+padding:9px 11px
+}
+
+.hero{
+padding:25px 15px 29px
+}
+
+.hero h1{
+font-size:32px
+}
+
+.hero p{
+font-size:15px
+}
+
+.container{
+padding:21px 12px 42px
+}
+
+.section{
+margin-bottom:24px
+}
+
+.section-title{
+font-size:23px
+}
+
+.section-subtitle{
+font-size:13px;
+margin-bottom:13px
+}
+
+.category-grid{
+grid-template-columns:repeat(2,1fr);
+gap:8px
+}
+
+.category-card{
+min-height:125px;
+padding:13px 7px;
+border-radius:14px
+}
+
+.category-icon{
+font-size:34px
+}
+
+.category-title{
+font-size:16px
+}
+
+.category-desc{
+font-size:11px
+}
+
+.form-card,
+.notification-card{
+padding:15px
+}
+
+.form-grid{
+grid-template-columns:1fr;
+gap:10px
+}
+
+.form-group.full{
+grid-column:auto
+}
+
+.location-grid{
+grid-template-columns:1fr
+}
+
+.route{
+grid-template-columns:1fr
+}
+
+.stats{
+grid-template-columns:repeat(3,1fr);
+gap:7px
+}
+
+.stat{
+padding:13px 7px;
+border-radius:14px
+}
+
+.stat-number{
+font-size:26px
+}
+
+.stat div:last-child{
+font-size:11px
+}
+
+}
+
+/* =========================
+   TELEFON
+========================= */
+
+@media(max-width:430px){
+
+body{
+font-size:14px
+}
+
+.header-inner{
+min-height:59px
+}
+
+.logo{
+font-size:20px
+}
+
+.logo-icon{
+font-size:21px
+}
+
+.header-btn{
+font-size:11px;
+padding:8px 10px;
+border-radius:10px
+}
+
+.hero{
+padding:22px 14px 26px
+}
+
+.hero-badge{
+font-size:11px;
+padding:5px 8px
+}
+
+.hero h1{
+font-size:29px
+}
+
+.hero p{
+font-size:14px
+}
+
+.container{
+padding:18px 10px 38px
+}
+
+.section-title{
+font-size:21px
+}
+
+.category-card{
+min-height:112px;
+padding:11px 5px
+}
+
+.category-icon{
+font-size:30px
+}
+
+.category-title{
+font-size:15px
+}
+
+.category-desc{
+font-size:10px
+}
+
+.form-card{
+padding:13px
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea,
+.filters select{
+padding:10px;
+font-size:14px
+}
+
+.form-group label{
+font-size:13px
+}
+
+.location-box{
+padding:10px
+}
+
+.route-help{
+font-size:11px
+}
+
+.primary-btn{
+padding:12px
+}
+
+.listing-card{
+padding:12px
+}
+
+.listing-type{
+font-size:12px
+}
+
+.listing-date{
+font-size:11px
+}
+
+.route-value{
+font-size:13px
+}
+
+.info-pill{
+font-size:10px;
+padding:4px 7px
+}
+
+.whatsapp-btn{
+font-size:12px;
+padding:8px 10px
+}
+
+.stats{
+gap:6px
+}
+
+.stat{
+padding:11px 4px
+}
+
+.stat-number{
+font-size:24px
+}
+
+.stat div:last-child{
+font-size:10px
+}
+
+.footer{
+padding:20px 10px
+}
+
+}
