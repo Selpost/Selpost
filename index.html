@@ -1,0 +1,4815 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaşıBunu - Yükün İçin Doğru Taşıyıcıyı Bul</title>
+
+<meta name="description"
+content="TaşıBunu ile küçük ve büyük yükleriniz için uygun taşıyıcıyı bulun. Şehir içi ve şehirler arası taşıma ilanları oluşturun.">
+
+<meta name="theme-color" content="#06264d">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+    --navy:#06264d;
+    --navy-dark:#031b36;
+    --navy2:#0a3970;
+    --blue:#1268d5;
+    --blue2:#2b83ed;
+    --green:#16a34a;
+    --red:#dc2626;
+    --orange:#f59e0b;
+    --bg:#f4f7fb;
+    --white:#fff;
+    --text:#172033;
+    --muted:#64748b;
+    --border:#dbe3ee;
+    --shadow:0 10px 30px rgba(6,38,77,.10);
+}
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+body.modal-open{
+    overflow:hidden;
+}
+
+button,
+input,
+select,
+textarea{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.65;
+    cursor:not-allowed;
+}
+
+.container{
+    width:min(1180px,94%);
+    margin:auto;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+    background:
+        linear-gradient(
+            135deg,
+            #041d3b,
+            #0a3970
+        );
+    color:#fff;
+    position:sticky;
+    top:0;
+    z-index:1000;
+    box-shadow:
+        0 3px 15px rgba(0,0,0,.15);
+}
+
+.nav{
+    min-height:68px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:-1px;
+    white-space:nowrap;
+    color:#fff;
+}
+
+.logo span{
+    color:#2990ff;
+}
+
+.navlinks{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
+
+.navlinks a{
+    color:#fff;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:700;
+    transition:.2s;
+}
+
+.navlinks a:hover{
+    color:#54a5ff;
+}
+
+.navbuttons{
+    display:flex;
+    gap:8px;
+}
+
+.btn{
+    border:0;
+    border-radius:10px;
+    padding:12px 17px;
+    font-weight:800;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-1px);
+}
+
+.btn-primary{
+    background:var(--blue);
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background:var(--blue2);
+}
+
+.btn-light{
+    background:#fff;
+    color:var(--navy);
+}
+
+.btn-green{
+    background:var(--green);
+    color:#fff;
+}
+
+.btn-danger{
+    background:var(--red);
+    color:#fff;
+}
+
+.btn-outline{
+    background:#fff;
+    color:var(--navy);
+    border:1px solid var(--border);
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(3,24,48,.98),
+            rgba(5,43,82,.92)
+        ),
+        radial-gradient(
+            circle at right,
+            #176bd1,
+            transparent 50%
+        );
+    color:#fff;
+    padding:65px 0 70px;
+}
+
+.hero-grid{
+    display:grid;
+    grid-template-columns:1.1fr .9fr;
+    gap:35px;
+    align-items:center;
+}
+
+.hero h1{
+    font-size:48px;
+    line-height:1.04;
+    margin:0 0 18px;
+    letter-spacing:-1.5px;
+}
+
+.hero h1 span{
+    color:#3294ff;
+}
+
+.hero p{
+    font-size:18px;
+    line-height:1.6;
+    color:#dbeafe;
+}
+
+.hero-stats{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:25px;
+}
+
+.hero-stat{
+    background:rgba(255,255,255,.09);
+    border:1px solid rgba(255,255,255,.16);
+    padding:11px 14px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.hero-card{
+    background:#fff;
+    color:var(--text);
+    border-radius:20px;
+    padding:25px;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.25);
+}
+
+.hero-card h2{
+    margin-top:0;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.field{
+    margin-bottom:15px;
+}
+
+label{
+    display:block;
+    font-weight:800;
+    margin-bottom:7px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    border:1px solid var(--border);
+    background:#fff;
+    border-radius:10px;
+    padding:13px 14px;
+    outline:none;
+    color:var(--text);
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:var(--blue);
+    box-shadow:
+        0 0 0 3px rgba(18,104,213,.10);
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+}
+
+.helper{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+section{
+    padding:45px 0;
+}
+
+.section-title{
+    margin:0 0 8px;
+    font-size:28px;
+}
+
+.section-subtitle{
+    color:var(--muted);
+    margin-top:0;
+}
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+.categories{
+    display:grid;
+    grid-template-columns:
+        repeat(6,1fr);
+    gap:12px;
+}
+
+.category{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px 12px;
+    text-align:center;
+    box-shadow:
+        0 4px 15px rgba(0,0,0,.04);
+    cursor:pointer;
+    transition:.2s;
+    user-select:none;
+}
+
+.category:hover{
+    transform:translateY(-3px);
+    border-color:var(--blue);
+    box-shadow:
+        0 8px 22px rgba(18,104,213,.15);
+}
+
+.category:active{
+    transform:scale(.98);
+}
+
+.category strong{
+    display:block;
+    margin:8px 0 5px;
+}
+
+.category small{
+    color:var(--muted);
+}
+
+.category.big{
+    border:2px solid var(--blue);
+    background:#eef6ff;
+}
+
+/* =========================================================
+   DASHBOARD
+========================================================= */
+
+.dashboard{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:20px;
+}
+
+.panel{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:20px;
+    box-shadow:var(--shadow);
+}
+
+/* =========================================================
+   LISTINGS
+========================================================= */
+
+.listing{
+    border:1px solid var(--border);
+    border-radius:13px;
+    padding:16px;
+    margin-bottom:12px;
+    background:#fff;
+    transition:.2s;
+}
+
+.listing:hover{
+    border-color:#b9cbe0;
+    box-shadow:
+        0 5px 18px rgba(6,38,77,.06);
+}
+
+.listing-top{
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.listing-title{
+    font-size:18px;
+    font-weight:900;
+}
+
+.route{
+    font-weight:800;
+    margin:10px 0;
+    line-height:1.5;
+}
+
+.route span{
+    color:var(--blue);
+}
+
+.tags{
+    display:flex;
+    flex-wrap:wrap;
+    gap:7px;
+}
+
+.tag{
+    background:#edf4fc;
+    color:#164e8b;
+    border-radius:20px;
+    padding:5px 9px;
+    font-size:12px;
+    font-weight:800;
+}
+
+.tag.big{
+    background:#dbeafe;
+    color:#0752a0;
+}
+
+.tag.small{
+    background:#ecfdf5;
+    color:#08743a;
+}
+
+.listing-actions{
+    display:flex;
+    gap:8px;
+    margin-top:12px;
+    flex-wrap:wrap;
+}
+
+.whatsapp{
+    background:#16a34a;
+    color:white;
+    text-decoration:none;
+    padding:10px 14px;
+    border-radius:9px;
+    font-weight:800;
+}
+
+.empty-state{
+    padding:25px;
+    text-align:center;
+    color:var(--muted);
+}
+
+/* =========================================================
+   ROUTE
+========================================================= */
+
+.route-card{
+    background:
+        linear-gradient(
+            135deg,
+            #06264d,
+            #0d4d91
+        );
+    color:#fff;
+    border-radius:17px;
+    padding:20px;
+    margin-bottom:15px;
+}
+
+.route-card h3{
+    margin-top:0;
+}
+
+.route-active{
+    background:#dcfce7;
+    color:#166534;
+    padding:10px;
+    border-radius:9px;
+    font-weight:800;
+    margin-top:10px;
+}
+
+.route-info{
+    background:#eff6ff;
+    color:#164e8b;
+    border:1px solid #bfdbfe;
+    padding:12px;
+    border-radius:10px;
+    margin-top:12px;
+    font-size:14px;
+}
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification-box{
+    border:2px solid #bfdbfe;
+    background:#eff6ff;
+    border-radius:14px;
+    padding:17px;
+    margin-top:15px;
+}
+
+.notification-box h3{
+    margin-top:0;
+}
+
+.notification-status{
+    margin-top:10px;
+    padding:10px;
+    border-radius:9px;
+    font-weight:700;
+    font-size:14px;
+}
+
+.notification-status.ok{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.notification-status.warn{
+    background:#fff7ed;
+    color:#9a3412;
+}
+
+/* =========================================================
+   MATCH
+========================================================= */
+
+.match-box{
+    border:1px solid #bbf7d0;
+    background:#f0fdf4;
+    border-radius:13px;
+    padding:15px;
+    margin-top:12px;
+}
+
+.match-box strong{
+    color:#166534;
+}
+
+.match-item{
+    background:#fff;
+    padding:10px;
+    border-radius:8px;
+    margin-top:8px;
+    border:1px solid #dcfce7;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:5000;
+    padding:15px;
+}
+
+.modal.active{
+    display:flex;
+}
+
+.modal-card{
+    width:min(700px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    position:relative;
+}
+
+.modal-card h2{
+    margin-top:0;
+}
+
+.close{
+    float:right;
+    border:0;
+    background:#eee;
+    border-radius:50%;
+    width:35px;
+    height:35px;
+    font-size:20px;
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast{
+    position:fixed;
+    right:15px;
+    bottom:15px;
+    z-index:9999;
+    background:#06264d;
+    color:#fff;
+    padding:15px 18px;
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    display:none;
+    max-width:340px;
+}
+
+.toast.show{
+    display:block;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+    background:#031b36;
+    color:#fff;
+    padding:45px 0 20px;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:
+        2fr 1fr 1fr 1fr;
+    gap:30px;
+}
+
+footer a{
+    color:#cbd5e1;
+    text-decoration:none;
+    display:block;
+    margin:7px 0;
+    cursor:pointer;
+}
+
+footer a:hover{
+    color:#fff;
+}
+
+.copyright{
+    border-top:1px solid rgba(255,255,255,.1);
+    margin-top:30px;
+    padding-top:20px;
+    text-align:center;
+    color:#94a3b8;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:900px){
+
+    .navlinks{
+        display:none;
+    }
+
+    .hero-grid,
+    .dashboard{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .categories{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .footer-grid{
+        grid-template-columns:
+            1fr 1fr;
+    }
+}
+
+@media(max-width:520px){
+
+    .navbuttons .btn-light{
+        display:none;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .hero{
+        padding:40px 0;
+    }
+
+    .hero h1{
+        font-size:31px;
+    }
+
+    .hero p{
+        font-size:16px;
+    }
+
+    .categories{
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .listing-top{
+        flex-direction:column;
+    }
+
+    .listing-actions{
+        flex-direction:column;
+    }
+
+    .whatsapp{
+        text-align:center;
+    }
+
+    .footer-grid{
+        grid-template-columns:1fr;
+    }
+
+    .panel{
+        padding:16px;
+    }
+
+    .section-title{
+        font-size:24px;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="container nav">
+
+    <div class="logo">
+        🚚 Taşı<span>Bunu</span>
+    </div>
+
+    <div class="navlinks">
+
+        <a href="#ilanlar">
+            Yük İlanları
+        </a>
+
+        <a href="#tasiyici">
+            Taşıyıcılar
+        </a>
+
+        <a href="#rota">
+            Rota Takibi
+        </a>
+
+        <a href="#nasil">
+            Nasıl Çalışır?
+        </a>
+
+    </div>
+
+    <div class="navbuttons">
+
+        <button
+        class="btn btn-primary"
+        onclick="openModal('ilanModal')">
+
+            + Yük İlanı Ver
+
+        </button>
+
+        <button
+        class="btn btn-light"
+        onclick="openModal('tasiyiciModal')">
+
+            + Taşıyıcı Ol
+
+        </button>
+
+    </div>
+
+</div>
+
+</header>
+
+
+<!-- ======================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+<div class="container hero-grid">
+
+<div>
+
+<h1>
+
+Yükün için doğru
+<span>taşıyıcıyı bul.</span>
+
+</h1>
+
+<p>
+
+Büyük yüklerden küçük yüklere,
+parça eşyadan evden eve taşımaya kadar
+Türkiye'nin her yerinde uygun taşıma çözümünü bul.
+
+</p>
+
+<div class="hero-stats">
+
+<div class="hero-stat">
+🇹🇷 81 İl
+</div>
+
+<div class="hero-stat">
+📍 İlçe & Mahalle
+</div>
+
+<div class="hero-stat">
+🚛 Büyük & Küçük Yük
+</div>
+
+<div class="hero-stat">
+🔔 Yakındaki Yük Bildirimi
+</div>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<h2>
+Hızlı Yük Ara
+</h2>
+
+<div class="field">
+
+<label>
+Nereden
+</label>
+
+<input
+id="quickFrom"
+placeholder="Örn. Gaziantep / Şahinbey">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Nereye
+</label>
+
+<input
+id="quickTo"
+placeholder="Örn. Bursa / Nilüfer">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Yük / araç
+</label>
+
+<select id="quickVehicle">
+
+<option value="">
+Tümü
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+TIR
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Frigorifik
+</option>
+
+<option>
+Tenteli
+</option>
+
+<option>
+Evden Eve Servis
+</option>
+
+</select>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="searchLoads()">
+
+Yükleri Ara
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     KATEGORİLER
+====================================================== -->
+
+<section>
+
+<div class="container">
+
+<h2 class="section-title">
+Taşıma İhtiyacını Seç
+</h2>
+
+<p class="section-subtitle">
+İhtiyacına uygun taşıma türünü seç ve uygun taşıyıcılara ulaş.
+</p>
+
+<div class="categories">
+
+<div
+class="category big"
+onclick="selectCategory('Büyük Yük')">
+
+<div style="font-size:38px">
+🚛
+</div>
+
+<strong>
+Büyük Yük
+</strong>
+
+<small>
+Kamyon, TIR ve ağır yük taşımaları
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Orta Yük')">
+
+<div style="font-size:38px">
+🚚
+</div>
+
+<strong>
+Orta Yük
+</strong>
+
+<small>
+Kamyonet ve uygun araçlar
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Küçük Yük')">
+
+<div style="font-size:38px">
+📦
+</div>
+
+<strong>
+Küçük Yük
+</strong>
+
+<small>
+Küçük ve hacimli yükler
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Parça Yük')">
+
+<div style="font-size:38px">
+🧩
+</div>
+
+<strong>
+Parça Yük
+</strong>
+
+<small>
+Güzergâh üzerindeki yükler
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Evden Eve')">
+
+<div style="font-size:38px">
+🏠
+</div>
+
+<strong>
+Evden Eve
+</strong>
+
+<small>
+Ev ve ofis taşımacılığı
+</small>
+
+</div>
+
+
+<div
+class="category"
+onclick="selectCategory('Özel Taşıma')">
+
+<div style="font-size:38px">
+❄️
+</div>
+
+<strong>
+Özel Taşıma
+</strong>
+
+<small>
+Frigorifik ve özel araçlar
+</small>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     ROTA
+====================================================== -->
+
+<section id="rota">
+
+<div class="container dashboard">
+
+<div class="panel">
+
+<h2 class="section-title">
+🚛 Taşıyıcının Güzergâhı
+</h2>
+
+<p class="section-subtitle">
+
+Gideceğin güzergâhı kaydet.
+Sistem bu güzergâha uygun yükleri bulsun.
+
+</p>
+
+
+<div class="field">
+
+<label>
+Çıkış şehri
+</label>
+
+<select id="routeFrom">
+
+<option value="">
+Seçiniz
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Varış şehri
+</label>
+
+<select id="routeTo">
+
+<option value="">
+Seçiniz
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Aracın
+</label>
+
+<select id="routeVehicle">
+
+<option>
+Kamyon
+</option>
+
+<option>
+TIR
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Frigorifik
+</option>
+
+<option>
+Tenteli
+</option>
+
+<option>
+Evden Eve Servis
+</option>
+
+</select>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+onclick="saveRoute()">
+
+Güzergâhımı Kaydet
+
+</button>
+
+
+<div id="routeStatus"></div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>
+🔔 Yakındaki Yük Bildirimi
+</h2>
+
+<p>
+
+Güzergâhını kaydettiğinde
+uygun yükleri takip edebilirsin.
+
+</p>
+
+
+<div class="notification-box">
+
+<h3>
+Akıllı bildirim sistemi
+</h3>
+
+<p>
+
+Güzergâhını kaydet.
+TaşıBunu, güzergâhına uygun yeni yükleri kontrol eder.
+
+</p>
+
+<p>
+
+Bildirim özelliği cihazın ve tarayıcın destekliyorsa
+gerçek tarayıcı bildirimi olarak çalışır.
+Desteklemiyorsa uygulama içi bildirim gösterilir.
+
+</p>
+
+
+<button
+class="btn btn-primary"
+onclick="enableNotifications()">
+
+🔔 Bildirimleri Aç
+
+</button>
+
+
+<div id="notificationStatus"></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     İLANLAR
+====================================================== -->
+
+<section id="ilanlar">
+
+<div class="container dashboard">
+
+<div class="panel">
+
+<h2 class="section-title">
+Güncel Yük İlanları
+</h2>
+
+
+<div style="
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:15px;
+">
+
+<select
+id="filterVehicle"
+onchange="loadListings()">
+
+<option value="">
+Tüm Araçlar
+</option>
+
+<option>
+Kamyon
+</option>
+
+<option>
+TIR
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Frigorifik
+</option>
+
+<option>
+Tenteli
+</option>
+
+<option>
+Evden Eve Servis
+</option>
+
+</select>
+
+
+<select
+id="filterType"
+onchange="loadListings()">
+
+<option value="">
+Tüm Yükler
+</option>
+
+<option>
+Büyük Yük
+</option>
+
+<option>
+Orta Yük
+</option>
+
+<option>
+Küçük Yük
+</option>
+
+<option>
+Parça Yük
+</option>
+
+<option>
+Evden Eve
+</option>
+
+<option>
+Özel Taşıma
+</option>
+
+</select>
+
+</div>
+
+
+<div id="listingContainer">
+Yük ilanları yükleniyor...
+</div>
+
+</div>
+
+
+<div class="panel" id="tasiyici">
+
+<h2>
+Taşıyıcı mısın?
+</h2>
+
+<p>
+
+Aracını ve güzergâhını kaydet.
+Sistem uygun yükleri bulmana yardımcı olsun.
+
+</p>
+
+
+<div class="route-card">
+
+<h3>
+Akıllı eşleştirme
+</h3>
+
+<p>
+🚛 Güzergâhını kaydet
+</p>
+
+<p>
+📍 Uygun yükleri sistem kontrol etsin
+</p>
+
+<p>
+🔔 Yeni uygun yük olduğunda haber verilsin
+</p>
+
+<div class="route-active">
+✓ Güzergâh sistemi aktif
+</div>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="openModal('tasiyiciModal')">
+
+Taşıyıcı Kaydı Oluştur
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     NASIL ÇALIŞIR
+====================================================== -->
+
+<section id="nasil">
+
+<div class="container">
+
+<h2 class="section-title">
+Nasıl Çalışır?
+</h2>
+
+
+<div class="dashboard">
+
+<div class="panel">
+
+<h3>
+1️⃣ Yükünü yayınla
+</h3>
+
+<p>
+
+Nereden nereye gideceğini,
+yük türünü, tonajını ve bilgilerini belirt.
+
+</p>
+
+
+<h3>
+2️⃣ Uygun taşıyıcıyı bul
+</h3>
+
+<p>
+
+Araç tipine ve güzergâha göre
+uygun taşıyıcılarla iletişim kur.
+
+</p>
+
+
+<h3>
+3️⃣ Taşıyıcı güzergâhını kaydetsin
+</h3>
+
+<p>
+
+Taşıyıcı gideceği yolu sisteme girsin.
+
+</p>
+
+
+<h3>
+4️⃣ Uygun yükler eşleştirilsin
+</h3>
+
+<p>
+
+Sistem güzergâh ile yükleri karşılaştırır.
+
+</p>
+
+
+<h3>
+5️⃣ Yakındaki yük bildirimi
+</h3>
+
+<p>
+
+Uygun yükler bulunduğunda
+sistem bildirim vermeyi dener.
+
+</p>
+
+</div>
+
+
+<div class="panel">
+
+<h3>
+🔵 Akıllı Güzergâh Mantığı
+</h3>
+
+<p>
+
+Taşıyıcının sadece bulunduğu şehir değil,
+<strong>güzergâhı</strong> önemlidir.
+
+</p>
+
+
+<div class="match-box">
+
+<strong>
+Taşıyıcı:
+</strong>
+
+<br>
+
+Kayıtlı çıkış → Kayıtlı varış
+
+<hr>
+
+<strong>
+Uygun yük:
+</strong>
+
+<br>
+
+Sistemdeki gerçek ilanlardan kontrol edilir.
+
+<br><br>
+
+✓ Çıkış bölgesi karşılaştırması
+<br>
+✓ Varış bölgesi karşılaştırması
+<br>
+✓ Araç tipi karşılaştırması
+
+</div>
+
+
+<p style="margin-top:15px">
+
+Örnek şehirler sabit değildir.
+Sistem Supabase'deki gerçek ilanları kullanır.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ======================================================
+     FOOTER
+====================================================== -->
+
+<footer>
+
+<div class="container footer-grid">
+
+<div>
+
+<div class="logo">
+🚚 Taşı<span>Bunu</span>
+</div>
+
+<p>
+Türkiye'nin yük ve taşıyıcı buluşturma platformu.
+</p>
+
+</div>
+
+
+<div>
+
+<strong>
+TaşıBunu
+</strong>
+
+<a href="#ilanlar">
+Yük İlanları
+</a>
+
+<a href="#tasiyici">
+Taşıyıcılar
+</a>
+
+<a href="#rota">
+Güzergâh
+</a>
+
+</div>
+
+
+<div>
+
+<strong>
+Kategoriler
+</strong>
+
+<a onclick="selectCategory('Büyük Yük')">
+Büyük Yük
+</a>
+
+<a onclick="selectCategory('Küçük Yük')">
+Küçük Yük
+</a>
+
+<a onclick="selectCategory('Parça Yük')">
+Parça Yük
+</a>
+
+<a onclick="selectCategory('Evden Eve')">
+Evden Eve
+</a>
+
+</div>
+
+
+<div>
+
+<strong>
+Yardım
+</strong>
+
+<a href="#nasil">
+Nasıl Çalışır?
+</a>
+
+<a href="#rota">
+Bildirimler
+</a>
+
+<a href="#ilanlar">
+Güvenlik
+</a>
+
+</div>
+
+</div>
+
+
+<div class="container copyright">
+
+© 2026 TaşıBunu. Tüm hakları saklıdır.
+
+</div>
+
+</footer>
+
+
+<!-- ======================================================
+     YÜK İLANI MODAL
+====================================================== -->
+
+<div class="modal" id="ilanModal">
+
+<div class="modal-card">
+
+<button
+class="close"
+onclick="closeModal('ilanModal')">
+
+×
+
+</button>
+
+
+<h2>
+Yük İlanı Ver
+</h2>
+
+
+<div class="field">
+
+<label>
+Yük başlığı
+</label>
+
+<input
+id="ilanBaslik"
+placeholder="Örn. 15 Ton Makine Yükü">
+
+<div class="helper">
+Başlık şu an ekranda kullanılır; mevcut veritabanı yapısını bozmamak için ayrı kolon olarak gönderilmez.
+</div>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Yük türü
+</label>
+
+<select id="ilanYukTipi">
+
+<option>
+Büyük Yük
+</option>
+
+<option>
+Orta Yük
+</option>
+
+<option>
+Küçük Yük
+</option>
+
+<option>
+Parça Yük
+</option>
+
+<option>
+Evden Eve
+</option>
+
+<option>
+Özel Taşıma
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Nereden
+</label>
+
+<input
+id="ilanNereden"
+placeholder="Gaziantep / Şahinbey / Mahalle">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Nereye
+</label>
+
+<input
+id="ilanNereye"
+placeholder="Bursa / Nilüfer / Mahalle">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Araç tipi
+</label>
+
+<select id="ilanArac">
+
+<option>
+Kamyon
+</option>
+
+<option>
+TIR
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Frigorifik
+</option>
+
+<option>
+Tenteli
+</option>
+
+<option>
+Evden Eve Servis
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Tonaj / ağırlık
+</label>
+
+<input
+id="ilanTonaj"
+placeholder="Örn. 15 ton">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Açıklama
+</label>
+
+<textarea
+id="ilanAciklama"
+placeholder="Yük hakkında bilgi..."></textarea>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Ad Soyad
+</label>
+
+<input id="ilanAd">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Telefon
+</label>
+
+<input
+id="ilanTelefon"
+type="tel"
+inputmode="tel"
+placeholder="05XXXXXXXXX">
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="createListing()">
+
+Yük İlanını Yayınla
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- ======================================================
+     TAŞIYICI MODAL
+====================================================== -->
+
+<div class="modal" id="tasiyiciModal">
+
+<div class="modal-card">
+
+<button
+class="close"
+onclick="closeModal('tasiyiciModal')">
+
+×
+
+</button>
+
+
+<h2>
+Taşıyıcı Ol
+</h2>
+
+<p>
+Aracını ve çalıştığın güzergâhı kaydet.
+</p>
+
+
+<div class="field">
+
+<label>
+Ad Soyad
+</label>
+
+<input id="carrierName">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Telefon
+</label>
+
+<input
+id="carrierPhone"
+type="tel"
+inputmode="tel"
+placeholder="05XXXXXXXXX">
+
+</div>
+
+
+<div class="field">
+
+<label>
+Araç tipi
+</label>
+
+<select id="carrierVehicle">
+
+<option>
+Kamyon
+</option>
+
+<option>
+TIR
+</option>
+
+<option>
+Kamyonet
+</option>
+
+<option>
+Panelvan
+</option>
+
+<option>
+Frigorifik
+</option>
+
+<option>
+Tenteli
+</option>
+
+<option>
+Evden Eve Servis
+</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Çıkış
+</label>
+
+<select id="carrierFrom"></select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Varış
+</label>
+
+<select id="carrierTo"></select>
+
+</div>
+
+
+<div class="field">
+
+<label>
+Güzergâh / açıklama
+</label>
+
+<textarea
+id="carrierRoute"
+placeholder="Örn. Gaziantep → Kayseri → Ankara → Bursa"></textarea>
+
+</div>
+
+
+<button
+class="btn btn-primary"
+style="width:100%"
+onclick="createCarrier()">
+
+Taşıyıcı Kaydını Oluştur
+
+</button>
+
+</div>
+
+</div>
+
+
+<div
+class="toast"
+id="toast">
+</div>
+
+
+<script>
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+"https://wacmbcmgpemcwdlwwjrh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_Q3R-e7e3MoOFc06_28Wr7A_WVOYzImC";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================================================
+   SABİTLER
+========================================================= */
+
+const VEHICLES = [
+    "Kamyon",
+    "TIR",
+    "Kamyonet",
+    "Panelvan",
+    "Frigorifik",
+    "Tenteli",
+    "Evden Eve Servis"
+];
+
+const LOAD_TYPES = [
+    "Büyük Yük",
+    "Orta Yük",
+    "Küçük Yük",
+    "Parça Yük",
+    "Evden Eve",
+    "Özel Taşıma"
+];
+
+
+/* =========================================================
+   TÜRKİYE 81 İL
+========================================================= */
+
+const cities = [
+
+"Adana","Adıyaman","Afyonkarahisar","Ağrı","Aksaray",
+"Amasya","Ankara","Antalya","Ardahan","Artvin",
+"Aydın","Balıkesir","Bartın","Batman","Bayburt",
+"Bilecik","Bingöl","Bitlis","Bolu","Burdur",
+"Bursa","Çanakkale","Çankırı","Çorum","Denizli",
+"Diyarbakır","Düzce","Edirne","Elazığ","Erzincan",
+"Erzurum","Eskişehir","Gaziantep","Giresun","Gümüşhane",
+"Hakkari","Hatay","Iğdır","Isparta","İstanbul",
+"İzmir","Kahramanmaraş","Karabük","Karaman","Kars",
+"Kastamonu","Kayseri","Kilis","Kırıkkale","Kırklareli",
+"Kırşehir","Kocaeli","Konya","Kütahya","Malatya",
+"Manisa","Mardin","Mersin","Muğla","Muş",
+"Nevşehir","Niğde","Ordu","Osmaniye","Rize",
+"Sakarya","Samsun","Siirt","Sinop","Sivas",
+"Şanlıurfa","Şırnak","Tekirdağ","Tokat","Trabzon",
+"Tunceli","Uşak","Van","Yalova","Yozgat","Zonguldak"
+
+];
+
+
+/* =========================================================
+   ŞEHİR KOORDİNATLARI
+========================================================= */
+
+const cityCoords = {
+
+"Adana":[37.0,35.32],
+"Adıyaman":[37.76,38.28],
+"Afyonkarahisar":[38.75,30.54],
+"Ağrı":[39.72,43.05],
+"Aksaray":[38.37,34.03],
+"Amasya":[40.65,35.83],
+"Ankara":[39.93,32.86],
+"Antalya":[36.89,30.70],
+"Ardahan":[41.11,42.70],
+"Artvin":[41.18,41.82],
+"Aydın":[37.85,27.84],
+"Balıkesir":[39.65,27.88],
+"Bartın":[41.63,32.34],
+"Batman":[37.88,41.13],
+"Bayburt":[40.26,40.22],
+"Bilecik":[40.15,29.98],
+"Bingöl":[38.89,40.50],
+"Bitlis":[38.40,42.11],
+"Bolu":[40.73,31.61],
+"Burdur":[37.72,30.29],
+"Bursa":[40.19,29.06],
+"Çanakkale":[40.15,26.41],
+"Çankırı":[40.60,33.62],
+"Çorum":[40.55,34.95],
+"Denizli":[37.78,29.09],
+"Diyarbakır":[37.91,40.23],
+"Düzce":[40.84,31.16],
+"Edirne":[41.68,26.56],
+"Elazığ":[38.67,39.22],
+"Erzincan":[39.75,39.49],
+"Erzurum":[39.90,41.27],
+"Eskişehir":[39.77,30.52],
+"Gaziantep":[37.06,37.38],
+"Giresun":[40.91,38.39],
+"Gümüşhane":[40.46,39.48],
+"Hakkari":[37.58,43.74],
+"Hatay":[36.20,36.16],
+"Iğdır":[39.92,44.04],
+"Isparta":[37.76,30.55],
+"İstanbul":[41.01,28.97],
+"İzmir":[38.42,27.14],
+"Kahramanmaraş":[37.58,36.93],
+"Karabük":[41.20,32.63],
+"Karaman":[37.18,33.22],
+"Kars":[40.60,43.10],
+"Kastamonu":[41.38,33.78],
+"Kayseri":[38.72,35.48],
+"Kilis":[36.72,37.12],
+"Kırıkkale":[39.84,33.52],
+"Kırklareli":[41.73,27.22],
+"Kırşehir":[39.15,34.16],
+"Kocaeli":[40.76,29.94],
+"Konya":[37.87,32.49],
+"Kütahya":[39.42,29.98],
+"Malatya":[38.35,38.31],
+"Manisa":[38.61,27.43],
+"Mardin":[37.31,40.74],
+"Mersin":[36.80,34.63],
+"Muğla":[37.22,28.36],
+"Muş":[38.73,41.49],
+"Nevşehir":[38.62,34.72],
+"Niğde":[37.97,34.68],
+"Ordu":[40.98,37.88],
+"Osmaniye":[37.07,36.25],
+"Rize":[41.02,40.52],
+"Sakarya":[40.77,30.40],
+"Samsun":[41.28,36.33],
+"Siirt":[37.93,41.94],
+"Sinop":[42.03,35.15],
+"Sivas":[39.75,37.02],
+"Şanlıurfa":[37.17,38.79],
+"Şırnak":[37.52,42.46],
+"Tekirdağ":[40.98,27.51],
+"Tokat":[40.31,36.55],
+"Trabzon":[41.00,39.72],
+"Tunceli":[39.11,39.55],
+"Uşak":[38.68,29.41],
+"Van":[38.50,43.38],
+"Yalova":[40.65,29.27],
+"Yozgat":[39.82,34.81],
+"Zonguldak":[41.45,31.79]
+
+};
+
+
+/* =========================================================
+   BAŞLANGIÇ
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    async function(){
+
+        fillCitySelect("routeFrom");
+        fillCitySelect("routeTo");
+
+        fillCitySelect("carrierFrom");
+        fillCitySelect("carrierTo");
+
+        await loadListings();
+
+        restoreRoute();
+
+        updateNotificationStatus();
+
+        setupRealtime();
+
+    }
+);
+
+
+/* =========================================================
+   ŞEHİR SELECT DOLDUR
+========================================================= */
+
+function fillCitySelect(id){
+
+    const el =
+        document.getElementById(id);
+
+    if(!el){
+        return;
+    }
+
+    el.innerHTML =
+        '<option value="">Şehir seçiniz</option>';
+
+    cities.forEach(function(city){
+
+        const option =
+            document.createElement("option");
+
+        option.value = city;
+
+        option.textContent = city;
+
+        el.appendChild(option);
+
+    });
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(!modal){
+        return;
+    }
+
+    modal.classList.add("active");
+
+    document.body.classList.add(
+        "modal-open"
+    );
+
+}
+
+
+function closeModal(id){
+
+    const modal =
+        document.getElementById(id);
+
+    if(!modal){
+        return;
+    }
+
+    modal.classList.remove("active");
+
+    if(
+        !document.querySelector(
+            ".modal.active"
+        )
+    ){
+
+        document.body.classList.remove(
+            "modal-open"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(message){
+
+    const el =
+        document.getElementById("toast");
+
+    if(!el){
+        return;
+    }
+
+    el.textContent =
+        message;
+
+    el.classList.add("show");
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+    window.toastTimer =
+        setTimeout(
+            function(){
+
+                el.classList.remove(
+                    "show"
+                );
+
+            },
+            5000
+        );
+
+}
+
+
+/* =========================================================
+   KATEGORİ
+========================================================= */
+
+function selectCategory(type){
+
+    const filter =
+        document.getElementById(
+            "filterType"
+        );
+
+    if(filter){
+
+        filter.value =
+            type;
+
+    }
+
+    loadListings();
+
+    setTimeout(
+        function(){
+
+            const section =
+                document.getElementById(
+                    "ilanlar"
+                );
+
+            if(section){
+
+                section.scrollIntoView({
+                    behavior:"smooth"
+                });
+
+            }
+
+        },
+        100
+    );
+
+}
+
+
+/* =========================================================
+   BİLDİRİM DURUMU
+========================================================= */
+
+function updateNotificationStatus(){
+
+    const el =
+        document.getElementById(
+            "notificationStatus"
+        );
+
+    if(!el){
+        return;
+    }
+
+    if(
+        !("Notification" in window)
+    ){
+
+        el.className =
+            "notification-status warn";
+
+        el.innerHTML =
+            "ℹ️ Bu tarayıcı sistem bildirimlerini desteklemiyor. Uygulama içi bildirimler kullanılacak.";
+
+        return;
+
+    }
+
+
+    if(
+        Notification.permission ===
+        "granted"
+    ){
+
+        el.className =
+            "notification-status ok";
+
+        el.innerHTML =
+            "✓ Tarayıcı bildirimleri aktif.";
+
+        return;
+
+    }
+
+
+    if(
+        Notification.permission ===
+        "denied"
+    ){
+
+        el.className =
+            "notification-status warn";
+
+        el.innerHTML =
+            "⚠️ Bildirim izni engellenmiş. Tarayıcı ayarlarından TaşıBunu bildirim iznini açabilirsin.";
+
+        return;
+
+    }
+
+
+    el.className =
+        "notification-status warn";
+
+    el.innerHTML =
+        "Bildirim izni henüz verilmedi.";
+
+}
+
+
+/* =========================================================
+   BİLDİRİMLERİ AÇ
+========================================================= */
+
+async function enableNotifications(){
+
+    if(
+        !("Notification" in window)
+    ){
+
+        localStorage.setItem(
+            "tasibunu_inapp_notifications",
+            "true"
+        );
+
+        updateNotificationStatus();
+
+        toast(
+            "Sistem bildirimi desteklenmiyor. Uygulama içi bildirimler aktif."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        location.protocol !== "https:" &&
+        location.hostname !== "localhost" &&
+        location.hostname !== "127.0.0.1"
+    ){
+
+        localStorage.setItem(
+            "tasibunu_inapp_notifications",
+            "true"
+        );
+
+        toast(
+            "Bu ortamda sistem bildirimi kullanılamıyor. Uygulama içi bildirimler aktif."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const permission =
+            await Notification.requestPermission();
+
+        updateNotificationStatus();
+
+
+        if(
+            permission === "granted"
+        ){
+
+            localStorage.setItem(
+                "tasibunu_notifications",
+                "true"
+            );
+
+            try{
+
+                new Notification(
+                    "TaşıBunu bildirimleri aktif",
+                    {
+                        body:
+                            "Güzergâhına uygun yeni yükler bulunduğunda haber vereceğiz."
+                    }
+                );
+
+            }catch(error){
+
+                console.log(
+                    "Bildirim oluşturulamadı:",
+                    error
+                );
+
+            }
+
+            toast(
+                "✓ Bildirimler başarıyla açıldı."
+            );
+
+            checkRouteMatches();
+
+            return;
+
+        }
+
+
+        localStorage.setItem(
+            "tasibunu_inapp_notifications",
+            "true"
+        );
+
+        if(
+            permission === "denied"
+        ){
+
+            toast(
+                "Bildirim izni engellendi. Uygulama içi bildirimler kullanılacak."
+            );
+
+        }else{
+
+            toast(
+                "Bildirim izni verilmedi. Uygulama içi bildirimler açık."
+            );
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Bildirim hatası:",
+            error
+        );
+
+        localStorage.setItem(
+            "tasibunu_inapp_notifications",
+            "true"
+        );
+
+        toast(
+            "Bildirim sistemi kullanılamadı. Uygulama içi bildirimler aktif."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   UYGULAMA İÇİ BİLDİRİM
+========================================================= */
+
+function showInAppNotification(
+    title,
+    message
+){
+
+    toast(
+        "🔔 " +
+        title +
+        " — " +
+        message
+    );
+
+}
+
+
+/* =========================================================
+   BİLDİRİM GÖNDER
+========================================================= */
+
+function sendNotification(
+    title,
+    message
+){
+
+    if(
+        "Notification" in window &&
+        Notification.permission ===
+        "granted"
+    ){
+
+        try{
+
+            new Notification(
+                title,
+                {
+                    body:message
+                }
+            );
+
+            return;
+
+        }catch(error){
+
+            console.log(error);
+
+        }
+
+    }
+
+    showInAppNotification(
+        title,
+        message
+    );
+
+}
+
+
+/* =========================================================
+   GÜZERGÂH KAYDET
+========================================================= */
+
+function saveRoute(){
+
+    const from =
+        document.getElementById(
+            "routeFrom"
+        ).value;
+
+    const to =
+        document.getElementById(
+            "routeTo"
+        ).value;
+
+    const vehicle =
+        document.getElementById(
+            "routeVehicle"
+        ).value;
+
+
+    if(
+        !from ||
+        !to
+    ){
+
+        toast(
+            "Lütfen çıkış ve varış şehrini seç."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        from === to
+    ){
+
+        toast(
+            "Çıkış ve varış şehri aynı olamaz."
+        );
+
+        return;
+
+    }
+
+
+    const route = {
+
+        from:from,
+
+        to:to,
+
+        vehicle:vehicle,
+
+        savedAt:Date.now()
+
+    };
+
+
+    localStorage.setItem(
+        "tasibunu_route",
+        JSON.stringify(route)
+    );
+
+
+    renderSavedRoute(route);
+
+    toast(
+        from +
+        " → " +
+        to +
+        " güzergâhı kaydedildi."
+    );
+
+
+    startLocationTracking();
+
+    checkRouteMatches();
+
+}
+
+
+/* =========================================================
+   KAYITLI ROTA GÖSTER
+========================================================= */
+
+function renderSavedRoute(route){
+
+    const panel =
+        document.getElementById(
+            "routeStatus"
+        );
+
+    if(!panel){
+        return;
+    }
+
+    panel.innerHTML = `
+
+        <div class="route-active">
+
+            ✓ Güzergâh kaydedildi:
+
+            <br><br>
+
+            ${escapeHtml(route.from || "")}
+
+            →
+
+            ${escapeHtml(route.to || "")}
+
+            <br>
+
+            Araç:
+            ${escapeHtml(route.vehicle || "")}
+
+        </div>
+
+        <div class="route-info">
+
+            Sistem uygun yüklerde
+            <strong>çıkış</strong>,
+            <strong>varış</strong> ve
+            <strong>araç tipi</strong>
+            bilgilerini karşılaştırır.
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   GÜZERGÂH GERİ YÜKLE
+========================================================= */
+
+function restoreRoute(){
+
+    const raw =
+        localStorage.getItem(
+            "tasibunu_route"
+        );
+
+    if(!raw){
+        return;
+    }
+
+
+    try{
+
+        const route =
+            JSON.parse(raw);
+
+
+        const fromEl =
+            document.getElementById(
+                "routeFrom"
+            );
+
+        const toEl =
+            document.getElementById(
+                "routeTo"
+            );
+
+        const vehicleEl =
+            document.getElementById(
+                "routeVehicle"
+            );
+
+
+        if(fromEl){
+
+            fromEl.value =
+                route.from || "";
+
+        }
+
+
+        if(toEl){
+
+            toEl.value =
+                route.to || "";
+
+        }
+
+
+        if(vehicleEl){
+
+            vehicleEl.value =
+                route.vehicle ||
+                "Kamyon";
+
+        }
+
+
+        renderSavedRoute(route);
+
+        startLocationTracking();
+
+    }catch(error){
+
+        console.error(error);
+
+        localStorage.removeItem(
+            "tasibunu_route"
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   MESAFE
+========================================================= */
+
+function distanceKm(
+    lat1,
+    lon1,
+    lat2,
+    lon2
+){
+
+    const R =
+        6371;
+
+    const dLat =
+        (lat2 - lat1) *
+        Math.PI / 180;
+
+    const dLon =
+        (lon2 - lon1) *
+        Math.PI / 180;
+
+    const a =
+        Math.sin(dLat / 2) ** 2 +
+
+        Math.cos(
+            lat1 *
+            Math.PI /
+            180
+        ) *
+
+        Math.cos(
+            lat2 *
+            Math.PI /
+            180
+        ) *
+
+        Math.sin(
+            dLon / 2
+        ) ** 2;
+
+    return R *
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+}
+
+
+/* =========================================================
+   KONUM TAKİBİ
+========================================================= */
+
+let locationWatcher = null;
+
+
+function startLocationTracking(){
+
+    if(
+        !navigator.geolocation
+    ){
+
+        return;
+
+    }
+
+
+    if(
+        locationWatcher !== null
+    ){
+
+        return;
+
+    }
+
+
+    locationWatcher =
+        navigator.geolocation.watchPosition(
+
+            function(position){
+
+                checkNearbyDestination(
+                    position.coords.latitude,
+                    position.coords.longitude
+                );
+
+            },
+
+            function(error){
+
+                console.log(
+                    "Konum hatası:",
+                    error
+                );
+
+            },
+
+            {
+                enableHighAccuracy:false,
+                maximumAge:60000,
+                timeout:15000
+            }
+
+        );
+
+}
+
+
+/* =========================================================
+   VARIŞA YAKLAŞMA
+========================================================= */
+
+let destinationNotificationSent =
+    false;
+
+
+function checkNearbyDestination(
+    lat,
+    lon
+){
+
+    const raw =
+        localStorage.getItem(
+            "tasibunu_route"
+        );
+
+    if(!raw){
+        return;
+    }
+
+
+    try{
+
+        const route =
+            JSON.parse(raw);
+
+        const coords =
+            cityCoords[route.to];
+
+        if(!coords){
+            return;
+        }
+
+
+        const km =
+            distanceKm(
+                lat,
+                lon,
+                coords[0],
+                coords[1]
+            );
+
+
+        if(
+            km <= 50
+        ){
+
+            if(
+                !destinationNotificationSent
+            ){
+
+                destinationNotificationSent =
+                    true;
+
+                checkRouteMatches();
+
+                sendNotification(
+                    "TaşıBunu",
+                    route.to +
+                    " bölgesine yaklaştın. Uygun yükler kontrol ediliyor."
+                );
+
+            }
+
+        }else if(
+            km > 80
+        ){
+
+            destinationNotificationSent =
+                false;
+
+        }
+
+    }catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+
+/* =========================================================
+   NORMALİZE
+========================================================= */
+
+function normalize(value){
+
+    return String(value || "")
+        .toLocaleLowerCase("tr-TR")
+        .replace(/ı/g,"i")
+        .replace(/ğ/g,"g")
+        .replace(/ü/g,"u")
+        .replace(/ş/g,"s")
+        .replace(/ö/g,"o")
+        .replace(/ç/g,"c")
+        .trim();
+
+}
+
+
+/* =========================================================
+   ROTA METNİNDE ŞEHİR KONTROLÜ
+========================================================= */
+
+function containsCity(
+    text,
+    city
+){
+
+    const normalizedText =
+        normalize(text);
+
+    const normalizedCity =
+        normalize(city);
+
+    if(
+        !normalizedText ||
+        !normalizedCity
+    ){
+
+        return false;
+
+    }
+
+    return normalizedText
+        .includes(normalizedCity);
+
+}
+
+
+/* =========================================================
+   ARAÇ EŞLEŞMESİ
+========================================================= */
+
+function vehiclesMatch(
+    carrierVehicle,
+    listingVehicle
+){
+
+    const carrier =
+        normalize(carrierVehicle);
+
+    const listing =
+        normalize(listingVehicle);
+
+
+    if(
+        !carrier ||
+        !listing
+    ){
+
+        return true;
+
+    }
+
+
+    if(
+        carrier === listing
+    ){
+
+        return true;
+
+    }
+
+
+    return (
+        carrier.includes(listing) ||
+        listing.includes(carrier)
+    );
+
+}
+
+
+/* =========================================================
+   ROTA EŞLEŞTİRME
+========================================================= */
+
+async function checkRouteMatches(){
+
+    const raw =
+        localStorage.getItem(
+            "tasibunu_route"
+        );
+
+    if(!raw){
+        return;
+    }
+
+
+    let route;
+
+
+    try{
+
+        route =
+            JSON.parse(raw);
+
+    }catch(error){
+
+        return;
+
+    }
+
+
+    if(
+        !route.from ||
+        !route.to
+    ){
+
+        return;
+
+    }
+
+
+    try{
+
+        const result =
+            await supabaseClient
+                .from("ilanlar")
+                .select("*")
+                .eq("durum","aktif")
+                .order(
+                    "ilan_id",
+                    {
+                        ascending:false
+                    }
+                )
+                .limit(100);
+
+
+        if(result.error){
+
+            console.error(
+                "Rota eşleştirme hatası:",
+                result.error
+            );
+
+            return;
+
+        }
+
+
+        const data =
+            result.data || [];
+
+
+        const matches =
+            data.filter(
+                function(item){
+
+                    const fromText =
+                        item.nereden || "";
+
+                    const toText =
+                        item.nereye || "";
+
+                    const listingVehicle =
+                        item.arac_tipi || "";
+
+
+                    const fromMatch =
+                        containsCity(
+                            fromText,
+                            route.from
+                        );
+
+
+                    const toMatch =
+                        containsCity(
+                            toText,
+                            route.to
+                        );
+
+
+                    const vehicleMatch =
+                        vehiclesMatch(
+                            route.vehicle,
+                            listingVehicle
+                        );
+
+
+                    /*
+                       Ana eşleşme:
+                       çıkış + varış + araç
+                    */
+
+                    if(
+                        fromMatch &&
+                        toMatch &&
+                        vehicleMatch
+                    ){
+
+                        return true;
+
+                    }
+
+
+                    /*
+                       Bazı ilanlarda kullanıcı
+                       sadece güzergâh metni yazabilir.
+                       Bu durumda çıkış/varış
+                       metninde iki şehir de varsa
+                       eşleşmeye izin veriyoruz.
+                    */
+
+                    const bothCities =
+                        containsCity(
+                            fromText,
+                            route.from
+                        ) &&
+                        containsCity(
+                            fromText,
+                            route.to
+                        );
+
+
+                    return (
+                        bothCities &&
+                        vehicleMatch
+                    );
+
+                }
+            );
+
+
+        if(
+            matches.length
+        ){
+
+            showRouteMatches(
+                matches
+            );
+
+
+            const ids =
+                matches
+                    .map(
+                        item =>
+                            item.ilan_id
+                    )
+                    .filter(Boolean);
+
+
+            const signature =
+                ids
+                    .slice(0,5)
+                    .join("-");
+
+
+            const lastNotified =
+                localStorage.getItem(
+                    "tasibunu_last_match_signature"
+                );
+
+
+            if(
+                signature &&
+                signature !== lastNotified
+            ){
+
+                localStorage.setItem(
+                    "tasibunu_last_match_signature",
+                    signature
+                );
+
+
+                sendNotification(
+                    "TaşıBunu - Uygun yük bulundu",
+                    matches.length +
+                    " adet güzergâhına uygun yük bulundu."
+                );
+
+            }
+
+        }
+
+    }catch(error){
+
+        console.error(
+            "Akıllı eşleştirme hatası:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   EŞLEŞEN YÜKLERİ GÖSTER
+========================================================= */
+
+function showRouteMatches(
+    matches
+){
+
+    const panel =
+        document.getElementById(
+            "routeStatus"
+        );
+
+    if(!panel){
+        return;
+    }
+
+
+    const route =
+        getSavedRoute();
+
+
+    let html = `
+
+        <div class="match-box">
+
+            <strong>
+                🚛 Güzergâhına uygun
+                ${matches.length}
+                yük bulundu.
+            </strong>
+
+            <br><br>
+
+    `;
+
+
+    matches
+        .slice(0,5)
+        .forEach(
+            function(item){
+
+                html += `
+
+                    <div class="match-item">
+
+                        <strong>
+                            ${escapeHtml(
+                                item.yuk_tipi ||
+                                "Yük ilanı"
+                            )}
+                        </strong>
+
+                        <br>
+
+                        ${escapeHtml(
+                            item.nereden || ""
+                        )}
+
+                        →
+
+                        ${escapeHtml(
+                            item.nereye || ""
+                        )}
+
+                        <br>
+
+                        Araç:
+                        ${escapeHtml(
+                            item.arac_tipi || ""
+                        )}
+
+                        ${
+                            item.tonaj
+                            ?
+                            `
+                            <br>
+                            Tonaj:
+                            ${escapeHtml(
+                                item.tonaj
+                            )}
+                            `
+                            :
+                            ""
+                        }
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+    html += `
+
+        </div>
+
+    `;
+
+
+    if(route){
+
+        html += `
+
+            <div class="route-info">
+
+                📍
+                ${escapeHtml(route.from)}
+                →
+                ${escapeHtml(route.to)}
+
+                <br>
+
+                🚛
+                ${escapeHtml(route.vehicle)}
+
+            </div>
+
+        `;
+
+    }
+
+
+    panel.innerHTML =
+        html;
+
+}
+
+
+/* =========================================================
+   KAYITLI ROTA AL
+========================================================= */
+
+function getSavedRoute(){
+
+    const raw =
+        localStorage.getItem(
+            "tasibunu_route"
+        );
+
+    if(!raw){
+        return null;
+    }
+
+
+    try{
+
+        return JSON.parse(raw);
+
+    }catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+/* =========================================================
+   YÜKLERİ GETİR
+========================================================= */
+
+async function loadListings(){
+
+    const container =
+        document.getElementById(
+            "listingContainer"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    container.innerHTML =
+        "Yük ilanları yükleniyor...";
+
+
+    try{
+
+        let query =
+            supabaseClient
+                .from("ilanlar")
+                .select("*")
+                .eq("durum","aktif")
+                .order(
+                    "ilan_id",
+                    {
+                        ascending:false
+                    }
+                );
+
+
+        const vehicle =
+            document.getElementById(
+                "filterVehicle"
+            )?.value || "";
+
+
+        const type =
+            document.getElementById(
+                "filterType"
+            )?.value || "";
+
+
+        if(vehicle){
+
+            query =
+                query.eq(
+                    "arac_tipi",
+                    vehicle
+                );
+
+        }
+
+
+        if(type){
+
+            query =
+                query.eq(
+                    "yuk_tipi",
+                    type
+                );
+
+        }
+
+
+        const result =
+            await query.limit(50);
+
+
+        if(result.error){
+
+            console.error(
+                "Supabase ilan hatası:",
+                result.error
+            );
+
+
+            container.innerHTML = `
+
+                <div class="listing">
+
+                    <strong style="color:#dc2626">
+
+                        İlanlar yüklenirken
+                        bağlantı hatası oluştu.
+
+                    </strong>
+
+                    <p style="
+                    font-size:13px;
+                    color:#64748b">
+
+                        Supabase bağlantısı çalışıyor
+                        ancak ilanlar tablosundan
+                        veri alınırken sorun oluştu.
+
+                    </p>
+
+                    <button
+                    class="btn btn-primary"
+                    onclick="loadListings()">
+
+                        Tekrar Dene
+
+                    </button>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const data =
+            result.data || [];
+
+
+        if(!data.length){
+
+            container.innerHTML = `
+
+                <div class="listing empty-state">
+
+                    Henüz uygun aktif ilan bulunmuyor.
+
+                    <br><br>
+
+                    <button
+                    class="btn btn-primary"
+                    onclick="openModal('ilanModal')">
+
+                        İlk İlanı Sen Ver
+
+                    </button>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        container.innerHTML =
+            data
+                .map(renderListing)
+                .join("");
+
+
+    }catch(error){
+
+        console.error(
+            "İlan yükleme JavaScript hatası:",
+            error
+        );
+
+
+        container.innerHTML = `
+
+            <div class="listing">
+
+                <strong style="color:#dc2626">
+
+                    İlanlar yüklenirken hata oluştu.
+
+                </strong>
+
+                <p>
+                    Bağlantı tekrar denenebilir.
+                </p>
+
+                <button
+                class="btn btn-primary"
+                onclick="loadListings()">
+
+                    Tekrar Dene
+
+                </button>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================================
+   WHATSAPP NUMARA HAZIRLA
+========================================================= */
+
+function prepareWhatsapp(
+    phone
+){
+
+    let normalized =
+        String(phone || "")
+            .replace(/\D/g,"");
+
+
+    if(!normalized){
+        return "";
+    }
+
+
+    if(
+        normalized.startsWith("0")
+    ){
+
+        normalized =
+            normalized.substring(1);
+
+    }
+
+
+    if(
+        !normalized.startsWith("90")
+    ){
+
+        normalized =
+            "90" +
+            normalized;
+
+    }
+
+
+    return normalized;
+
+}
+
+
+/* =========================================================
+   İLAN GÖRÜNÜMÜ
+========================================================= */
+
+function renderListing(
+    item
+){
+
+    const phone =
+        String(
+            item.telefon || ""
+        ).replace(
+            /\D/g,
+            ""
+        );
+
+
+    let whatsapp =
+        "";
+
+
+    const whatsappPhone =
+        prepareWhatsapp(
+            item.telefon
+        );
+
+
+    if(
+        whatsappPhone
+    ){
+
+        whatsapp =
+            "https://wa.me/" +
+            whatsappPhone;
+
+    }
+
+
+    const type =
+        item.yuk_tipi ||
+        "Yük";
+
+
+    const normalizedType =
+        normalize(type);
+
+
+    const isBig =
+        normalizedType.includes("buyuk") ||
+        normalizedType.includes("agir");
+
+
+    const isSmall =
+        normalizedType.includes("kucuk") ||
+        normalizedType.includes("parca");
+
+
+    let tagClass =
+        "tag";
+
+
+    if(isBig){
+
+        tagClass =
+            "tag big";
+
+    }else if(isSmall){
+
+        tagClass =
+            "tag small";
+
+    }
+
+
+    const title =
+        item.baslik ||
+        item.yuk_baslik ||
+        item.yuk_tipi ||
+        "Yük ilanı";
+
+
+    return `
+
+        <div class="listing">
+
+            <div class="listing-top">
+
+                <div>
+
+                    <div class="listing-title">
+
+                        ${escapeHtml(
+                            title
+                        )}
+
+                    </div>
+
+
+                    <div class="route">
+
+                        <span>
+                            ${escapeHtml(
+                                item.nereden || ""
+                            )}
+                        </span>
+
+                        →
+
+                        <span>
+                            ${escapeHtml(
+                                item.nereye || ""
+                            )}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <strong>
+
+                    ${escapeHtml(
+                        item.arac_tipi || ""
+                    )}
+
+                </strong>
+
+            </div>
+
+
+            <div class="tags">
+
+                <span class="${tagClass}">
+
+                    ${escapeHtml(type)}
+
+                </span>
+
+
+                ${
+                    item.tonaj
+                    ?
+                    `
+                    <span class="tag">
+                        ${escapeHtml(
+                            item.tonaj
+                        )}
+                    </span>
+                    `
+                    :
+                    ""
+                }
+
+
+                ${
+                    item.agirlik
+                    ?
+                    `
+                    <span class="tag">
+                        ${escapeHtml(
+                            item.agirlik
+                        )}
+                    </span>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+
+            ${
+                item.aciklama
+                ?
+                `
+                <p>
+                    ${escapeHtml(
+                        item.aciklama
+                    )}
+                </p>
+                `
+                :
+                ""
+            }
+
+
+            <div class="listing-actions">
+
+                ${
+                    phone && whatsapp
+                    ?
+                    `
+                    <a
+                    class="whatsapp"
+                    href="${whatsapp}"
+                    target="_blank"
+                    rel="noopener noreferrer">
+
+                        💬 WhatsApp'tan İletişime Geç
+
+                    </a>
+                    `
+                    :
+                    ""
+                }
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   YÜK İLANI OLUŞTUR
+========================================================= */
+
+async function createListing(){
+
+    const button =
+        document.querySelector(
+            "#ilanModal .btn-primary"
+        );
+
+
+    if(button){
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "Yayınlanıyor...";
+
+    }
+
+
+    try{
+
+        const baslik =
+            document.getElementById(
+                "ilanBaslik"
+            ).value.trim();
+
+
+        const yukTipi =
+            document.getElementById(
+                "ilanYukTipi"
+            ).value;
+
+
+        const nereden =
+            document.getElementById(
+                "ilanNereden"
+            ).value.trim();
+
+
+        const nereye =
+            document.getElementById(
+                "ilanNereye"
+            ).value.trim();
+
+
+        const arac =
+            document.getElementById(
+                "ilanArac"
+            ).value;
+
+
+        const tonaj =
+            document.getElementById(
+                "ilanTonaj"
+            ).value.trim();
+
+
+        const aciklama =
+            document.getElementById(
+                "ilanAciklama"
+            ).value.trim();
+
+
+        const ad =
+            document.getElementById(
+                "ilanAd"
+            ).value.trim();
+
+
+        const telefon =
+            document.getElementById(
+                "ilanTelefon"
+            ).value.trim();
+
+
+        if(
+            !nereden ||
+            !nereye ||
+            !ad ||
+            !telefon
+        ){
+
+            toast(
+                "Lütfen nereden, nereye, ad soyad ve telefon alanlarını doldur."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !baslik
+        ){
+
+            /*
+               Başlık mevcut veritabanı yapısında
+               ayrı kolona yazılmasa bile kullanıcıdan
+               boş bırakılmasını istemiyoruz.
+            */
+
+            toast(
+                "Lütfen yük başlığını da yaz."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           DİKKAT:
+           Burada yalnızca mevcut yapımızda
+           kullandığımız kolonlar gönderiliyor.
+
+           baslik gönderilmiyor.
+           Böylece Supabase'de baslik kolonu
+           bulunmuyorsa INSERT bozulmaz.
+        */
+
+        const data = {
+
+            yuk_tipi:
+                yukTipi,
+
+            nereden:
+                nereden,
+
+            nereye:
+                nereye,
+
+            arac_tipi:
+                arac,
+
+            tonaj:
+                tonaj,
+
+            aciklama:
+                (
+                    baslik
+                    ?
+                    "Başlık: " +
+                    baslik +
+                    (
+                        aciklama
+                        ?
+                        "\n\n" +
+                        aciklama
+                        :
+                        ""
+                    )
+                    :
+                    aciklama
+                ),
+
+            ad_soyad:
+                ad,
+
+            telefon:
+                telefon,
+
+            durum:
+                "aktif"
+
+        };
+
+
+        const result =
+            await supabaseClient
+                .from("ilanlar")
+                .insert(data)
+                .select();
+
+
+        if(result.error){
+
+            console.error(
+                "İLAN EKLEME HATASI:",
+                result.error
+            );
+
+
+            toast(
+                "İlan yayınlanamadı. Supabase izinlerini ve tablo yapısını kontrol et."
+            );
+
+            return;
+
+        }
+
+
+        toast(
+            "✓ İlan başarıyla yayınlandı."
+        );
+
+
+        closeModal(
+            "ilanModal"
+        );
+
+
+        resetListingForm();
+
+
+        await loadListings();
+
+
+        checkRouteMatches();
+
+
+    }catch(error){
+
+        console.error(
+            "İlan oluşturma hatası:",
+            error
+        );
+
+
+        toast(
+            "İlan oluşturulurken beklenmeyen bir hata oluştu."
+        );
+
+
+    }finally{
+
+        if(button){
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Yük İlanını Yayınla";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   İLAN FORMUNU TEMİZLE
+========================================================= */
+
+function resetListingForm(){
+
+    const ids = [
+
+        "ilanBaslik",
+        "ilanNereden",
+        "ilanNereye",
+        "ilanTonaj",
+        "ilanAciklama",
+        "ilanAd",
+        "ilanTelefon"
+
+    ];
+
+
+    ids.forEach(
+        function(id){
+
+            const el =
+                document.getElementById(id);
+
+            if(el){
+
+                el.value =
+                    "";
+
+            }
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   TAŞIYICI OLUŞTUR
+========================================================= */
+
+async function createCarrier(){
+
+    const button =
+        document.querySelector(
+            "#tasiyiciModal .btn-primary"
+        );
+
+
+    if(button){
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "Kaydediliyor...";
+
+    }
+
+
+    try{
+
+        const from =
+            document.getElementById(
+                "carrierFrom"
+            ).value;
+
+
+        const to =
+            document.getElementById(
+                "carrierTo"
+            ).value;
+
+
+        const routeText =
+            document.getElementById(
+                "carrierRoute"
+            ).value.trim();
+
+
+        const name =
+            document.getElementById(
+                "carrierName"
+            ).value.trim();
+
+
+        const phone =
+            document.getElementById(
+                "carrierPhone"
+            ).value.trim();
+
+
+        const vehicle =
+            document.getElementById(
+                "carrierVehicle"
+            ).value;
+
+
+        if(
+            !name ||
+            !phone ||
+            !from ||
+            !to
+        ){
+
+            toast(
+                "Lütfen taşıyıcı bilgilerini tamamla."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            from === to
+        ){
+
+            toast(
+                "Çıkış ve varış şehri aynı olamaz."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Mevcut nakliyeciler tablomuzda
+           kullandığımız güvenli kolonlar.
+        */
+
+        const data = {
+
+            ad_soyad:
+                name,
+
+            telefon:
+                phone,
+
+            arac_tipi:
+                vehicle,
+
+            guzergah:
+                routeText ||
+                `${from} → ${to}`
+
+        };
+
+
+        const result =
+            await supabaseClient
+                .from("nakliyeciler")
+                .insert(data);
+
+
+        if(result.error){
+
+            console.error(
+                "TAŞIYICI HATASI:",
+                result.error
+            );
+
+
+            toast(
+                "Taşıyıcı kaydedilemedi. Supabase izinlerini kontrol et."
+            );
+
+            return;
+
+        }
+
+
+        /*
+           Cihaz üzerinde rota saklanıyor.
+        */
+
+        localStorage.setItem(
+            "tasibunu_route",
+            JSON.stringify({
+
+                from:from,
+
+                to:to,
+
+                vehicle:vehicle,
+
+                savedAt:
+                    Date.now()
+
+            })
+        );
+
+
+        toast(
+            "✓ " +
+            from +
+            " → " +
+            to +
+            " güzergâhı kaydedildi."
+        );
+
+
+        closeModal(
+            "tasiyiciModal"
+        );
+
+
+        restoreRoute();
+
+        checkRouteMatches();
+
+
+    }catch(error){
+
+        console.error(
+            "Taşıyıcı oluşturma hatası:",
+            error
+        );
+
+
+        toast(
+            "Taşıyıcı oluşturulurken hata oluştu."
+        );
+
+
+    }finally{
+
+        if(button){
+
+            button.disabled =
+                false;
+
+            button.textContent =
+                "Taşıyıcı Kaydını Oluştur";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
+   ARAMA
+========================================================= */
+
+async function searchLoads(){
+
+    const from =
+        normalize(
+            document.getElementById(
+                "quickFrom"
+            ).value
+        );
+
+
+    const to =
+        normalize(
+            document.getElementById(
+                "quickTo"
+            ).value
+        );
+
+
+    const vehicle =
+        normalize(
+            document.getElementById(
+                "quickVehicle"
+            ).value
+        );
+
+
+    const container =
+        document.getElementById(
+            "listingContainer"
+        );
+
+
+    if(!container){
+        return;
+    }
+
+
+    container.innerHTML =
+        "Aranıyor...";
+
+
+    try{
+
+        const result =
+            await supabaseClient
+                .from("ilanlar")
+                .select("*")
+                .eq("durum","aktif")
+                .order(
+                    "ilan_id",
+                    {
+                        ascending:false
+                    }
+                )
+                .limit(100);
+
+
+        if(result.error){
+
+            console.error(
+                "Arama hatası:",
+                result.error
+            );
+
+
+            container.innerHTML = `
+
+                <div class="listing">
+
+                    Arama sırasında bağlantı hatası oluştu.
+
+                    <br><br>
+
+                    <button
+                    class="btn btn-primary"
+                    onclick="loadListings()">
+
+                        Tüm İlanları Göster
+
+                    </button>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const data =
+            result.data || [];
+
+
+        const results =
+            data.filter(
+                function(item){
+
+                    const itemFrom =
+                        normalize(
+                            item.nereden
+                        );
+
+
+                    const itemTo =
+                        normalize(
+                            item.nereye
+                        );
+
+
+                    const itemVehicle =
+                        normalize(
+                            item.arac_tipi
+                        );
+
+
+                    const fromMatch =
+                        !from ||
+                        itemFrom.includes(from);
+
+
+                    const toMatch =
+                        !to ||
+                        itemTo.includes(to);
+
+
+                    const vehicleMatch =
+                        !vehicle ||
+                        itemVehicle.includes(
+                            vehicle
+                        );
+
+
+                    return (
+                        fromMatch &&
+                        toMatch &&
+                        vehicleMatch
+                    );
+
+                }
+            );
+
+
+        if(!results.length){
+
+            container.innerHTML = `
+
+                <div class="listing empty-state">
+
+                    Aradığın kriterlere uygun
+                    ilan bulunamadı.
+
+                    <br><br>
+
+                    <button
+                    class="btn btn-outline"
+                    onclick="loadListings()">
+
+                        Tüm İlanları Göster
+
+                    </button>
+
+                </div>
+
+            `;
+
+        }else{
+
+            container.innerHTML =
+                results
+                    .map(renderListing)
+                    .join("");
+
+        }
+
+
+        document
+            .getElementById(
+                "ilanlar"
+            )
+            .scrollIntoView({
+                behavior:"smooth"
+            });
+
+
+    }catch(error){
+
+        console.error(
+            error
+        );
+
+        toast(
+            "Arama sırasında hata oluştu."
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   GÜVENLİ HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =========================================================
+   REALTIME
+========================================================= */
+
+function setupRealtime(){
+
+    try{
+
+        supabaseClient
+            .channel(
+                "tasibunu-yukler"
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event:"INSERT",
+                    schema:"public",
+                    table:"ilanlar"
+                },
+                async function(payload){
+
+                    console.log(
+                        "Yeni yük ilanı:",
+                        payload.new
+                    );
+
+
+                    await loadListings();
+
+
+                    /*
+                       Yeni ilan gerçekten
+                       kayıtlı rotaya uyuyor mu?
+                    */
+
+                    await checkRouteMatches();
+
+                }
+            )
+            .subscribe(
+                function(status){
+
+                    console.log(
+                        "Realtime:",
+                        status
+                    );
+
+                }
+            );
+
+    }catch(error){
+
+        console.error(
+            "Realtime kurulamadı:",
+            error
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   PERİYODİK ROTA KONTROLÜ
+========================================================= */
+
+setInterval(
+    function(){
+
+        checkRouteMatches();
+
+    },
+    120000
+);
+
+
+/* =========================================================
+   MODAL DIŞINA TIKLAYINCA KAPAT
+========================================================= */
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target.classList &&
+            event.target.classList.contains(
+                "modal"
+            )
+        ){
+
+            closeModal(
+                event.target.id
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   ESC İLE MODAL KAPAT
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key === "Escape"
+        ){
+
+            document
+                .querySelectorAll(
+                    ".modal.active"
+                )
+                .forEach(
+                    function(modal){
+
+                        closeModal(
+                            modal.id
+                        );
+
+                    }
+                );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
