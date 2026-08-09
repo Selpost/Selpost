@@ -1,3 +1,134 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaşıBunu - Yük ve Nakliyeci Platformu</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+
+:root{
+  --navy:#0b1f3a;
+  --navy2:#17365d;
+  --blue:#1d5fa7;
+  --lightblue:#eaf3ff;
+  --border:#dce4ec;
+  --muted:#64748b;
+  --bg:#f5f8fb;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#172033;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+.hidden{
+  display:none !important;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  color:var(--navy);
+  white-space:nowrap;
+}
+
+.logo span{
+  color:var(--blue);
+}
+
+nav{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+nav button{
+  border:0;
+  background:#edf3f9;
+  color:var(--navy);
+  padding:10px 13px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+nav button:hover{
+  background:#dfeaf5;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  background:
+    linear-gradient(
+      135deg,
+      #0b1f3a,
+      #174a80
+    );
+  color:#fff;
+  padding:55px 18px;
+}
+
+.hero-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,50px);
+  line-height:1.08;
+  margin:0 0 18px;
+  max-width:850px;
+}
+
 .hero p{
   font-size:clamp(18px,3vw,24px);
   max-width:800px;
@@ -71,7 +202,9 @@
   margin-top:7px;
 }
 
-.category small{color:var(--muted)}
+.category small{
+  color:var(--muted);
+}
 
 .grid{
   display:grid;
@@ -87,9 +220,13 @@
   box-shadow:0 3px 12px #0b1f3a0b;
 }
 
-.card h3{margin:0 0 8px}
+.card h3{
+  margin:0 0 8px;
+}
 
-.muted{color:var(--muted)}
+.muted{
+  color:var(--muted);
+}
 
 .badge{
   display:inline-block;
@@ -115,7 +252,9 @@ label{
   margin-bottom:5px;
 }
 
-input,select,textarea{
+input,
+select,
+textarea{
   width:100%;
   padding:11px;
   border:1px solid #cbd6e2;
@@ -124,7 +263,9 @@ input,select,textarea{
   outline:none;
 }
 
-input:focus,select:focus,textarea:focus{
+input:focus,
+select:focus,
+textarea:focus{
   border-color:var(--blue);
   box-shadow:0 0 0 3px #1d5fa720;
 }
@@ -134,7 +275,9 @@ textarea{
   resize:vertical;
 }
 
-.full{grid-column:1/-1}
+.full{
+  grid-column:1/-1;
+}
 
 .form-actions{
   display:flex;
@@ -182,7 +325,9 @@ textarea{
   line-height:1.5;
 }
 
-.route strong{color:var(--navy)}
+.route strong{
+  color:var(--navy);
+}
 
 .item-actions{
   display:flex;
@@ -257,7 +402,9 @@ textarea{
   padding:18px;
 }
 
-.feature-icon{font-size:30px}
+.feature-icon{
+  font-size:30px;
+}
 
 footer{
   background:#071629;
@@ -327,15 +474,23 @@ footer .container{
   .searchbar{
     grid-template-columns:1fr 1fr;
   }
+
 }
 
 @media(max-width:560px){
 
-  .header-inner{align-items:flex-start}
+  .header-inner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 
-  nav{width:100%}
+  nav{
+    width:100%;
+  }
 
-  nav button{flex:1}
+  nav button{
+    flex:1;
+  }
 
   .grid,
   .feature-grid,
@@ -346,10 +501,16 @@ footer .container{
     grid-template-columns:1fr;
   }
 
-  .hero{padding:32px 18px}
+  .hero{
+    padding:32px 18px;
+  }
 
-  .card{padding:14px}
+  .card{
+    padding:14px;
+  }
+
 }
+
 </style>
 </head>
 
@@ -661,7 +822,7 @@ placeholder="Örn. Ev eşyası, mobilya, koli">
 
 <select
 id="tasima_tipi"
-onchange="updateLocationMode()">
+onchange="updateLocationMode">
 
 <option>Şehir içi</option>
 <option>Şehirler arası</option>
@@ -1361,11 +1522,6 @@ district.appendChild(option);
 
 function updateNeighborhoods(prefix){
 
-/*
- Mahalle alanı manuel yazıldığı için
- burada ayrıca API gerekmiyor.
-*/
-
 }
 
 
@@ -1393,10 +1549,7 @@ boxes.forEach(function(box){
 
 if(!box)return;
 
-box.style.display=
-mode==="Şehir içi"
-?"block"
-:"block";
+box.style.display="block";
 
 });
 
