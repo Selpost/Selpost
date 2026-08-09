@@ -1,0 +1,3183 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>TaşıBunu - Yük ve Nakliyeci Platformu</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --navy:#0b1f3a;
+  --navy2:#17365d;
+  --blue:#1d5fa7;
+  --lightblue:#eaf3ff;
+  --border:#dce4ec;
+  --muted:#64748b;
+  --bg:#f5f8fb;
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--bg);
+  color:#172033;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+
+header{
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.header-inner{
+  max-width:1150px;
+  margin:auto;
+  padding:14px 18px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+}
+
+.logo{
+  font-size:25px;
+  font-weight:900;
+  color:var(--navy);
+  white-space:nowrap;
+}
+
+.logo span{color:var(--blue)}
+
+nav{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+nav button{
+  border:0;
+  background:#edf3f9;
+  color:var(--navy);
+  padding:10px 13px;
+  border-radius:9px;
+  font-weight:800;
+}
+
+nav button:hover{background:#dfeaf5}
+
+.hero{
+  background:linear-gradient(135deg,#0b1f3a,#174a80);
+  color:#fff;
+  padding:55px 18px;
+}
+
+.hero-inner{
+  max-width:1150px;
+  margin:auto;
+}
+
+.hero h1{
+  font-size:clamp(30px,5vw,50px);
+  line-height:1.08;
+  margin:0 0 18px;
+  max-width:850px;
+}
+
+.hero p{
+  font-size:clamp(18px,3vw,24px);
+  max-width:800px;
+  line-height:1.45;
+  margin:0 0 24px;
+  font-weight:700;
+}
+
+.hero-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:12px 16px;
+  font-weight:800;
+}
+
+.btn-primary{background:#fff;color:var(--navy)}
+.btn-dark{background:var(--navy);color:#fff}
+.btn-blue{background:var(--blue);color:#fff}
+
+.container{
+  max-width:1150px;
+  margin:auto;
+  padding:22px 18px;
+}
+
+.section-title{
+  font-size:25px;
+  margin:8px 0 15px;
+}
+
+.category-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.category{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.category:hover{
+  transform:translateY(-2px);
+  border-color:#8fb5dc;
+  box-shadow:0 6px 18px #0b1f3a12;
+}
+
+.category strong{
+  display:block;
+  margin-top:7px;
+}
+
+.category small{color:var(--muted)}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:17px;
+  box-shadow:0 3px 12px #0b1f3a0b;
+}
+
+.card h3{margin:0 0 8px}
+
+.muted{color:var(--muted)}
+
+.badge{
+  display:inline-block;
+  background:var(--lightblue);
+  color:var(--navy2);
+  padding:5px 9px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:800;
+  margin:3px 3px 3px 0;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:11px;
+  border:1px solid #cbd6e2;
+  border-radius:9px;
+  background:#fff;
+  outline:none;
+}
+
+input:focus,select:focus,textarea:focus{
+  border-color:var(--blue);
+  box-shadow:0 0 0 3px #1d5fa720;
+}
+
+textarea{
+  min-height:95px;
+  resize:vertical;
+}
+
+.full{grid-column:1/-1}
+
+.form-actions{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.searchbar{
+  display:grid;
+  grid-template-columns:1fr 170px 170px auto;
+  gap:10px;
+  margin-bottom:15px;
+}
+
+.notice{
+  padding:12px 14px;
+  border-radius:10px;
+  background:#fff8df;
+  border:1px solid #efd98d;
+  margin:12px 0;
+}
+
+.success{
+  background:#eaf8f0;
+  border-color:#9bd6b5;
+}
+
+.danger{
+  background:#fff0f0;
+  border-color:#efb1b1;
+}
+
+.item-head{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.route{
+  font-size:17px;
+  margin:13px 0;
+  line-height:1.5;
+}
+
+.route strong{color:var(--navy)}
+
+.item-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.small{
+  padding:8px 10px;
+  border-radius:8px;
+  border:0;
+  font-weight:700;
+  text-decoration:none;
+  display:inline-block;
+}
+
+.wa{background:#25d366;color:#fff}
+.edit{background:#edf3ff;color:#3158b8}
+.delete{background:#ffecec;color:#b52020}
+
+.empty{
+  padding:30px;
+  text-align:center;
+  background:#fff;
+  border-radius:14px;
+  border:1px dashed #cbd5df;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:18px 0;
+}
+
+.stat{
+  background:#fff;
+  border-radius:12px;
+  padding:17px;
+  text-align:center;
+  border:1px solid var(--border);
+}
+
+.stat strong{
+  display:block;
+  font-size:28px;
+  color:var(--navy);
+}
+
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:15px;
+}
+
+.feature{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:18px;
+}
+
+.feature-icon{font-size:30px}
+
+footer{
+  background:#071629;
+  color:#dbe8f5;
+  margin-top:30px;
+  padding:28px 18px;
+}
+
+footer .container{
+  padding-top:0;
+  padding-bottom:0;
+}
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:#0008;
+  z-index:500;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+}
+
+.modal-box{
+  background:#fff;
+  max-width:720px;
+  width:100%;
+  max-height:92vh;
+  overflow:auto;
+  border-radius:16px;
+  padding:20px;
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.close{
+  border:0;
+  background:#eee;
+  border-radius:50%;
+  width:36px;
+  height:36px;
+  font-size:20px;
+}
+
+.loading{
+  padding:30px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.location-note{
+  background:#eaf3ff;
+  border:1px solid #b8d4f0;
+  color:#17365d;
+  padding:10px 12px;
+  border-radius:9px;
+  font-size:13px;
+  font-weight:700;
+}
+
+@media(max-width:800px){
+  .grid,.feature-grid{grid-template-columns:1fr 1fr}
+  .category-grid{grid-template-columns:1fr 1fr}
+  .searchbar{grid-template-columns:1fr 1fr}
+}
+
+@media(max-width:560px){
+  .header-inner{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  nav{width:100%}
+  nav button{flex:1}
+
+  .grid,
+  .feature-grid,
+  .category-grid,
+  .form-grid,
+  .stats,
+  .searchbar{
+    grid-template-columns:1fr;
+  }
+
+  .hero{padding:32px 18px}
+  .card{padding:14px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+
+    <div class="logo">
+      🚚 Taşı<span>Bunu</span>
+    </div>
+
+    <nav>
+      <button onclick="go('ilanlar')">Yük İlanları</button>
+      <button onclick="go('nakliyeciler')">Nakliyeciler</button>
+      <button onclick="openModal('ilanModal')">+ Yük İlanı</button>
+      <button onclick="openModal('nakliyeciModal')">+ Nakliyeci</button>
+    </nav>
+
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+
+    <h1>Evden eve taşımadan küçük yüke kadar.</h1>
+
+    <p>
+      TaşıBunu ile yükünüz için uygun taşıyıcıyı bulun.
+      Ev eşyası, mobilya, küçük yükler veya büyük yükler için
+      şehir içi ve şehirler arası taşıma seçeneklerini keşfedin.
+    </p>
+
+    <div class="hero-actions">
+      <button class="btn btn-primary" onclick="openModal('ilanModal')">
+        📦 Yükünü / Eşyalarını İlan Et
+      </button>
+
+      <button class="btn btn-dark" onclick="openModal('nakliyeciModal')">
+        🚛 Taşıyıcı Olarak İş Bul
+      </button>
+    </div>
+
+  </div>
+</section>
+
+<main>
+
+<section class="container">
+
+  <div class="stats">
+
+    <div class="stat">
+      <strong id="ilanCount">0</strong>
+      Aktif yük ilanı
+    </div>
+
+    <div class="stat">
+      <strong id="nakliyeciCount">0</strong>
+      Nakliyeci
+    </div>
+
+    <div class="stat">
+      <strong>7/24</strong>
+      İş keşfi
+    </div>
+
+  </div>
+
+</section>
+
+<section class="container">
+
+  <h2 class="section-title">🚚 Taşıma İhtiyacın Nedir?</h2>
+
+  <div class="category-grid">
+
+    <div class="category" onclick="selectCategory('Evden Eve Taşıma')">
+      <div class="feature-icon">🏠</div>
+      <strong>Evden Eve Taşıma</strong>
+      <small>Ev, daire ve ev eşyaları</small>
+    </div>
+
+    <div class="category" onclick="selectCategory('Parça Eşya')">
+      <div class="feature-icon">🛋️</div>
+      <strong>Parça Eşya</strong>
+      <small>Mobilya, beyaz eşya, koli</small>
+    </div>
+
+    <div class="category" onclick="selectCategory('Küçük Yük')">
+      <div class="feature-icon">📦</div>
+      <strong>Küçük Yük</strong>
+      <small>Panelvan ve kamyonet işleri</small>
+    </div>
+
+    <div class="category" onclick="selectCategory('Büyük Yük')">
+      <div class="feature-icon">🚛</div>
+      <strong>Büyük Yük</strong>
+      <small>Kamyon ve TIR taşımaları</small>
+    </div>
+
+  </div>
+
+</section>
+
+<section id="ilanlar" class="container">
+
+  <h2 class="section-title">📦 Yük & Taşıma İlanları</h2>
+
+  <div class="searchbar">
+
+    <input
+      id="ilanSearch"
+      placeholder="Şehir, ilçe, mahalle, yük veya araç ara..."
+      oninput="renderIlanlar()">
+
+    <select id="ilanAracFilter" onchange="renderIlanlar()">
+      <option value="">Tüm araçlar</option>
+      <option>Panelvan</option>
+      <option>Kamyonet</option>
+      <option>Kamyon</option>
+      <option>Tır</option>
+    </select>
+
+    <select id="ilanYolFilter" onchange="renderIlanlar()">
+      <option value="">Tüm güzergâhlar</option>
+      <option>Şehir içi</option>
+      <option>Şehirler arası</option>
+    </select>
+
+    <button class="btn btn-dark" onclick="loadAll()">Yenile</button>
+
+  </div>
+
+  <div id="ilanList" class="grid">
+    <div class="loading">İlanlar yükleniyor...</div>
+  </div>
+
+</section>
+
+<section id="nakliyeciler" class="container">
+
+  <h2 class="section-title">🚛 Taşıyıcılar & Nakliyeciler</h2>
+
+  <div class="searchbar">
+
+    <input
+      id="nakSearch"
+      placeholder="İsim, şehir, ilçe, araç, güzergâh ara..."
+      oninput="renderNakliyeciler()">
+
+    <select id="nakAracFilter" onchange="renderNakliyeciler()">
+      <option value="">Tüm araçlar</option>
+      <option>Panelvan</option>
+      <option>Kamyonet</option>
+      <option>Kamyon</option>
+      <option>Tır</option>
+    </select>
+
+  </div>
+
+  <div id="nakList" class="grid">
+    <div class="loading">Nakliyeciler yükleniyor...</div>
+  </div>
+
+</section>
+
+<section class="container">
+
+  <div class="card">
+
+    <h2>TaşıBunu nasıl çalışır?</h2>
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        <div class="feature-icon">📦</div>
+        <h3>1. İhtiyacını yayınla</h3>
+        <p class="muted">
+          Taşınacak yükü veya ev eşyalarını,
+          nereden nereye gideceğini ve tarihini belirt.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🚛</div>
+        <h3>2. Uygun taşıyıcıyı bul</h3>
+        <p class="muted">
+          Panelvandan kamyona ve TIR'a kadar
+          uygun taşıyıcıları keşfet.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">💬</div>
+        <h3>3. Doğrudan iletişim kur</h3>
+        <p class="muted">
+          Uygun taşıyıcıyla WhatsApp üzerinden
+          doğrudan iletişime geç.
+        </p>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <strong>🚚 TaşıBunu</strong>
+
+    <p>
+      Evden eve taşımadan küçük ve büyük yüklere kadar
+      taşıma ihtiyacınız için uygun taşıyıcıyı bulun.
+    </p>
+  </div>
+</footer>
+
+
+<!-- =====================================================
+     İLAN MODALI
+===================================================== -->
+
+<div id="ilanModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>📦 Yeni Taşıma İlanı</h2>
+
+      <button class="close" onclick="closeModal('ilanModal')">×</button>
+
+    </div>
+
+    <div id="ilanMsg"></div>
+
+    <form id="ilanForm">
+
+      <div class="form-grid">
+
+        <div>
+          <label>Taşıma kategorisi</label>
+
+          <select id="kategori">
+            <option>Evden Eve Taşıma</option>
+            <option>Parça Eşya</option>
+            <option>Küçük Yük</option>
+            <option>Büyük Yük</option>
+            <option>Mobilya</option>
+            <option>Beyaz Eşya</option>
+            <option>Koli / Paket</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Yük / eşya türü</label>
+
+          <input
+            id="yuk_tipi"
+            required
+            placeholder="Örn. Ev eşyası, mobilya, koli">
+        </div>
+
+        <div class="full">
+
+          <label>Taşıma tipi</label>
+
+          <select id="tasima_tipi" onchange="updateLocationMode()">
+            <option>Şehir içi</option>
+            <option>Şehirler arası</option>
+          </select>
+
+        </div>
+
+        <div id="locationInfo" class="full location-note">
+          Şehir içi seçili: İl seçtiğinizde Nereye bölümü aynı ilin
+          ilçe ve mahallelerini gösterecek.
+        </div>
+
+        <div>
+          <label>Tarih</label>
+          <input id="tarih" type="date">
+        </div>
+
+        <!-- NEREDEN -->
+
+        <div>
+          <label>Nereden - İl</label>
+
+          <select
+            id="nereden_il"
+            onchange="onFromProvinceChange()"
+            required>
+
+            <option value="">İl seçin</option>
+
+          </select>
+        </div>
+
+        <div>
+          <label>Nereden - İlçe</label>
+
+          <select
+            id="nereden_ilce"
+            onchange="onFromDistrictChange()"
+            required>
+
+            <option value="">Önce il seçin</option>
+
+          </select>
+        </div>
+
+        <div>
+          <label>Nereden - Mahalle</label>
+
+          <select id="nereden_mahalle">
+            <option value="">Önce ilçe seçin</option>
+          </select>
+        </div>
+
+        <!-- NEREYE ŞEHİRLER ARASI -->
+
+        <div id="nereyeIlBox">
+          <label>Nereye - İl</label>
+
+          <select
+            id="nereye_il"
+            onchange="onToProvinceChange()">
+
+            <option value="">İl seçin</option>
+
+          </select>
+        </div>
+
+        <div>
+          <label id="nereyeIlceLabel">Nereye - İlçe</label>
+
+          <select
+            id="nereye_ilce"
+            onchange="onToDistrictChange()"
+            required>
+
+            <option value="">Önce il seçin</option>
+
+          </select>
+        </div>
+
+        <div>
+          <label>Nereye - Mahalle</label>
+
+          <select id="nereye_mahalle">
+            <option value="">Önce ilçe seçin</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Araç tipi</label>
+
+          <select id="arac_tipi">
+            <option>Panelvan</option>
+            <option>Kamyonet</option>
+            <option>Kamyon</option>
+            <option>Tır</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Tonaj / yaklaşık ağırlık</label>
+
+          <input
+            id="tonaj"
+            placeholder="Örn. 2 ton">
+        </div>
+
+        <div>
+          <label>Telefon / WhatsApp</label>
+
+          <input
+            id="telefon"
+            type="tel"
+            required
+            placeholder="05xx xxx xx xx">
+        </div>
+
+        <div class="full">
+
+          <label>Açıklama</label>
+
+          <textarea
+            id="aciklama"
+            placeholder="Eşyalar, kat bilgisi, asansör, araç giriş durumu, yük miktarı vb."></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button class="btn btn-dark" type="submit">
+          İlanı Yayınla
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          onclick="closeModal('ilanModal')">
+          Vazgeç
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     NAKLİYECİ MODALI
+===================================================== -->
+
+<div id="nakliyeciModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>🚛 Taşıyıcı / Nakliyeci İlanı</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('nakliyeciModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div id="nakMsg"></div>
+
+    <form id="nakForm">
+
+      <div class="form-grid">
+
+        <div>
+          <label>Ad / Firma</label>
+
+          <input
+            id="nak_ad"
+            required
+            placeholder="Adınız veya firma adı">
+        </div>
+
+        <div>
+          <label>Telefon / WhatsApp</label>
+
+          <input
+            id="nak_telefon"
+            required
+            type="tel"
+            placeholder="05xx xxx xx xx">
+        </div>
+
+        <div>
+          <label>Çalıştığınız il</label>
+
+          <select id="nak_sehir" required>
+            <option value="">İl seçin</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Araç tipi</label>
+
+          <select id="nak_arac">
+            <option>Panelvan</option>
+            <option>Kamyonet</option>
+            <option>Kamyon</option>
+            <option>Tır</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Taşıma alanı</label>
+
+          <select id="nak_tasima">
+            <option>Şehir içi</option>
+            <option>Şehirler arası</option>
+            <option>Şehir içi ve şehirler arası</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Ev taşıma yapıyor musunuz?</label>
+
+          <select id="nak_ev">
+            <option>Evet</option>
+            <option>Hayır</option>
+          </select>
+        </div>
+
+        <div class="full">
+
+          <label>Güzergâh</label>
+
+          <input
+            id="nak_guzergah"
+            placeholder="Örn. İstanbul → Ankara veya İstanbul içi">
+
+        </div>
+
+        <div class="full">
+
+          <label>Açıklama</label>
+
+          <textarea
+            id="nak_aciklama"
+            placeholder="Hangi yükleri taşıyorsunuz? Ev taşıma, parça eşya, küçük yük, büyük yük vb."></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button class="btn btn-dark" type="submit">
+          Nakliyeci İlanını Yayınla
+        </button>
+
+        <button
+          class="btn"
+          type="button"
+          onclick="closeModal('nakliyeciModal')">
+          Vazgeç
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
+     DÜZENLEME MODALI
+===================================================== -->
+
+<div id="editModal" class="modal hidden">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h2>İlanı Düzenle</h2>
+
+      <button
+        class="close"
+        onclick="closeModal('editModal')">
+        ×
+      </button>
+
+    </div>
+
+    <div id="editMsg"></div>
+
+    <form id="editForm">
+
+      <input type="hidden" id="editId">
+
+      <div class="form-grid">
+
+        <div>
+          <label>Kategori</label>
+
+          <select id="editKategori">
+            <option>Evden Eve Taşıma</option>
+            <option>Parça Eşya</option>
+            <option>Küçük Yük</option>
+            <option>Büyük Yük</option>
+            <option>Mobilya</option>
+            <option>Beyaz Eşya</option>
+            <option>Koli / Paket</option>
+            <option>Diğer</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Yük türü</label>
+          <input id="editYuk" required>
+        </div>
+
+        <div>
+          <label>Araç tipi</label>
+
+          <select id="editArac">
+            <option>Panelvan</option>
+            <option>Kamyonet</option>
+            <option>Kamyon</option>
+            <option>Tır</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Taşıma tipi</label>
+
+          <select id="editTasima">
+            <option>Şehir içi</option>
+            <option>Şehirler arası</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Nereden</label>
+          <input id="editFrom" required>
+        </div>
+
+        <div>
+          <label>Nereye</label>
+          <input id="editTo" required>
+        </div>
+
+        <div class="full">
+          <label>Açıklama</label>
+          <textarea id="editDesc"></textarea>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button class="btn btn-dark" type="submit">
+          Kaydet
+        </button>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+const SUPABASE_URL =
+"https://wacmbcmgpemcwdlwwjrh.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+"sb_publishable_Q3R-e7e3MoOFc06_28Wr7A_WVOYzImC";
+
+const supabaseClient =
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =====================================================
+   TÜRKİYE KONUM API
+   81 İL / 973 İLÇE / MAHALLE
+===================================================== */
+
+const LOCATION_API =
+"https://api.turkiyeapi.dev/v1";
+
+let provinces=[];
+let districts=[];
+let locationReady=false;
+
+
+/* =====================================================
+   VERİLER
+===================================================== */
+
+let ilanlar=[];
+let nakliyeciler=[];
+
+
+/* =====================================================
+   HTML GÜVENLİ ÇIKIŞ
+===================================================== */
+
+function esc(value){
+
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(m){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[m];
+
+    });
+
+}
+
+
+/* =====================================================
+   ARAMA NORMALİZASYONU
+===================================================== */
+
+function norm(value){
+
+  return String(value ?? "")
+    .toLocaleLowerCase("tr-TR");
+
+}
+
+
+/* =====================================================
+   SAYFA KAYDIR
+===================================================== */
+
+function go(id){
+
+  const el=document.getElementById(id);
+
+  if(el){
+
+    el.scrollIntoView({
+      behavior:"smooth"
+    });
+
+  }
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function openModal(id){
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.classList.remove("hidden");
+  }
+
+}
+
+
+function closeModal(id){
+
+  const el=document.getElementById(id);
+
+  if(el){
+    el.classList.add("hidden");
+  }
+
+}
+
+
+/* =====================================================
+   MESAJ
+===================================================== */
+
+function message(id,text,type=""){
+
+  const el=document.getElementById(id);
+
+  if(!el)return;
+
+  if(!text){
+
+    el.innerHTML="";
+    return;
+
+  }
+
+  el.innerHTML=
+  `<div class="notice ${type}">
+    ${esc(text)}
+  </div>`;
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function whatsapp(phone){
+
+  const digits=
+    String(phone || "")
+      .replace(/\D/g,"");
+
+  if(!digits)return "#";
+
+  const tr=
+    digits.startsWith("0")
+      ? "90"+digits.slice(1)
+      : digits;
+
+  return "https://wa.me/"+tr;
+
+}
+
+
+/* =====================================================
+   TÜRKİYE KONUM VERİLERİNİ YÜKLE
+===================================================== */
+
+async function loadLocationData(){
+
+  try{
+
+    const response=
+      await fetch(
+        LOCATION_API+"/provinces"
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "İller alınamadı."
+      );
+
+    }
+
+    const result=
+      await response.json();
+
+    provinces=
+      result.data || [];
+
+    const districtResponse=
+      await fetch(
+        LOCATION_API+"/districts"
+      );
+
+    if(!districtResponse.ok){
+
+      throw new Error(
+        "İlçeler alınamadı."
+      );
+
+    }
+
+    const districtResult=
+      await districtResponse.json();
+
+    districts=
+      districtResult.data || [];
+
+    locationReady=true;
+
+    fillProvinceSelects();
+
+  }catch(error){
+
+    console.error(
+      "Konum verileri:",
+      error
+    );
+
+    const note=
+      document.getElementById(
+        "locationInfo"
+      );
+
+    if(note){
+
+      note.innerHTML=
+        "Konum verileri yüklenemedi. Sayfayı yenileyin.";
+
+    }
+
+  }
+
+}
+
+
+/* =====================================================
+   İLLERİ SELECTLERE DOLDUR
+===================================================== */
+
+function fillProvinceSelects(){
+
+  const ids=[
+    "nereden_il",
+    "nereye_il",
+    "nak_sehir"
+  ];
+
+  ids.forEach(function(id){
+
+    const select=
+      document.getElementById(id);
+
+    if(!select)return;
+
+    const first=
+      select.options[0]
+        ? select.options[0].outerHTML
+        : "";
+
+    select.innerHTML=first;
+
+    provinces
+      .slice()
+      .sort(function(a,b){
+
+        return a.name.localeCompare(
+          b.name,
+          "tr"
+        );
+
+      })
+      .forEach(function(province){
+
+        const option=
+          document.createElement(
+            "option"
+          );
+
+        option.value=
+          province.id;
+
+        option.textContent=
+          province.name;
+
+        select.appendChild(option);
+
+      });
+
+  });
+
+}
+
+
+/* =====================================================
+   İLÇELERİ GETİR
+===================================================== */
+
+function getDistrictsForProvince(
+  provinceId
+){
+
+  return districts
+    .filter(function(d){
+
+      return String(d.provinceId) ===
+        String(provinceId);
+
+    })
+    .sort(function(a,b){
+
+      return a.name.localeCompare(
+        b.name,
+        "tr"
+      );
+
+    });
+
+}
+
+
+/* =====================================================
+   İLÇE SELECT DOLDUR
+===================================================== */
+
+function fillDistrictSelect(
+  selectId,
+  provinceId
+){
+
+  const select=
+    document.getElementById(
+      selectId
+    );
+
+  if(!select)return;
+
+  select.innerHTML=
+    `<option value="">İlçe seçin</option>`;
+
+  if(!provinceId){
+
+    select.innerHTML=
+      `<option value="">Önce il seçin</option>`;
+
+    return;
+
+  }
+
+  const list=
+    getDistrictsForProvince(
+      provinceId
+    );
+
+  list.forEach(function(district){
+
+    const option=
+      document.createElement(
+        "option"
+      );
+
+    option.value=
+      district.id;
+
+    option.textContent=
+      district.name;
+
+    select.appendChild(option);
+
+  });
+
+}
+
+
+/* =====================================================
+   MAHALLELERİ GETİR
+===================================================== */
+
+async function loadNeighborhoods(
+  districtId,
+  selectId
+){
+
+  const select=
+    document.getElementById(
+      selectId
+    );
+
+  if(!select)return;
+
+  select.innerHTML=
+    `<option value="">Mahalleler yükleniyor...</option>`;
+
+  if(!districtId){
+
+    select.innerHTML=
+      `<option value="">Önce ilçe seçin</option>`;
+
+    return;
+
+  }
+
+  try{
+
+    const response=
+      await fetch(
+        LOCATION_API+
+        "/districts/"+
+        districtId
+      );
+
+    if(!response.ok){
+
+      throw new Error(
+        "Mahalleler alınamadı."
+      );
+
+    }
+
+    const result=
+      await response.json();
+
+    const data=
+      result.data || {};
+
+    const neighborhoods=
+      data.neighborhoods || [];
+
+    select.innerHTML=
+      `<option value="">Mahalle seçin</option>`;
+
+    neighborhoods
+      .slice()
+      .sort(function(a,b){
+
+        return a.name.localeCompare(
+          b.name,
+          "tr"
+        );
+
+      })
+      .forEach(function(neighborhood){
+
+        const option=
+          document.createElement(
+            "option"
+          );
+
+        option.value=
+          neighborhood.id;
+
+        option.textContent=
+          neighborhood.name;
+
+        select.appendChild(option);
+
+      });
+
+  }catch(error){
+
+    console.error(error);
+
+    select.innerHTML=
+      `<option value="">Mahalleler yüklenemedi</option>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   İL ADINI BUL
+===================================================== */
+
+function provinceName(id){
+
+  const p=
+    provinces.find(function(x){
+
+      return String(x.id) ===
+        String(id);
+
+    });
+
+  return p ? p.name : "";
+
+}
+
+
+/* =====================================================
+   İLÇE ADINI BUL
+===================================================== */
+
+function districtName(id){
+
+  const d=
+    districts.find(function(x){
+
+      return String(x.id) ===
+        String(id);
+
+    });
+
+  return d ? d.name : "";
+
+}
+
+
+/* =====================================================
+   MAHALLE ADINI SELECTTEN AL
+===================================================== */
+
+function selectedText(id){
+
+  const el=
+    document.getElementById(id);
+
+  if(!el)return "";
+
+  const option=
+    el.options[el.selectedIndex];
+
+  if(!option)return "";
+
+  return option.value
+    ? option.textContent
+    : "";
+
+}
+
+
+/* =====================================================
+   NEREDEN İL DEĞİŞİNCE
+===================================================== */
+
+function onFromProvinceChange(){
+
+  const provinceId=
+    document.getElementById(
+      "nereden_il"
+    ).value;
+
+  fillDistrictSelect(
+    "nereden_ilce",
+    provinceId
+  );
+
+  document.getElementById(
+    "nereden_mahalle"
+  ).innerHTML=
+    `<option value="">Önce ilçe seçin</option>`;
+
+  const mode=
+    document.getElementById(
+      "tasima_tipi"
+    ).value;
+
+  /*
+    ŞEHİR İÇİ:
+    Nereye ili kapanır ve
+    seçilen il otomatik kullanılır.
+  */
+
+  if(mode==="Şehir içi"){
+
+    syncSameCity();
+
+  }
+
+}
+
+
+/* =====================================================
+   NEREDEN İLÇE DEĞİŞİNCE
+===================================================== */
+
+function onFromDistrictChange(){
+
+  const districtId=
+    document.getElementById(
+      "nereden_ilce"
+    ).value;
+
+  loadNeighborhoods(
+    districtId,
+    "nereden_mahalle"
+  );
+
+  const mode=
+    document.getElementById(
+      "tasima_tipi"
+    ).value;
+
+  if(mode==="Şehir içi"){
+
+    /*
+      Aynı şehir olduğu için
+      Nereye ilçe listesi de
+      aynı ilin ilçeleri.
+    */
+
+    fillDistrictSelect(
+      "nereye_ilce",
+      document.getElementById(
+        "nereden_il"
+      ).value
+    );
+
+  }
+
+}
+
+
+/* =====================================================
+   NEREYE İL DEĞİŞİNCE
+===================================================== */
+
+function onToProvinceChange(){
+
+  const provinceId=
+    document.getElementById(
+      "nereye_il"
+    ).value;
+
+  fillDistrictSelect(
+    "nereye_ilce",
+    provinceId
+  );
+
+  document.getElementById(
+    "nereye_mahalle"
+  ).innerHTML=
+    `<option value="">Önce ilçe seçin</option>`;
+
+}
+
+
+/* =====================================================
+   NEREYE İLÇE DEĞİŞİNCE
+===================================================== */
+
+function onToDistrictChange(){
+
+  const districtId=
+    document.getElementById(
+      "nereye_ilce"
+    ).value;
+
+  loadNeighborhoods(
+    districtId,
+    "nereye_mahalle"
+  );
+
+}
+
+
+/* =====================================================
+   ŞEHİR İÇİ / ŞEHİRLER ARASI
+===================================================== */
+
+function updateLocationMode(){
+
+  const mode=
+    document.getElementById(
+      "tasima_tipi"
+    ).value;
+
+  const nereyeIlBox=
+    document.getElementById(
+      "nereyeIlBox"
+    );
+
+  const nereyeIl=
+    document.getElementById(
+      "nereye_il"
+    );
+
+  const label=
+    document.getElementById(
+      "nereyeIlceLabel"
+    );
+
+  const info=
+    document.getElementById(
+      "locationInfo"
+    );
+
+
+  if(mode==="Şehir içi"){
+
+    /*
+      NEREYE İL TAMAMEN KAPANIR.
+    */
+
+    nereyeIlBox.classList.add(
+      "hidden"
+    );
+
+    nereyeIl.disabled=true;
+
+    label.textContent=
+      "Nereye - İlçe";
+
+
+    if(info){
+
+      info.textContent=
+        "Şehir içi seçili: Nereden ilini seçtiğinizde Nereye bölümü aynı ilin ilçe ve mahallelerini gösterecek.";
+
+    }
+
+    syncSameCity();
+
+  }else{
+
+    /*
+      ŞEHİRLER ARASI:
+      Nereye il tekrar açılır.
+    */
+
+    nereyeIlBox.classList.remove(
+      "hidden"
+    );
+
+    nereyeIl.disabled=false;
+
+    label.textContent=
+      "Nereye - İlçe";
+
+    if(info){
+
+      info.textContent=
+        "Şehirler arası seçili: Nereden ve Nereye için farklı iller seçebilirsiniz.";
+
+    }
+
+    fillDistrictSelect(
+      "nereye_ilce",
+      nereyeIl.value
+    );
+
+    document.getElementById(
+      "nereye_mahalle"
+    ).innerHTML=
+      `<option value="">Önce ilçe seçin</option>`;
+
+  }
+
+}
+
+
+/* =====================================================
+   ŞEHİR İÇİ SENKRONİZASYON
+===================================================== */
+
+function syncSameCity(){
+
+  const fromProvince=
+    document.getElementById(
+      "nereden_il"
+    ).value;
+
+  const toProvince=
+    document.getElementById(
+      "nereye_il"
+    );
+
+
+  /*
+    Nereye il selecti gizli olsa bile
+    değerini seçilen il ile eşitliyoruz.
+  */
+
+  if(toProvince){
+
+    toProvince.value=
+      fromProvince || "";
+
+    toProvince.disabled=true;
+
+  }
+
+
+  if(!fromProvince){
+
+    document.getElementById(
+      "nereye_ilce"
+    ).innerHTML=
+      `<option value="">Önce il seçin</option>`;
+
+    document.getElementById(
+      "nereye_mahalle"
+    ).innerHTML=
+      `<option value="">Önce ilçe seçin</option>`;
+
+    return;
+
+  }
+
+
+  /*
+    Nereye ilçeleri =
+    Nereden ilinin ilçeleri.
+  */
+
+  fillDistrictSelect(
+    "nereye_ilce",
+    fromProvince
+  );
+
+}
+
+
+/* =====================================================
+   TARİH
+===================================================== */
+
+function setMinDate(){
+
+  const today=
+    new Date();
+
+  const year=
+    today.getFullYear();
+
+  const month=
+    String(
+      today.getMonth()+1
+    ).padStart(2,"0");
+
+  const day=
+    String(
+      today.getDate()
+    ).padStart(2,"0");
+
+  const min=
+    year+"-"+month+"-"+day;
+
+  const el=
+    document.getElementById(
+      "tarih"
+    );
+
+  if(el)el.min=min;
+
+}
+
+
+/* =====================================================
+   KATEGORİ
+===================================================== */
+
+function selectCategory(category){
+
+  openModal(
+    "ilanModal"
+  );
+
+  setTimeout(function(){
+
+    const select=
+      document.getElementById(
+        "kategori"
+      );
+
+    if(select){
+
+      select.value=
+        category;
+
+    }
+
+  },100);
+
+}
+
+
+/* =====================================================
+   VERİLERİ YÜKLE
+===================================================== */
+
+async function loadAll(){
+
+  const ilanList=
+    document.getElementById(
+      "ilanList"
+    );
+
+  const nakList=
+    document.getElementById(
+      "nakList"
+    );
+
+  if(ilanList){
+
+    ilanList.innerHTML=
+      `<div class="loading">
+        İlanlar yükleniyor...
+      </div>`;
+
+  }
+
+  if(nakList){
+
+    nakList.innerHTML=
+      `<div class="loading">
+        Nakliyeciler yükleniyor...
+      </div>`;
+
+  }
+
+
+  const [
+    ilanResult,
+    nakResult
+  ]=await Promise.all([
+
+    supabaseClient
+      .from("ilanlar")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      ),
+
+    supabaseClient
+      .from("nakliyeciler")
+      .select("*")
+      .order(
+        "created_at",
+        {ascending:false}
+      )
+
+  ]);
+
+
+  if(ilanResult.error){
+
+    console.error(
+      "ilanlar:",
+      ilanResult.error
+    );
+
+  }
+
+  if(nakResult.error){
+
+    console.error(
+      "nakliyeciler:",
+      nakResult.error
+    );
+
+  }
+
+
+  ilanlar=
+    ilanResult.data || [];
+
+  nakliyeciler=
+    nakResult.data || [];
+
+
+  document.getElementById(
+    "ilanCount"
+  ).textContent=
+    ilanlar.length;
+
+  document.getElementById(
+    "nakliyeciCount"
+  ).textContent=
+    nakliyeciler.length;
+
+
+  renderIlanlar();
+  renderNakliyeciler();
+
+}
+
+
+/* =====================================================
+   İLANLARI GÖSTER
+===================================================== */
+
+function renderIlanlar(){
+
+  const search=
+    norm(
+      document.getElementById(
+        "ilanSearch"
+      ).value
+    );
+
+  const arac=
+    document.getElementById(
+      "ilanAracFilter"
+    ).value;
+
+  const yol=
+    document.getElementById(
+      "ilanYolFilter"
+    ).value;
+
+
+  const list=
+    ilanlar.filter(function(x){
+
+      const haystack=
+        norm([
+
+          x.yuk_tipi,
+          x.yuk_turu,
+          x.kategori,
+          x.nereden,
+          x.nereye,
+          x.arac_tipi,
+          x.aciklama,
+          x.tasima_tipi
+
+        ].join(" "));
+
+
+      return(
+        (!search ||
+          haystack.includes(search))
+        &&
+        (!arac ||
+          x.arac_tipi===arac)
+        &&
+        (!yol ||
+          x.tasima_tipi===yol)
+      );
+
+    });
+
+
+  const container=
+    document.getElementById(
+      "ilanList"
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML=`
+      <div
+        class="empty"
+        style="grid-column:1/-1">
+
+        Henüz bu kriterlere uygun ilan yok.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML=
+    list.map(function(x){
+
+      const from=
+        x.nereden || "—";
+
+      const to=
+        x.nereye || "—";
+
+
+      return`
+
+        <article class="card">
+
+          <div class="item-head">
+
+            <div>
+
+              <h3>
+                📦
+                ${esc(
+                  x.yuk_tipi ||
+                  x.yuk_turu ||
+                  "Taşıma ilanı"
+                )}
+              </h3>
+
+              ${
+                x.kategori
+                ?
+                `
+                <span class="badge">
+                  ${esc(x.kategori)}
+                </span>
+                `
+                :""
+              }
+
+              <span class="badge">
+                ${esc(
+                  x.tasima_tipi ||
+                  "Taşıma"
+                )}
+              </span>
+
+              <span class="badge">
+                ${esc(
+                  x.arac_tipi ||
+                  "Araç belirtilmemiş"
+                )}
+              </span>
+
+            </div>
+
+            <span class="muted">
+              ${esc(
+                (x.created_at||"")
+                .slice(0,10)
+              )}
+            </span>
+
+          </div>
+
+
+          <div class="route">
+
+            📍
+
+            <strong>
+              ${esc(from)}
+            </strong>
+
+            →
+
+            <strong>
+              ${esc(to)}
+            </strong>
+
+          </div>
+
+
+          ${
+            x.tonaj
+            ?
+            `
+            <p>
+              ⚖️ <b>Tonaj:</b>
+              ${esc(x.tonaj)}
+            </p>
+            `
+            :""
+          }
+
+
+          ${
+            x.tarih
+            ?
+            `
+            <p>
+              📅 <b>Taşıma tarihi:</b>
+              ${esc(x.tarih)}
+            </p>
+            `
+            :""
+          }
+
+
+          ${
+            x.aciklama
+            ?
+            `
+            <p class="muted">
+              ${esc(x.aciklama)}
+            </p>
+            `
+            :""
+          }
+
+
+          <div class="item-actions">
+
+            ${
+              x.telefon
+              ?
+              `
+              <a
+                class="small wa"
+                target="_blank"
+                rel="noopener"
+                href="${whatsapp(x.telefon)}">
+
+                WhatsApp
+
+              </a>
+              `
+              :""
+            }
+
+
+            <button
+              class="small edit"
+              onclick="editIlan('${String(x.id)}')">
+
+              Düzenle
+
+            </button>
+
+
+            <button
+              class="small delete"
+              onclick="deleteIlan('${String(x.id)}')">
+
+              Sil
+
+            </button>
+
+          </div>
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   NAKLİYECİLER
+===================================================== */
+
+function renderNakliyeciler(){
+
+  const search=
+    norm(
+      document.getElementById(
+        "nakSearch"
+      ).value
+    );
+
+  const arac=
+    document.getElementById(
+      "nakAracFilter"
+    ).value;
+
+
+  const list=
+    nakliyeciler.filter(function(x){
+
+      const haystack=
+        norm([
+
+          x.ad_soyad,
+          x.ad,
+          x.firma,
+          x.sehir,
+          x.arac_tipi,
+          x.guzergah,
+          x.aciklama,
+          x.tasima_tipi
+
+        ].join(" "));
+
+
+      return(
+        (!search ||
+          haystack.includes(search))
+        &&
+        (!arac ||
+          x.arac_tipi===arac)
+      );
+
+    });
+
+
+  const container=
+    document.getElementById(
+      "nakList"
+    );
+
+
+  if(!list.length){
+
+    container.innerHTML=`
+      <div
+        class="empty"
+        style="grid-column:1/-1">
+
+        Henüz nakliyeci ilanı yok.
+
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML=
+    list.map(function(x){
+
+      return`
+
+        <article class="card">
+
+          <h3>
+            🚛
+            ${esc(
+              x.ad_soyad ||
+              x.ad ||
+              x.firma ||
+              "Nakliyeci"
+            )}
+          </h3>
+
+
+          <span class="badge">
+            ${esc(
+              x.arac_tipi ||
+              "Araç belirtilmemiş"
+            )}
+          </span>
+
+
+          ${
+            x.sehir
+            ?
+            `
+            <span class="badge">
+              📍 ${esc(x.sehir)}
+            </span>
+            `
+            :""
+          }
+
+
+          ${
+            x.tasima_tipi
+            ?
+            `
+            <span class="badge">
+              ${esc(x.tasima_tipi)}
+            </span>
+            `
+            :""
+          }
+
+
+          ${
+            x.guzergah
+            ?
+            `
+            <p>
+              <b>Güzergâh:</b>
+              ${esc(x.guzergah)}
+            </p>
+            `
+            :""
+          }
+
+
+          ${
+            x.aciklama
+            ?
+            `
+            <p class="muted">
+              ${esc(x.aciklama)}
+            </p>
+            `
+            :""
+          }
+
+
+          ${
+            x.telefon
+            ?
+            `
+            <div class="item-actions">
+
+              <a
+                class="small wa"
+                target="_blank"
+                rel="noopener"
+                href="${whatsapp(x.telefon)}">
+
+                WhatsApp
+
+              </a>
+
+            </div>
+            `
+            :""
+          }
+
+        </article>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =====================================================
+   YENİ İLAN
+===================================================== */
+
+document
+  .getElementById("ilanForm")
+  .addEventListener(
+    "submit",
+    async function(e){
+
+      e.preventDefault();
+
+
+      message(
+        "ilanMsg",
+        "İlan yayınlanıyor..."
+      );
+
+
+      const {
+        data:{user}
+      }=
+        await supabaseClient
+          .auth
+          .getUser();
+
+
+      const tasimaTipi=
+        document.getElementById(
+          "tasima_tipi"
+        ).value;
+
+
+      const neredenIlId=
+        document.getElementById(
+          "nereden_il"
+        ).value;
+
+      const neredenIl=
+        provinceName(
+          neredenIlId
+        );
+
+      const neredenIlceId=
+        document.getElementById(
+          "nereden_ilce"
+        ).value;
+
+      const neredenIlce=
+        districtName(
+          neredenIlceId
+        );
+
+      const neredenMahalle=
+        selectedText(
+          "nereden_mahalle"
+        );
+
+
+      let nereyeIl="";
+      let nereyeIlce="";
+      let nereyeMahalle="";
+
+
+      if(tasimaTipi==="Şehir içi"){
+
+        /*
+          ŞEHİR İÇİ:
+          Nereye il = Nereden il
+        */
+
+        nereyeIl=
+          neredenIl;
+
+        const nereyeIlceId=
+          document.getElementById(
+            "nereye_ilce"
+          ).value;
+
+        nereyeIlce=
+          districtName(
+            nereyeIlceId
+          );
+
+        nereyeMahalle=
+          selectedText(
+            "nereye_mahalle"
+          );
+
+      }else{
+
+        nereyeIl=
+          provinceName(
+            document.getElementById(
+              "nereye_il"
+            ).value
+          );
+
+        nereyeIlce=
+          districtName(
+            document.getElementById(
+              "nereye_ilce"
+            ).value
+          );
+
+        nereyeMahalle=
+          selectedText(
+            "nereye_mahalle"
+          );
+
+      }
+
+
+      const nereden=
+        [
+          neredenIl,
+          neredenIlce,
+          neredenMahalle
+        ]
+        .filter(Boolean)
+        .join(" / ");
+
+
+      const nereye=
+        [
+          nereyeIl,
+          nereyeIlce,
+          nereyeMahalle
+        ]
+        .filter(Boolean)
+        .join(" / ");
+
+
+      const row={
+
+        owner_id:
+          user?.id || null,
+
+        kategori:
+          document.getElementById(
+            "kategori"
+          ).value,
+
+        yuk_tipi:
+          document.getElementById(
+            "yuk_tipi"
+          ).value.trim(),
+
+        tasima_tipi:
+          tasimaTipi,
+
+        nereden:
+          nereden,
+
+        nereye:
+          nereye,
+
+        arac_tipi:
+          document.getElementById(
+            "arac_tipi"
+          ).value,
+
+        tonaj:
+          document.getElementById(
+            "tonaj"
+          ).value.trim(),
+
+        tarih:
+          document.getElementById(
+            "tarih"
+          ).value || null,
+
+        telefon:
+          document.getElementById(
+            "telefon"
+          ).value.trim(),
+
+        aciklama:
+          document.getElementById(
+            "aciklama"
+          ).value.trim()
+
+      };
+
+
+      const {error}=
+        await supabaseClient
+          .from("ilanlar")
+          .insert(row);
+
+
+      if(error){
+
+        console.error(error);
+
+        message(
+          "ilanMsg",
+          "İlan kaydedilemedi: "+
+          error.message,
+          "danger"
+        );
+
+        return;
+
+      }
+
+
+      message(
+        "ilanMsg",
+        "İlan başarıyla yayınlandı.",
+        "success"
+      );
+
+
+      e.target.reset();
+
+      setMinDate();
+
+      resetLocationForm();
+
+      await loadAll();
+
+
+      setTimeout(function(){
+
+        closeModal(
+          "ilanModal"
+        );
+
+        message(
+          "ilanMsg",
+          ""
+        );
+
+      },700);
+
+    }
+  );
+
+
+/* =====================================================
+   NAKLİYECİ EKLE
+===================================================== */
+
+document
+  .getElementById("nakForm")
+  .addEventListener(
+    "submit",
+    async function(e){
+
+      e.preventDefault();
+
+
+      message(
+        "nakMsg",
+        "Nakliyeci ilanı yayınlanıyor..."
+      );
+
+
+      const {
+        data:{user}
+      }=
+        await supabaseClient
+          .auth
+          .getUser();
+
+
+      const sehirId=
+        document.getElementById(
+          "nak_sehir"
+        ).value;
+
+
+      const sehir=
+        provinceName(
+          sehirId
+        );
+
+
+      const row={
+
+        owner_id:
+          user?.id || null,
+
+        ad_soyad:
+          document.getElementById(
+            "nak_ad"
+          ).value.trim(),
+
+        telefon:
+          document.getElementById(
+            "nak_telefon"
+          ).value.trim(),
+
+        sehir:
+          sehir,
+
+        arac_tipi:
+          document.getElementById(
+            "nak_arac"
+          ).value,
+
+        guzergah:
+          document.getElementById(
+            "nak_guzergah"
+          ).value.trim(),
+
+        aciklama:
+          document.getElementById(
+            "nak_aciklama"
+          ).value.trim(),
+
+        tasima_tipi:
+          document.getElementById(
+            "nak_tasima"
+          ).value
+
+      };
+
+
+      const {error}=
+        await supabaseClient
+          .from("nakliyeciler")
+          .insert(row);
+
+
+      if(error){
+
+        console.error(error);
+
+        message(
+          "nakMsg",
+          "Nakliyeci kaydedilemedi: "+
+          error.message,
+          "danger"
+        );
+
+        return;
+
+      }
+
+
+      message(
+        "nakMsg",
+        "Nakliyeci ilanı başarıyla yayınlandı.",
+        "success"
+      );
+
+
+      e.target.reset();
+
+      await loadAll();
+
+
+      setTimeout(function(){
+
+        closeModal(
+          "nakliyeciModal"
+        );
+
+        message(
+          "nakMsg",
+          ""
+        );
+
+      },700);
+
+    }
+  );
+
+
+/* =====================================================
+   İLAN DÜZENLE
+===================================================== */
+
+function editIlan(id){
+
+  const x=
+    ilanlar.find(function(i){
+
+      return String(i.id) ===
+        String(id);
+
+    });
+
+
+  if(!x)return;
+
+
+  document.getElementById(
+    "editId"
+  ).value=x.id;
+
+
+  document.getElementById(
+    "editKategori"
+  ).value=
+    x.kategori || "Diğer";
+
+
+  document.getElementById(
+    "editYuk"
+  ).value=
+    x.yuk_tipi ||
+    x.yuk_turu ||
+    "";
+
+
+  document.getElementById(
+    "editArac"
+  ).value=
+    x.arac_tipi ||
+    "Panelvan";
+
+
+  document.getElementById(
+    "editTasima"
+  ).value=
+    x.tasima_tipi ||
+    "Şehir içi";
+
+
+  document.getElementById(
+    "editFrom"
+  ).value=
+    x.nereden || "";
+
+
+  document.getElementById(
+    "editTo"
+  ).value=
+    x.nereye || "";
+
+
+  document.getElementById(
+    "editDesc"
+  ).value=
+    x.aciklama || "";
+
+
+  openModal(
+    "editModal"
+  );
+
+}
+
+
+/* =====================================================
+   GÜNCELLE
+===================================================== */
+
+document
+  .getElementById("editForm")
+  .addEventListener(
+    "submit",
+    async function(e){
+
+      e.preventDefault();
+
+
+      const id=
+        document.getElementById(
+          "editId"
+        ).value;
+
+
+      const {error}=
+        await supabaseClient
+          .from("ilanlar")
+          .update({
+
+            kategori:
+              document.getElementById(
+                "editKategori"
+              ).value,
+
+            yuk_tipi:
+              document.getElementById(
+                "editYuk"
+              ).value.trim(),
+
+            arac_tipi:
+              document.getElementById(
+                "editArac"
+              ).value,
+
+            tasima_tipi:
+              document.getElementById(
+                "editTasima"
+              ).value,
+
+            nereden:
+              document.getElementById(
+                "editFrom"
+              ).value.trim(),
+
+            nereye:
+              document.getElementById(
+                "editTo"
+              ).value.trim(),
+
+            aciklama:
+              document.getElementById(
+                "editDesc"
+              ).value.trim()
+
+          })
+          .eq(
+            "id",
+            id
+          );
+
+
+      if(error){
+
+        message(
+          "editMsg",
+          "Güncelleme başarısız: "+
+          error.message,
+          "danger"
+        );
+
+        return;
+
+      }
+
+
+      closeModal(
+        "editModal"
+      );
+
+      await loadAll();
+
+    }
+  );
+
+
+/* =====================================================
+   SİL
+===================================================== */
+
+async function deleteIlan(id){
+
+  if(
+    !confirm(
+      "Bu ilanı silmek istediğine emin misin?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  const {error}=
+    await supabaseClient
+      .from("ilanlar")
+      .delete()
+      .eq(
+        "id",
+        id
+      );
+
+
+  if(error){
+
+    alert(
+      "Silinemedi: "+
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  await loadAll();
+
+}
+
+
+/* =====================================================
+   FORMU SIFIRLA
+===================================================== */
+
+function resetLocationForm(){
+
+  const tasima=
+    document.getElementById(
+      "tasima_tipi"
+    );
+
+  if(tasima){
+
+    tasima.value=
+      "Şehir içi";
+
+  }
+
+
+  document.getElementById(
+    "nereden_il"
+  ).value="";
+
+
+  document.getElementById(
+    "nereden_ilce"
+  ).innerHTML=
+    `<option value="">Önce il seçin</option>`;
+
+
+  document.getElementById(
+    "nereden_mahalle"
+  ).innerHTML=
+    `<option value="">Önce ilçe seçin</option>`;
+
+
+  document.getElementById(
+    "nereye_il"
+  ).value="";
+
+
+  document.getElementById(
+    "nereye_ilce"
+  ).innerHTML=
+    `<option value="">Önce il seçin</option>`;
+
+
+  document.getElementById(
+    "nereye_mahalle"
+  ).innerHTML=
+    `<option value="">Önce ilçe seçin</option>`;
+
+
+  updateLocationMode();
+
+}
+
+
+/* =====================================================
+   REALTIME
+===================================================== */
+
+supabaseClient
+  .channel("tasibunu-realtime")
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"ilanlar"
+    },
+    function(){
+
+      loadAll();
+
+    }
+  )
+
+  .on(
+    "postgres_changes",
+    {
+      event:"*",
+      schema:"public",
+      table:"nakliyeciler"
+    },
+    function(){
+
+      loadAll();
+
+    }
+  )
+
+  .subscribe();
+
+
+/* =====================================================
+   BAŞLANGIÇ
+===================================================== */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  async function(){
+
+    setMinDate();
+
+    updateLocationMode();
+
+    await loadLocationData();
+
+    await loadAll();
+
+  }
+);
+
+</script>
+
+</body>
+</html>
